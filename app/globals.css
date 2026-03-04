@@ -16,6 +16,44 @@ body {
   line-height: 1.5;
 }
 
+.page-hero {
+  padding: 20px 0 10px;
+  border-bottom: 1px solid rgb(226 232 240);
+  margin-bottom: 16px;
+}
+
+.page-hero h1 {
+  margin: 0 0 6px;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  color: var(--brand-primary, rgb(29 78 216));
+  line-height: 1.25;
+}
+
+.page-hero p {
+  margin: 0;
+  color: rgb(51 65 85);
+  font-size: 15px;
+  max-width: 72ch;
+}
+
+.card-cta {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgb(29 78 216);
+  text-decoration: none;
+  gap: 4px;
+  transition: gap 0.15s ease, color 0.15s ease;
+}
+
+.card-cta:hover {
+  color: rgb(30 58 138);
+  gap: 8px;
+  text-decoration: underline;
+}
+
 main {
   width: min(100%, 1120px);
   margin: 0 auto;
@@ -59,6 +97,12 @@ input:focus-visible {
   border-radius: 12px;
   padding: 16px;
   margin-bottom: 12px;
+  transition: box-shadow 0.18s ease, transform 0.18s ease;
+}
+
+.card.card-interactive:hover {
+  box-shadow: 0 6px 20px rgba(29, 78, 216, 0.10);
+  transform: translateY(-2px);
 }
 
 .territory-selector h2 {
@@ -127,6 +171,13 @@ input:focus-visible {
   padding: 5px 10px;
   font-size: 13px;
   cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.territory-layer-chip:hover {
+  background: rgb(254 226 226);
+  border-color: rgb(252 165 165);
+  color: rgb(153 27 27);
 }
 
 .territory-layer-option {
@@ -135,6 +186,14 @@ input:focus-visible {
   gap: 10px;
   align-items: start;
   margin: 10px 0;
+  padding: 6px 8px;
+  border-radius: 8px;
+  transition: background 0.15s ease;
+  cursor: pointer;
+}
+
+.territory-layer-option:hover {
+  background: rgb(239 246 255);
 }
 
 .territory-layer-option small {
@@ -188,6 +247,14 @@ input:focus-visible {
   padding: 9px 10px;
   background: rgb(255 255 255);
   color: rgb(15 23 42);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.territory-controls select:focus,
+.territory-controls input:focus {
+  border-color: rgb(29 78 216);
+  box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.15);
+  outline: none;
 }
 
 .territory-loading,
@@ -204,15 +271,43 @@ input:focus-visible {
 
 .territory-cta {
   margin-top: 6px;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   text-align: center;
   text-decoration: none;
   background: rgb(29 78 216);
   color: rgb(255 255 255);
   border: 1px solid rgb(29 78 216);
   border-radius: 8px;
-  padding: 10px 12px;
+  padding: 11px 16px;
   font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.01em;
+  transition: background 0.18s ease, box-shadow 0.18s ease, transform 0.15s ease;
+  box-shadow: 0 2px 8px rgba(29, 78, 216, 0.18);
+}
+
+.territory-cta:not(.disabled):hover {
+  background: rgb(30 58 138);
+  box-shadow: 0 4px 16px rgba(29, 78, 216, 0.32);
+  transform: translateY(-1px);
+}
+
+.territory-cta:not(.disabled):active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(29, 78, 216, 0.20);
+}
+
+@keyframes cta-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(29, 78, 216, 0.30); }
+  70%  { box-shadow: 0 0 0 8px rgba(29, 78, 216, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(29, 78, 216, 0); }
+}
+
+.territory-cta.ready {
+  animation: cta-pulse 1.8s ease-out 0.3s 2;
 }
 
 .territory-cta.disabled {
@@ -220,12 +315,40 @@ input:focus-visible {
   border-color: rgb(203 213 225);
   color: rgb(51 65 85);
   pointer-events: none;
+  box-shadow: none;
 }
 
 .quick-links {
   display: flex;
-  gap: 14px;
+  gap: 8px;
   flex-wrap: wrap;
+  align-items: center;
+}
+
+.quick-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgb(203 213 225);
+  color: rgb(29 78 216);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  background: rgb(248 250 252);
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.12s ease;
+}
+
+.quick-links a:hover {
+  background: rgb(239 246 255);
+  border-color: rgb(147 197 253);
+  color: rgb(30 58 138);
+  transform: translateY(-1px);
+}
+
+.quick-links a:active {
+  transform: translateY(0);
 }
 
 .agents-grid {
@@ -264,6 +387,12 @@ input:focus-visible {
   border-radius: 8px;
   padding: 8px 10px;
   cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.consent-actions button:hover {
+  background: rgb(226 232 240);
+  border-color: rgb(100 116 139);
 }
 
 .language-switcher {
@@ -292,6 +421,16 @@ input:focus-visible {
   border-bottom: 1px solid rgb(203 213 225);
   background: var(--brand-background);
   padding: 16px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  backdrop-filter: blur(8px);
+  background: rgba(255 255 255 / 0.92);
+  transition: box-shadow 0.2s ease;
+}
+
+.site-header.scrolled {
+  box-shadow: 0 2px 12px rgba(15, 23, 42, 0.10);
 }
 
 .site-header-inner {
@@ -321,10 +460,22 @@ input:focus-visible {
 }
 
 .site-footer {
-  border-top: 1px solid var(--brand-secondary);
+  border-top: 2px solid var(--brand-primary);
   margin-top: 20px;
-  padding: 16px 20px 28px;
-  background: var(--brand-background);
+  padding: 20px 20px 32px;
+  background: linear-gradient(to bottom, rgb(248 250 252), rgb(255 255 255));
+}
+
+.site-footer nav a {
+  color: rgb(29 78 216);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.15s ease, text-decoration 0.15s ease;
+}
+
+.site-footer nav a:hover {
+  color: rgb(30 58 138);
+  text-decoration: underline;
 }
 
 .site-footer-brand {
@@ -395,6 +546,12 @@ input:focus-visible {
   padding: 10px 12px;
   font-weight: 700;
   cursor: pointer;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.accessibility-toggle:hover {
+  background: rgb(30 41 59);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.25);
 }
 
 .accessibility-controls {

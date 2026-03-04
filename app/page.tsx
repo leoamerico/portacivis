@@ -20,31 +20,45 @@ export default async function HomePage() {
         </div>
       </nav>
 
-      <h1>{t('title')}</h1>
-      <p>{t('description')}</p>
+      <div className="page-hero">
+        <h1>{t('title')}</h1>
+        <p>{t('description')}</p>
+      </div>
 
       <section id="mapa-brasil" aria-label={territory('mapTitle')}>
         <InitialTerritorySelector />
       </section>
 
-      <section className="card">
+      <section className="card card-interactive">
         <h2>{t('sections.servicesTitle')}</h2>
         <p>{t('sections.servicesText')}</p>
+        <Link href="/noticias" className="card-cta" aria-label="Acessar serviços ao cidadão">
+          Acessar serviços →
+        </Link>
       </section>
 
-      <section className="card">
+      <section className="card card-interactive">
         <h2>{t('sections.newsTitle')}</h2>
         <p>{t('sections.newsText')}</p>
+        <Link href="/noticias" className="card-cta" aria-label="Ver notícias oficiais">
+          Ver notícias →
+        </Link>
       </section>
 
-      <section className="card">
+      <section className="card card-interactive">
         <h2>{t('sections.transparencyTitle')}</h2>
         <p>{t('sections.transparencyText')}</p>
+        <Link href="/conformidade" className="card-cta" aria-label="Ver dados de transparência">
+          Ver transparência →
+        </Link>
       </section>
 
-      <section className="card" aria-labelledby="acessibilidade-titulo">
+      <section className="card card-interactive" aria-labelledby="acessibilidade-titulo">
         <h2 id="acessibilidade-titulo">{t('sections.accessibilityTitle')}</h2>
         <p>{t('sections.accessibilityText')}</p>
+        <Link href="/accessibilidade" className="card-cta" aria-label="Ver recursos de acessibilidade">
+          Recursos de acessibilidade →
+        </Link>
       </section>
     </main>
   );

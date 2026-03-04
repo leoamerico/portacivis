@@ -391,11 +391,11 @@ export default function InitialTerritorySelector() {
               ? `/trilha-da-verdade?uf=${encodeURIComponent(selectedUf)}&cidade=${encodeURIComponent(city.trim())}&correlationId=${encodeURIComponent(correlationId)}&traceId=${encodeURIComponent(traceId)}&layers=${encodeURIComponent(effectiveLayers.join(','))}`
               : '/trilha-da-verdade'
             }
-            className={canProceed ? 'territory-cta' : 'territory-cta disabled'}
+            className={canProceed ? 'territory-cta ready' : 'territory-cta disabled'}
             onClick={persistSelection}
             aria-disabled={!canProceed}
           >
-            {t('cta')}
+            {t('cta')} {canProceed && '→'}
           </Link>
 
           <p className="territory-summary" aria-live="polite">

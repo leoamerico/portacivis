@@ -75,6 +75,17 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang={locale}>
       <head>
         <style id="brand-vars">{cssVars}</style>
+        {/* Sticky header scroll shadow */}
+        <script dangerouslySetInnerHTML={{__html: `
+          (function(){
+            function onScroll(){
+              var h=document.querySelector('.site-header');
+              if(!h)return;
+              h.classList.toggle('scrolled',window.scrollY>8);
+            }
+            window.addEventListener('scroll',onScroll,{passive:true});
+          })();
+        `}} />
       </head>
       <body>
         <a className="skip-link" href="#conteudo-principal">
