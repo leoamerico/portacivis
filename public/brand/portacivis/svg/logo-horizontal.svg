@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 180" role="img" aria-label="PortaCivis logo horizontal">
+  <rect x="18" y="30" width="96" height="120" rx="12" fill="#1E5AA8"/>
+  <rect x="40" y="48" width="52" height="84" rx="8" fill="#FFFFFF"/>
+  <circle cx="116" cy="90" r="26" fill="#F39C12"/>
+  <text x="170" y="88" font-size="54" font-family="Montserrat, Arial, sans-serif" fill="#1E5AA8" font-weight="700">PortaCivis</text>
+  <text x="170" y="128" font-size="24" font-family="Montserrat, Arial, sans-serif" fill="#4A4A4A">Informação pública para todos os cidadãos</text>
+</svg>

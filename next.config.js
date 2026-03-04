@@ -25,7 +25,7 @@ const nextConfig = {
     const securityHeaders = [
       {
         key: 'Content-Security-Policy',
-        value: "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data: https://r2cdn.perplexity.ai; script-src 'self' 'unsafe-inline' https://vercel.live; script-src-elem 'self' 'unsafe-inline' https://vercel.live; connect-src 'self'; upgrade-insecure-requests",
+        value: "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; frame-src 'self' https://vercel.live; form-action 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data: https://r2cdn.perplexity.ai; script-src 'self' 'unsafe-inline' https://vercel.live; script-src-elem 'self' 'unsafe-inline' https://vercel.live; connect-src 'self' https://servicodados.ibge.gov.br https://vercel.live; upgrade-insecure-requests",
       },
       {
         key: 'Strict-Transport-Security',

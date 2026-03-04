@@ -1,0 +1,9 @@
+:root {
+  /* BRAND_COLOR_ALLOWLIST */
+  --pc-color-primary: #1E5AA8;
+  --pc-color-secondary: #2F7DD1;
+  --pc-color-citizen: #F39C12;
+  --pc-color-neutral: #4A4A4A;
+  --pc-color-background: #FFFFFF;
+  --pc-font-primary: "Montserrat", system-ui, Arial, sans-serif;
+}

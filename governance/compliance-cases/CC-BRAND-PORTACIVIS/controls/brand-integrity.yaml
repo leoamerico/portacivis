@@ -1,0 +1,23 @@
+controls:
+
+  - id: logo_variants_exist
+    description: All required logo variants must exist in the asset directory
+    required_files:
+      - logo-horizontal.svg
+      - logo-stacked.svg
+      - logo-mark.svg
+
+  - id: colors_match_catalog
+    description: Token colors must match governance catalog
+
+  - id: tokens_exist
+    description: Brand tokens must be present
+    required_files:
+      - colors.json
+      - typography.json
+
+  - id: brand_docs_exist
+    description: Brand guide documentation must exist
+
+  - id: slogan_matches_registry
+    description: Slogan in documentation must match registry

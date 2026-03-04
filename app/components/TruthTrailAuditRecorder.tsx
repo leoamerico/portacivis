@@ -53,6 +53,55 @@ async function postToServer(
   });
 
   if (!response.ok) {
+    let errorPayload: {
+      success?: boolean;
+      error?: string;
+      expectedPreviousHash?: string;
+    } | null = null;
+
+    try {
+      errorPayload = (await response.json()) as {
+        success?: boolean;
+        error?: string;
+        expectedPreviousHash?: string;
+      };
+    } catch {
+      errorPayload = null;
+    }
+
+    if (response.status === 409 && errorPayload?.expectedPreviousHash) {
+      const retriedEvent = {
+        ...event,
+        previousHash: errorPayload.expectedPreviousHash
+      };
+
+      const retryResponse = await fetch('/api/truth-trail/audit', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(retriedEvent)
+      });
+
+      if (!retryResponse.ok) {
+        throw new Error('server audit retry failed');
+      }
+
+      const retryPayload = (await retryResponse.json()) as {
+        success: boolean;
+        deduplicated?: boolean;
+        hash?: string;
+      };
+
+      if (!retryPayload.success || !retryPayload.hash) {
+        throw new Error('server audit retry invalid response');
+      }
+
+      return {
+        success: true,
+        deduplicated: Boolean(retryPayload.deduplicated),
+        hash: retryPayload.hash
+      };
+    }
+
     throw new Error('server audit failed');
   }
 
@@ -130,7 +179,7 @@ export default function TruthTrailAuditRecorder({
 
         const unsignedEvent = {
           eventId: randomId('evt'),
-          eventType: 'TruthTrailEntered',
+          eventType: 'TRUTH_TRAIL_ENTRY',
           actorId: 'visitor-anonymous',
           delegationId: 'none',
           timestamp: new Date().toISOString(),

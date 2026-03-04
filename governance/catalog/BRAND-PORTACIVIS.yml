@@ -1,0 +1,38 @@
+brand_id: PORTACIVIS
+brand_name: PortaCivis
+slogan: "Informação pública para todos os cidadãos"
+
+concept:
+  symbol: porta_aberta_cidadao
+  meaning:
+    - acesso_informacao_publica
+    - cidadania
+    - transparencia
+    - orientacao_cidada
+
+colors:
+  primary: "#1E5AA8"
+  secondary: "#2F7DD1"
+  citizen: "#F39C12"
+  neutral: "#4A4A4A"
+  background: "#FFFFFF"
+
+typography:
+  primary: Montserrat
+  fallback:
+    - system-ui
+    - Arial
+    - sans-serif
+
+logo_variants:
+  - horizontal
+  - stacked
+  - mark
+  - mono_black
+  - mono_white
+
+usage:
+  header: horizontal
+  favicon: mark
+  documents: mono_black
+  social: mark

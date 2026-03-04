@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="PortaCivis logo mono black">
+  <rect x="16" y="12" width="72" height="104" rx="10" fill="#111111"/>
+  <rect x="34" y="28" width="38" height="72" rx="6" fill="#FFFFFF"/>
+  <circle cx="92" cy="64" r="20" fill="#111111"/>
+</svg>

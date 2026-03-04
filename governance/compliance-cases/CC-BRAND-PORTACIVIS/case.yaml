@@ -1,0 +1,17 @@
+case_id: CC-BRAND-PORTACIVIS
+
+title: Brand Integrity Enforcement for PortaCivis
+
+objective:
+  Ensure the PortaCivis brand assets remain consistent with the
+  governance catalog and brand guide.
+
+controls:
+  - logo_variants_exist
+  - tokens_exist
+  - colors_match_catalog
+  - brand_docs_exist
+  - slogan_matches_registry
+
+evidence_path:
+  governance/compliance-cases/CC-BRAND-PORTACIVIS/evidence/

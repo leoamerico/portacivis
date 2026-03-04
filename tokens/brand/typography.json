@@ -1,0 +1,10 @@
+{
+  "brand": {
+    "fontPrimary": "Montserrat",
+    "fontFallback": [
+      "system-ui",
+      "Arial",
+      "sans-serif"
+    ]
+  }
+}

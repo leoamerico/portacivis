@@ -1,0 +1,9 @@
+{
+  "brand": {
+    "primary": "#1E5AA8",
+    "secondary": "#2F7DD1",
+    "citizen": "#F39C12",
+    "neutral": "#4A4A4A",
+    "background": "#FFFFFF"
+  }
+}

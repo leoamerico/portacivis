@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 160" role="img" aria-label="PortaCivis logo horizontal sem slogan">
+  <rect x="18" y="20" width="96" height="120" rx="12" fill="#1E5AA8"/>
+  <rect x="40" y="38" width="52" height="84" rx="8" fill="#FFFFFF"/>
+  <circle cx="116" cy="80" r="26" fill="#F39C12"/>
+  <text x="170" y="94" font-size="58" font-family="Montserrat, Arial, sans-serif" fill="#1E5AA8" font-weight="700">PortaCivis</text>
+</svg>
