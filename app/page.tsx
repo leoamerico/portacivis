@@ -40,6 +40,10 @@ export default async function HomePage() {
           <span className="quicknav-icon" aria-hidden="true">🌆</span>
           Smart City Demo
         </Link>
+        <Link href="/cidade-aurora?demo=true" className="quicknav-item">
+          <span className="quicknav-icon" aria-hidden="true">🎯</span>
+          Modo Demo
+        </Link>
       </nav>
 
       {/* ── Hero ── */}

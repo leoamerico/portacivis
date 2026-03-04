@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import {getTranslations} from 'next-intl/server';
+import ComplianceScorePanel from '../components/ComplianceScorePanel';
 
 export default async function CompliancePage() {
   const t = await getTranslations('compliancePage');
@@ -50,6 +51,8 @@ export default async function CompliancePage() {
           {t('auditOpenLink')} <span aria-hidden="true">→</span>
         </Link>
       </section>
+
+      <ComplianceScorePanel />
     </main>
   );
 }

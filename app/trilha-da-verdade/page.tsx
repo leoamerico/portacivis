@@ -2,6 +2,7 @@ import Link from 'next/link';
 import {getTranslations} from 'next-intl/server';
 import TruthTrailAuditRecorder from '../components/TruthTrailAuditRecorder';
 import ContextInsightPanel from '../components/ContextInsightPanel';
+import ProvenanceSection from '../components/ProvenanceSection';
 import {buildTruthTrailQuickPaths} from '../../src/truthTrail/pathRecommendations';
 
 type SearchParams = Record<string, string | string[] | undefined>;
@@ -93,6 +94,8 @@ export default async function TrilhaDaVerdadePage({
         correlationId={correlationId}
         layers={selectedLayers}
       />
+
+      <ProvenanceSection hasTerritory={hasTerritory} cidade={cidade} uf={uf} layers={selectedLayers} />
 
       <TruthTrailAuditRecorder
         uf={uf}

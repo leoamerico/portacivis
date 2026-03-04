@@ -8,6 +8,7 @@ import {
   OBRAS,
   INDICADORES
 } from '../../src/smart-city/aurora';
+import AuroraDemoWrapper from '../components/AuroraDemoWrapper';
 
 export const metadata: Metadata = {
   title: 'Cidade Aurora — Smart City EnvNeo | PortaCivis',
@@ -84,7 +85,15 @@ function formatNumber(value: number): string {
   return new Intl.NumberFormat('pt-BR').format(value);
 }
 
-export default function CidadeAuroraPage() {
+type SearchParams = Record<string, string | string[] | undefined>;
+
+export default async function CidadeAuroraPage({
+  searchParams
+}: {
+  searchParams: Promise<SearchParams>;
+}) {
+  const params = await searchParams;
+  const demoMode = params.demo === 'true';
   const totalOrcamento = SECRETARIAS.reduce((acc, s) => acc + s.orcamento, 0);
   const totalServicos = SERVICOS.filter((s) => s.status === 'disponivel').length;
   const totalContratosVigentes = CONTRATOS.filter((c) => c.status === 'vigente').length;
@@ -101,7 +110,7 @@ export default function CidadeAuroraPage() {
       </nav>
 
       {/* ── Hero ── */}
-      <div className="page-hero aurora-hero">
+      <div id="demo-section-hero" className="page-hero aurora-hero">
         <div className="aurora-hero-badge">🌆 Ambiente Demonstrativo EnvNeo</div>
         <h1>{CIDADE_AURORA.nome}</h1>
         <p className="aurora-hero-sub">
@@ -121,8 +130,11 @@ export default function CidadeAuroraPage() {
         </div>
       </div>
 
+      {/* ── Demo controller (Module 5) ── */}
+      <AuroraDemoWrapper presentationMode={demoMode} />
+
       {/* ── Stats summary ── */}
-      <section aria-label="Dados gerais do município" className="aurora-stats-grid">
+      <section id="demo-section-stats" aria-label="Dados gerais do município" className="aurora-stats-grid">
         <div className="aurora-stat-card">
           <span className="aurora-stat-icon" aria-hidden="true">👥</span>
           <strong className="aurora-stat-value">{formatNumber(CIDADE_AURORA.populacao)}</strong>
@@ -215,7 +227,7 @@ export default function CidadeAuroraPage() {
       </section>
 
       {/* ── Serviços ── */}
-      <section id="servicos" aria-labelledby="servicos-title" className="aurora-section">
+      <section id="servicos" aria-labelledby="servicos-title" className="aurora-section" data-demo-section="servicos">
         <h2 id="servicos-title" className="aurora-section-title">💻 Catálogo de Serviços Digitais</h2>
         <p className="aurora-section-sub">{SERVICOS.length} serviços catalogados · {totalServicos} disponíveis hoje</p>
         <ul className="aurora-servicos-list" role="list">
@@ -351,7 +363,7 @@ export default function CidadeAuroraPage() {
       </section>
 
       {/* ── Nota de conformidade ── */}
-      <aside className="aurora-disclaimer" role="note" aria-label="Nota sobre dados demonstrativos">
+      <aside id="demo-section-conclusion" className="aurora-disclaimer" role="note" aria-label="Nota sobre dados demonstrativos">
         <p>
           <strong>⚠ Dados demonstrativos:</strong> Cidade Aurora é um ambiente fictício criado exclusivamente
           para demonstração do ecossistema EnvNeo. Todos os dados, nomes, valores e indicadores são simulados

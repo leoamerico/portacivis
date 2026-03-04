@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import {getTranslations} from 'next-intl/server';
+import CitizenAgentPanel from '../components/CitizenAgentPanel';
 
 type AgentMeta = {
   id: string;
@@ -59,6 +60,13 @@ export default async function AgentsGalleryPage() {
           </article>
         ))}
       </section>
+
+      <CitizenAgentPanel
+        cityName="Cidade Aurora"
+        uf="MG"
+        population={120000}
+        region="Sudeste — Minas Gerais"
+      />
     </main>
   );
 }
