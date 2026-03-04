@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 640" role="img" aria-labelledby="title desc">
+  <title id="title">Brasão PortaCivis</title>
+  <desc id="desc">Brasão institucional da plataforma PortaCivis com escudo cívico, portal e ramo inferior.</desc>
+
+  <defs>
+    <linearGradient id="shieldBlue" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#1D4ED8"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="0" y="0" width="512" height="640" fill="#ffffff"/>
+
+  <g transform="translate(256,52)">
+    <text x="0" y="0" text-anchor="middle" font-size="26" font-family="Arial, sans-serif" fill="#0F172A" font-weight="700">PORTA CIVIS</text>
+    <text x="0" y="30" text-anchor="middle" font-size="15" font-family="Arial, sans-serif" fill="#334155">Gabinete de Comunicação Institucional</text>
+  </g>
+
+  <g transform="translate(96,118)">
+    <path d="M160 0 L320 60 L320 220 C320 316 248 392 160 422 C72 392 0 316 0 220 L0 60 Z" fill="url(#shieldBlue)" stroke="#0F172A" stroke-width="8"/>
+
+    <path d="M160 82 C196 82 226 112 226 148 V266 C226 302 196 332 160 332 C124 332 94 302 94 266 V148 C94 112 124 82 160 82 Z" fill="#ffffff" opacity="0.95"/>
+
+    <path d="M160 116 C177 116 192 131 192 148 V266 C192 283 177 298 160 298 C143 298 128 283 128 266 V148 C128 131 143 116 160 116 Z" fill="#1D4ED8"/>
+
+    <path d="M116 184 H204" stroke="#ffffff" stroke-width="12" stroke-linecap="round"/>
+
+    <path d="M160 26 L292 78 L292 220 C292 299 235 362 160 392 C85 362 28 299 28 220 L28 78 Z" fill="none" stroke="#ffffff" stroke-width="6" opacity="0.55"/>
+  </g>
+
+  <g transform="translate(256,568)">
+    <path d="M-128 0 C-85 -24 -40 -24 0 0 C40 -24 85 -24 128 0" fill="none" stroke="#0F172A" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="0" cy="0" r="10" fill="#1D4ED8"/>
+  </g>
+</svg>

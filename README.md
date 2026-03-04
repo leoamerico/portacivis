@@ -21,6 +21,18 @@ npm run build
 npm run start
 ```
 
+## Segurança (fundação)
+
+```bash
+npm run security:headers
+npm run security:verify
+npm run test:smoke
+```
+
+- `security:headers`: valida presença de headers de segurança no `next.config.js`.
+- `security:verify`: executa validação de segurança + build bloqueante.
+- `test:smoke`: verifica saúde da URL canônica (`CANONICAL_URL`, padrão `https://portacivis.vercel.app`).
+
 ## Criar repositório no GitHub
 
 Com GitHub CLI autenticado:

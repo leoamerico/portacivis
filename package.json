@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "security:headers": "node scripts/verify-security-headers.mjs",
+    "security:verify": "npm run security:headers && npm run build",
+    "test:smoke": "node scripts/smoke-domain.mjs"
   },
   "dependencies": {
     "next": "15.5.12",
