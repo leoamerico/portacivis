@@ -5,6 +5,8 @@ import Link from 'next/link';
 
 const storageKey = 'portacivis.consent.v1';
 
+type ConsentMode = 'essential-only' | 'anonymous-research';
+
 export default function ConsentBanner() {
   const [visible, setVisible] = useState(false);
 
@@ -13,7 +15,7 @@ export default function ConsentBanner() {
     setVisible(!consent);
   }, []);
 
-  function setConsent(value: 'accepted' | 'essential-only') {
+  function setConsent(value: ConsentMode) {
     localStorage.setItem(storageKey, value);
     setVisible(false);
   }
@@ -25,15 +27,17 @@ export default function ConsentBanner() {
   return (
     <section className="consent-banner" aria-label="Consentimento de privacidade">
       <p>
-        Utilizamos apenas dados estritamente necessários para operação e segurança do portal. Saiba
-        mais em <Link href="/privacidade">Política de Privacidade</Link>.
+        Utilizamos apenas dados estritamente necessários para operação e segurança do portal. A
+        pesquisa de uso é sempre anônima, opcional e sem perfilamento sensível. Saiba mais em{' '}
+        <Link href="/privacidade">Política de Privacidade</Link> e{' '}
+        <Link href="/cookies-e-cache">Política de Cookies e Cache</Link>.
       </p>
       <div className="consent-actions">
         <button type="button" onClick={() => setConsent('essential-only')}>
           Apenas essenciais
         </button>
-        <button type="button" onClick={() => setConsent('accepted')}>
-          Concordo
+        <button type="button" onClick={() => setConsent('anonymous-research')}>
+          Permitir pesquisa anônima
         </button>
       </div>
     </section>

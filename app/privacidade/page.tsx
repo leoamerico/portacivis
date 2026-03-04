@@ -23,6 +23,19 @@ export default function PrivacyPage() {
           <li>Disponibilizar serviços e informações públicas.</li>
           <li>Garantir funcionamento, disponibilidade e segurança da plataforma.</li>
           <li>Atender obrigações legais e regulatórias aplicáveis.</li>
+          <li>
+            Realizar pesquisa de uso anônima e agregada (opcional), exclusivamente para melhoria de
+            serviço público digital.
+          </li>
+        </ul>
+      </section>
+
+      <section className="card">
+        <h2>Limites éticos de pesquisa de visitantes</h2>
+        <ul>
+          <li>Não realizamos perfilamento sensível de visitantes.</li>
+          <li>Não realizamos reidentificação a partir de cache, cookies ou telemetria.</li>
+          <li>Coleta opcional para pesquisa de uso é agregada, minimizada e auditável.</li>
         </ul>
       </section>
 

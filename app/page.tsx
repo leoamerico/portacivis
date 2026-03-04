@@ -5,8 +5,10 @@ export default function HomePage() {
     <main id="conteudo-principal" role="main">
       <nav aria-label="Navegação principal" className="card">
         <div className="quick-links">
+          <Link href="/agentes">Galeria de Agentes</Link>
           <Link href="/accessibilidade">Recursos de Acessibilidade</Link>
           <Link href="/privacidade">Privacidade (LGPD)</Link>
+          <Link href="/cookies-e-cache">Cookies e cache</Link>
           <Link href="/termos">Termos de uso</Link>
           <Link href="/conformidade">Conformidade</Link>
         </div>
