@@ -77,7 +77,7 @@
     "restart": "Redo initial selection"
   },
   "agents": {
-    "title": "PortaCivis Agents Gallery",
+    "title": "Porta Civis Agents Gallery",
     "description": "These intelligence agents gather, verify and present verified news in a clearer format, with citizen-friendly language, source traceability and compliance review.",
     "howTitle": "How they work",
     "how1": "They collect and organize information from verifiable official sources.",

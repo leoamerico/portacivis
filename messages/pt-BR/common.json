@@ -77,7 +77,7 @@
     "restart": "Refazer seleção inicial"
   },
   "agents": {
-    "title": "Galeria de Agentes do PortaCivis",
+    "title": "Galeria de Agentes do Porta Civis",
     "description": "Estes são agentes de inteligência que agregam, checam e apresentam notícias verificadas em uma nova roupagem, com linguagem cidadã, rastreabilidade de fontes e revisão de conformidade.",
     "howTitle": "Como eles atuam",
     "how1": "Coletam e organizam informações de fontes oficiais verificáveis.",

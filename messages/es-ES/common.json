@@ -77,7 +77,7 @@
     "restart": "Rehacer selección inicial"
   },
   "agents": {
-    "title": "Galería de Agentes de PortaCivis",
+    "title": "Galería de Agentes de Porta Civis",
     "description": "Estos agentes de inteligencia reúnen, verifican y presentan noticias verificadas en un formato más claro, con lenguaje ciudadano, trazabilidad de fuentes y revisión de cumplimiento.",
     "howTitle": "Cómo actúan",
     "how1": "Recopilan y organizan información de fuentes oficiales verificables.",
