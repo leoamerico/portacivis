@@ -104,6 +104,8 @@ export default function InitialTerritorySelector() {
   const [cityFetchFailed, setCityFetchFailed] = useState(false);
   const [selectedLayers, setSelectedLayers] = useState<string[]>(DEFAULT_LAYERS);
   const [hideSelectedLayerItems, setHideSelectedLayerItems] = useState(false);
+  const [ctaShake, setCtaShake] = useState(false);
+  const [ctaAttempted, setCtaAttempted] = useState(false);
 
   useEffect(() => {
     let disposed = false;
@@ -248,6 +250,23 @@ export default function InitialTerritorySelector() {
     return `tid-${Date.now()}`;
   }, []);
 
+  const handleCtaClick = (e: React.MouseEvent) => {
+    if (!canProceed) {
+      e.preventDefault();
+      setCtaAttempted(true);
+      setCtaShake(true);
+      setTimeout(() => setCtaShake(false), 600);
+      // Focus the first unfilled field
+      if (!selectedUf) {
+        document.getElementById('uf-select')?.focus();
+      } else if (!city.trim()) {
+        document.getElementById('city-select')?.focus();
+      }
+      return;
+    }
+    persistSelection();
+  };
+
   const persistSelection = () => {
     if (!canProceed) {
       return;
@@ -386,23 +405,39 @@ export default function InitialTerritorySelector() {
             })}
           </fieldset>
 
-          <Link
-            href={canProceed
-              ? `/trilha-da-verdade?uf=${encodeURIComponent(selectedUf)}&cidade=${encodeURIComponent(city.trim())}&correlationId=${encodeURIComponent(correlationId)}&traceId=${encodeURIComponent(traceId)}&layers=${encodeURIComponent(effectiveLayers.join(','))}`
-              : '/trilha-da-verdade'
-            }
-            className={canProceed ? 'territory-cta ready' : 'territory-cta disabled'}
-            onClick={persistSelection}
-            aria-disabled={!canProceed}
-          >
-            {t('cta')} {canProceed && '→'}
-          </Link>
+          <div className="territory-cta-wrap">
+            <Link
+              href={canProceed
+                ? `/trilha-da-verdade?uf=${encodeURIComponent(selectedUf)}&cidade=${encodeURIComponent(city.trim())}&correlationId=${encodeURIComponent(correlationId)}&traceId=${encodeURIComponent(traceId)}&layers=${encodeURIComponent(effectiveLayers.join(','))}`
+                : '#'
+              }
+              className={[
+                'territory-cta',
+                canProceed ? 'territory-cta--ready' : 'territory-cta--locked',
+                ctaShake ? 'territory-cta--shake' : ''
+              ].filter(Boolean).join(' ')}
+              onClick={handleCtaClick}
+              aria-disabled={!canProceed}
+              aria-label={canProceed
+                ? `Iniciar trilha da verdade para ${city.trim()} - ${selectedUf}`
+                : 'Preencha estado e cidade para iniciar a trilha da verdade'
+              }
+            >
+              <span className="territory-cta-icon" aria-hidden="true">
+                {canProceed ? '▶' : '○'}
+              </span>
+              <span className="territory-cta-label">{t('cta')}</span>
+              {canProceed && <span className="territory-cta-arrow" aria-hidden="true">→</span>}
+            </Link>
 
-          <p className="territory-summary" aria-live="polite">
-            {canProceed
-              ? t('summarySelected', {city: city.trim(), uf: selectedUf})
-              : t('summaryPending')}
-          </p>
+            <p className="territory-cta-hint" aria-live="polite" role="status">
+              {canProceed
+                ? `✓ ${city.trim()} — ${selectedUf} selecionado. Clique para iniciar.`
+                : !selectedUf
+                  ? ctaAttempted ? '⚠ Selecione o estado para continuar.' : 'Selecione o estado e a cidade para iniciar.'
+                  : ctaAttempted ? '⚠ Digite a cidade para continuar.' : 'Agora selecione a cidade.'}
+            </p>
+          </div>
         </div>
       </div>
     </section>
