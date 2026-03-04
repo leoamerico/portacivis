@@ -127,8 +127,9 @@ export default function InitialTerritorySelector() {
         zoomControl: true
       });
 
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors'
+      L.tileLayer('/api/map-tiles/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors',
+        maxNativeZoom: 19
       }).addTo(map);
 
       for (const uf of FEDERATIVE_UNITS) {
