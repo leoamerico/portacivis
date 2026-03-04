@@ -6,6 +6,13 @@ export type BrandId = "GOVEVIA" | "PORTACIVIS" | "ENVLIVE" | "LEOAMERICO";
 
 export const BRANDS = [
   {
+    "tokens": {
+      "primary": "#0E5A3D",
+      "secondary": "#2A8D69",
+      "citizen": "#7BCFAF",
+      "neutral": "#2F3B36",
+      "background": "#FFFFFF"
+    },
     "brand_id": "GOVEVIA",
     "name": "Govevia",
     "category": "govtech_platform",
@@ -20,6 +27,13 @@ export const BRANDS = [
     }
   },
   {
+    "tokens": {
+      "primary": "#1E5AA8",
+      "secondary": "#2F7DD1",
+      "citizen": "#F39C12",
+      "neutral": "#4A4A4A",
+      "background": "#FFFFFF"
+    },
     "brand_id": "PORTACIVIS",
     "name": "PortaCivis",
     "category": "civic_information_portal",
@@ -34,6 +48,13 @@ export const BRANDS = [
     }
   },
   {
+    "tokens": {
+      "primary": "#4B2CA8",
+      "secondary": "#6E4CE0",
+      "citizen": "#B6A6FF",
+      "neutral": "#3A3150",
+      "background": "#FFFFFF"
+    },
     "brand_id": "ENVLIVE",
     "name": "Env Live",
     "category": "private_sector_platform",
@@ -48,6 +69,13 @@ export const BRANDS = [
     }
   },
   {
+    "tokens": {
+      "primary": "#1E1E1E",
+      "secondary": "#3A3A3A",
+      "citizen": "#D4A017",
+      "neutral": "#4A4A4A",
+      "background": "#FFFFFF"
+    },
     "brand_id": "LEOAMERICO",
     "name": "leoamerico.me",
     "category": "personal_institutional_brand",

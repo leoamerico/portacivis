@@ -16,7 +16,7 @@ const nextConfig = {
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'www.portacivis.com' }],
-        destination: 'https://www.portacivis.com.br/:path*',
+        destination: 'https://portacivis.com.br/:path*',
         permanent: true,
       },
     ];

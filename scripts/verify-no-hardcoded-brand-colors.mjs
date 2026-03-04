@@ -4,6 +4,9 @@ import path from 'node:path';
 const repoRoot = process.cwd();
 const HEX_COLOR_PATTERN = /#[0-9a-fA-F]{6}\b/g;
 const ALLOWLIST_MARKER = 'BRAND_COLOR_ALLOWLIST';
+const ALLOWED_GENERATED_FILES = new Set([
+  path.normalize('src/brand/registry.generated.ts')
+]);
 
 const scanRoots = [
   path.join(repoRoot, 'app'),
@@ -40,6 +43,11 @@ function main() {
   const violations = [];
 
   for (const file of files) {
+    const rel = path.relative(repoRoot, file);
+    if (ALLOWED_GENERATED_FILES.has(path.normalize(rel))) {
+      continue;
+    }
+
     const content = fs.readFileSync(file, 'utf8');
     if (content.includes(ALLOWLIST_MARKER)) {
       continue;
@@ -48,7 +56,7 @@ function main() {
     const matches = content.match(HEX_COLOR_PATTERN);
     if (matches && matches.length > 0) {
       violations.push({
-        file: path.relative(repoRoot, file),
+        file: rel,
         colors: [...new Set(matches)]
       });
     }

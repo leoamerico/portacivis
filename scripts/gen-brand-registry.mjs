@@ -39,6 +39,28 @@ for (const brand of parsed.brands) {
 const sourceHash = crypto.createHash('sha256').update(yml).digest('hex');
 
 const brands = parsed.brands.map((b) => ({
+  ...(function loadTokens() {
+    const tokenFile = path.join(repoRoot, String(b.tokens_path), 'colors.json');
+    if (!fs.existsSync(tokenFile)) {
+      throw new Error(`tokens file not found for ${b.brand_id}: ${tokenFile}`);
+    }
+
+    const tokenRaw = fs.readFileSync(tokenFile, 'utf8');
+    const tokenJson = JSON.parse(tokenRaw);
+    const primary = String(tokenJson?.brand?.primary ?? '');
+    const secondary = String(tokenJson?.brand?.secondary ?? '');
+    const citizen = String(tokenJson?.brand?.citizen ?? '');
+    const neutral = String(tokenJson?.brand?.neutral ?? '');
+    const background = String(tokenJson?.brand?.background ?? '');
+
+    if (!primary || !secondary || !citizen || !neutral || !background) {
+      throw new Error(`invalid token schema for ${b.brand_id}: ${tokenFile}`);
+    }
+
+    return {
+      tokens: {primary, secondary, citizen, neutral, background}
+    };
+  })(),
   brand_id: String(b.brand_id).toUpperCase(),
   name: String(b.name),
   category: String(b.category),

@@ -14,8 +14,33 @@ import {loadBrandCssVars} from '../src/brand/tokens';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.portacivis.com.br'),
   title: 'PortaCivis — Portal do Cidadão',
   description: 'Serviços, informações e transparência da cidade.',
+  alternates: {
+    canonical: '/'
+  },
+  openGraph: {
+    type: 'website',
+    url: 'https://www.portacivis.com.br/',
+    siteName: 'PortaCivis',
+    title: 'PortaCivis — Portal do Cidadão',
+    description: 'Serviços, informações e transparência da cidade.',
+    images: [
+      {
+        url: '/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'PortaCivis — Portal do Cidadão'
+      }
+    ]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'PortaCivis — Portal do Cidadão',
+    description: 'Serviços, informações e transparência da cidade.',
+    images: ['/twitter-image']
+  }
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
@@ -30,7 +55,16 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const brandHint = c.get('ENVNEO_BRAND')?.value ?? null;
   const {brand_id} = resolveBrand({host, tenant, brandHint});
   const brandBase = getBrandConfig(brand_id);
-  const {cssVars, tokens} = await loadBrandCssVars(brandBase);
+  const {cssVars, tokens} = await loadBrandCssVars(brandBase).catch(() => ({
+    cssVars: ':root { --brand-primary: rgb(30 90 168); --brand-secondary: rgb(47 125 209); --brand-citizen: rgb(243 156 18); --brand-neutral: rgb(74 74 74); --brand-background: rgb(255 255 255); }',
+    tokens: {
+      primary: 'rgb(30 90 168)',
+      secondary: 'rgb(47 125 209)',
+      citizen: 'rgb(243 156 18)',
+      neutral: 'rgb(74 74 74)',
+      background: 'rgb(255 255 255)'
+    }
+  }));
   const brand = {
     ...brandBase,
     tokens

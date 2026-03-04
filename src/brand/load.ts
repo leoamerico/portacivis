@@ -26,6 +26,13 @@ export function getBrandConfig(brandId: string): BrandRuntime {
       adr: string;
       compliance_case: string;
     };
+    tokens: {
+      primary: string;
+      secondary: string;
+      citizen: string;
+      neutral: string;
+      background: string;
+    };
   };
 
   const baseAssets = toPublicPath(runtime.assets_path).replace(/\/$/, '');
@@ -36,12 +43,6 @@ export function getBrandConfig(brandId: string): BrandRuntime {
       logo: `${baseAssets}/svg/logo-horizontal.svg`,
       mark: `${baseAssets}/svg/logo-mark.svg`
     },
-    tokens: {
-      primary: '',
-      secondary: '',
-      citizen: '',
-      neutral: '',
-      background: ''
-    }
+    tokens: runtime.tokens
   };
 }
