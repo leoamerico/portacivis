@@ -82,23 +82,26 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <BrandProvider brand={brand}>
           <NextIntlClientProvider messages={messages} locale={locale}>
             <header className="site-header" aria-label="Cabeçalho institucional">
-              <Link href="/" className="site-header-brand" aria-label={`${brand.name} - Página inicial`}>
-                <img
-                  src={brand.assets.logo}
-                  alt={brand.name}
-                  width={220}
-                  height={62}
-                  loading="eager"
-                  decoding="async"
-                />
-                <span className="site-header-text">
-                  <strong>{brand.name}</strong>
-                  <small>{brand.slogan}</small>
-                </span>
-              </Link>
+              <div className="site-header-inner">
+                <Link href="/" className="site-header-brand" aria-label={`${brand.name} - Página inicial`}>
+                  <img
+                    src={brand.assets.logo}
+                    alt={brand.name}
+                    width={220}
+                    height={62}
+                    loading="eager"
+                    decoding="async"
+                  />
+                  <span className="site-header-text">
+                    <small>{brand.slogan}</small>
+                  </span>
+                </Link>
+                <div className="site-utilities" aria-label="Ferramentas de interface">
+                  <LanguageSwitcher />
+                  <AccessibilityPanel />
+                </div>
+              </div>
             </header>
-            <AccessibilityPanel />
-            <LanguageSwitcher />
             <ConsentBanner />
             {children}
             <footer className="site-footer" aria-label="Rodapé institucional">

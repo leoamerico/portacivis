@@ -20,6 +20,7 @@
   },
   "home": {
     "mainNav": "Navegación principal",
+    "quickAccessNav": "Accesos rápidos de la página inicial",
     "title": "PortaCivis — Portal Ciudadano",
     "description": "Canal oficial para que la ciudadanía conozca sus derechos y deberes, acceda a servicios y acompañe información y transparencia de la ciudad.",
     "sections": {

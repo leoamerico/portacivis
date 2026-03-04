@@ -20,6 +20,7 @@
   },
   "home": {
     "mainNav": "Navegação principal",
+    "quickAccessNav": "Atalhos principais da página inicial",
     "title": "PortaCivis — Portal do Cidadão",
     "description": "Canal oficial para o cidadão conhecer seus direitos e deveres, acessar serviços e acompanhar informações e transparência da cidade.",
     "sections": {

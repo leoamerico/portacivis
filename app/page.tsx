@@ -9,15 +9,13 @@ export default async function HomePage() {
 
   return (
     <main id="conteudo-principal" role="main">
-      <nav aria-label={t('mainNav')} className="card">
+      <nav aria-label={t('quickAccessNav')} className="card">
         <div className="quick-links">
           <Link href="#mapa-brasil">{territory('mapTitle')}</Link>
+          <Link href="/trilha-da-verdade">{common('truthTrail.title')}</Link>
           <Link href="/noticias">{common('nav.news')}</Link>
           <Link href="/agentes">{common('nav.agents')}</Link>
           <Link href="/accessibilidade">{common('nav.accessibility')}</Link>
-          <Link href="/privacidade">{common('nav.privacy')}</Link>
-          <Link href="/cookies-e-cache">{common('nav.cookies')}</Link>
-          <Link href="/termos">{common('nav.terms')}</Link>
           <Link href="/conformidade">{common('nav.compliance')}</Link>
         </div>
       </nav>
