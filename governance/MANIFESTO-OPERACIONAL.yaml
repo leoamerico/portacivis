@@ -1,0 +1,48 @@
+version: 1
+project: portacivis
+owner: envneo
+updatedAt: 2026-03-04
+
+source_of_truth:
+  architecture: app/
+  policies: governance/
+  workflows: .github/workflows/
+  reports: reports/
+
+principles:
+  - policy_as_code
+  - security_by_default
+  - multilingual_by_design
+  - accessibility_first
+  - observable_operations
+  - rollback_first
+
+required_gates:
+  - security:headers
+  - test:i18n
+  - build
+  - test:smoke
+  - governance:verify
+
+decision_record:
+  adr_required: true
+  no_merge_without_traceability: true
+
+resilience:
+  deploy_strategy:
+    - progressive_rollout
+    - automatic_rollback
+  backup_policy:
+    frequency: daily
+    retention_days: 30
+  game_day:
+    frequency: quarterly
+
+compliance:
+  privacy_framework: LGPD
+  required_headers:
+    - Content-Security-Policy
+    - Strict-Transport-Security
+    - X-Content-Type-Options
+    - Referrer-Policy
+    - Permissions-Policy

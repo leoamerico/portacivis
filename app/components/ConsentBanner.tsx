@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import {useTranslations} from 'next-intl';
 
 const storageKey = 'portacivis.consent.v1';
 
@@ -9,6 +10,7 @@ type ConsentMode = 'essential-only' | 'anonymous-research';
 
 export default function ConsentBanner() {
   const [visible, setVisible] = useState(false);
+  const t = useTranslations('consent');
 
   useEffect(() => {
     const consent = localStorage.getItem(storageKey);
@@ -25,19 +27,18 @@ export default function ConsentBanner() {
   }
 
   return (
-    <section className="consent-banner" aria-label="Consentimento de privacidade">
+    <section className="consent-banner" aria-label={t('aria')}>
       <p>
-        Utilizamos apenas dados estritamente necessários para operação e segurança do portal. A
-        pesquisa de uso é sempre anônima, opcional e sem perfilamento sensível. Saiba mais em{' '}
-        <Link href="/privacidade">Política de Privacidade</Link> e{' '}
-        <Link href="/cookies-e-cache">Política de Cookies e Cache</Link>.
+        {t('text')}{' '}
+        <Link href="/privacidade">{t('privacy')}</Link> {t('and')}{' '}
+        <Link href="/cookies-e-cache">{t('cookies')}</Link>.
       </p>
       <div className="consent-actions">
         <button type="button" onClick={() => setConsent('essential-only')}>
-          Apenas essenciais
+          {t('essential')}
         </button>
         <button type="button" onClick={() => setConsent('anonymous-research')}>
-          Permitir pesquisa anônima
+          {t('anonymous')}
         </button>
       </div>
     </section>

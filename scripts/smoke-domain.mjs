@@ -1,4 +1,4 @@
-const canonicalUrl = process.env.CANONICAL_URL || 'https://portacivis.vercel.app';
+const canonicalUrl = process.env.CANONICAL_URL || 'https://www.portacivis.com.br';
 
 async function check(url) {
   const response = await fetch(url, {

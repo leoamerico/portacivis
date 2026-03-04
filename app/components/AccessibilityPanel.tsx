@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+import {useLocale, useTranslations} from 'next-intl';
 
 type AccessibilityState = {
   fontScale: number;
@@ -29,7 +30,7 @@ function applyAccessibility(state: AccessibilityState) {
   body.setAttribute('data-color-vision', state.colorVisionMode);
 }
 
-function readTextFromMain() {
+function readTextFromMain(locale: string) {
   const main = document.getElementById('conteudo-principal');
   if (!main) {
     return;
@@ -42,7 +43,7 @@ function readTextFromMain() {
 
   window.speechSynthesis.cancel();
   const utterance = new SpeechSynthesisUtterance(content);
-  utterance.lang = 'pt-BR';
+  utterance.lang = locale;
   utterance.rate = 1;
   window.speechSynthesis.speak(utterance);
 }
@@ -50,6 +51,8 @@ function readTextFromMain() {
 export default function AccessibilityPanel() {
   const [open, setOpen] = useState(false);
   const [state, setState] = useState<AccessibilityState>(defaultState);
+  const locale = useLocale();
+  const t = useTranslations('accessibilityPanel');
 
   useEffect(() => {
     const stored = localStorage.getItem(storageKey);
@@ -75,7 +78,7 @@ export default function AccessibilityPanel() {
   const fontLabel = useMemo(() => `${state.fontScale}%`, [state.fontScale]);
 
   return (
-    <aside className="accessibility-panel" aria-label="Painel de acessibilidade">
+    <aside className="accessibility-panel" aria-label={t('aria')}>
       <button
         type="button"
         className="accessibility-toggle"
@@ -83,15 +86,15 @@ export default function AccessibilityPanel() {
         aria-expanded={open}
         aria-controls="accessibility-controls"
       >
-        Acessibilidade
+        {t('toggle')}
       </button>
 
       {open ? (
         <div id="accessibility-controls" className="accessibility-controls">
-          <p className="accessibility-title">Ajustes de navegação</p>
+          <p className="accessibility-title">{t('title')}</p>
 
           <div className="accessibility-row">
-            <span>Tamanho do texto: {fontLabel}</span>
+            <span>{t('fontSize')}: {fontLabel}</span>
             <div className="accessibility-inline-buttons">
               <button
                 type="button"
@@ -126,7 +129,7 @@ export default function AccessibilityPanel() {
                 setState((previous) => ({ ...previous, highContrast: event.target.checked }))
               }
             />
-            Alto contraste
+            {t('highContrast')}
           </label>
 
           <label className="accessibility-row">
@@ -137,7 +140,7 @@ export default function AccessibilityPanel() {
                 setState((previous) => ({ ...previous, underlineLinks: event.target.checked }))
               }
             />
-            Destacar links
+            {t('underlineLinks')}
           </label>
 
           <label className="accessibility-row">
@@ -148,11 +151,11 @@ export default function AccessibilityPanel() {
                 setState((previous) => ({ ...previous, reducedMotion: event.target.checked }))
               }
             />
-            Reduzir movimento
+            {t('reduceMotion')}
           </label>
 
           <label className="accessibility-row" htmlFor="color-vision-mode">
-            <span>Modo de cores</span>
+            <span>{t('colorMode')}</span>
             <select
               id="color-vision-mode"
               value={state.colorVisionMode}
@@ -163,22 +166,22 @@ export default function AccessibilityPanel() {
                 }))
               }
             >
-              <option value="default">Padrão</option>
-              <option value="protanopia">Daltonismo (protanopia)</option>
-              <option value="deuteranopia">Daltonismo (deuteranopia)</option>
-              <option value="tritanopia">Daltonismo (tritanopia)</option>
+              <option value="default">{t('default')}</option>
+              <option value="protanopia">{t('protanopia')}</option>
+              <option value="deuteranopia">{t('deuteranopia')}</option>
+              <option value="tritanopia">{t('tritanopia')}</option>
             </select>
           </label>
 
           <div className="accessibility-actions">
-            <button type="button" onClick={readTextFromMain}>
-              Ler página
+            <button type="button" onClick={() => readTextFromMain(locale)}>
+              {t('readPage')}
             </button>
             <button type="button" onClick={() => window.speechSynthesis.cancel()}>
-              Parar leitura
+              {t('stopReading')}
             </button>
             <button type="button" onClick={() => setState(defaultState)}>
-              Restaurar padrão
+              {t('restore')}
             </button>
           </div>
         </div>

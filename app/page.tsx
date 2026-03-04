@@ -1,46 +1,52 @@
 import Link from 'next/link';
+import {getTranslations} from 'next-intl/server';
+import InitialTerritorySelector from './components/InitialTerritorySelector';
 
-export default function HomePage() {
+export default async function HomePage() {
+  const t = await getTranslations('home');
+  const common = await getTranslations();
+  const territory = await getTranslations('territory');
+
   return (
     <main id="conteudo-principal" role="main">
-      <nav aria-label="Navegação principal" className="card">
+      <nav aria-label={t('mainNav')} className="card">
         <div className="quick-links">
-          <Link href="/agentes">Galeria de Agentes</Link>
-          <Link href="/accessibilidade">Recursos de Acessibilidade</Link>
-          <Link href="/privacidade">Privacidade (LGPD)</Link>
-          <Link href="/cookies-e-cache">Cookies e cache</Link>
-          <Link href="/termos">Termos de uso</Link>
-          <Link href="/conformidade">Conformidade</Link>
+          <Link href="#mapa-brasil">{territory('mapTitle')}</Link>
+          <Link href="/noticias">{common('nav.news')}</Link>
+          <Link href="/agentes">{common('nav.agents')}</Link>
+          <Link href="/accessibilidade">{common('nav.accessibility')}</Link>
+          <Link href="/privacidade">{common('nav.privacy')}</Link>
+          <Link href="/cookies-e-cache">{common('nav.cookies')}</Link>
+          <Link href="/termos">{common('nav.terms')}</Link>
+          <Link href="/conformidade">{common('nav.compliance')}</Link>
         </div>
       </nav>
 
-      <h1>PortaCivis — Portal do Cidadão</h1>
-      <p>
-        Canal oficial para o cidadão conhecer seus direitos e deveres, acessar serviços e
-        acompanhar informações e transparência da cidade.
-      </p>
+      <h1>{t('title')}</h1>
+      <p>{t('description')}</p>
 
-      <section className="card">
-        <h2>Serviços ao Cidadão</h2>
-        <p>Solicitações, atendimento e orientações municipais.</p>
+      <section id="mapa-brasil" aria-label={territory('mapTitle')}>
+        <InitialTerritorySelector />
       </section>
 
       <section className="card">
-        <h2>Notícias Oficiais</h2>
-        <p>Atualizações institucionais e comunicados da prefeitura.</p>
+        <h2>{t('sections.servicesTitle')}</h2>
+        <p>{t('sections.servicesText')}</p>
       </section>
 
       <section className="card">
-        <h2>Transparência</h2>
-        <p>Dados públicos, relatórios e atos oficiais com referência de fonte.</p>
+        <h2>{t('sections.newsTitle')}</h2>
+        <p>{t('sections.newsText')}</p>
+      </section>
+
+      <section className="card">
+        <h2>{t('sections.transparencyTitle')}</h2>
+        <p>{t('sections.transparencyText')}</p>
       </section>
 
       <section className="card" aria-labelledby="acessibilidade-titulo">
-        <h2 id="acessibilidade-titulo">Acessibilidade</h2>
-        <p>
-          O portal possui suporte para alto contraste, aumento de fonte, leitura por voz,
-          destaque de links e redução de movimento.
-        </p>
+        <h2 id="acessibilidade-titulo">{t('sections.accessibilityTitle')}</h2>
+        <p>{t('sections.accessibilityText')}</p>
       </section>
     </main>
   );

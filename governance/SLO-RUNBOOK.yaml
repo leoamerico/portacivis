@@ -1,0 +1,68 @@
+version: 1
+updatedAt: 2026-03-04
+
+sli:
+  availability:
+    description: canonical_endpoint_health
+    source: scripts/smoke-domain.mjs
+  i18n_integrity:
+    description: locale_response_consistency
+    source: scripts/verify-i18n-smoke.mjs
+  security_headers:
+    description: required_http_headers_presence
+    source: scripts/verify-security-headers.mjs
+
+slo:
+  availability:
+    target: 99.9
+    window: 30d
+  i18n_integrity:
+    target: 99.95
+    window: 30d
+  security_headers:
+    target: 100
+    window: 30d
+
+error_budget:
+  availability:
+    monthly_budget_minutes: 43
+  i18n_integrity:
+    monthly_failed_runs: 2
+
+automation:
+  daily_smoke_workflow: .github/workflows/smoke.yml
+  ci_gates_workflow: .github/workflows/ci.yml
+
+incident_response:
+  severity_levels:
+    - SEV1
+    - SEV2
+    - SEV3
+  first_response_minutes:
+    SEV1: 15
+    SEV2: 30
+    SEV3: 120
+  rollback_policy:
+    enabled: true
+    trigger_on:
+      - smoke_failure_after_deploy
+      - header_regression
+      - i18n_regression
+
+runbook_steps:
+  smoke_failure:
+    - validate_dns_and_tls
+    - run_local_verify_all
+    - inspect_last_deployment
+    - execute_rollback_if_needed
+    - publish_incident_report
+  i18n_failure:
+    - identify_missing_keys
+    - restore_previous_catalog
+    - run_test_i18n
+    - re-deploy
+  security_failure:
+    - identify_missing_header
+    - patch_next_config
+    - run_security_verify
+    - re-deploy

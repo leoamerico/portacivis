@@ -7,21 +7,26 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "governance:verify": "node scripts/verify-operational-governance.mjs",
     "security:headers": "node scripts/verify-security-headers.mjs",
-    "security:verify": "npm run security:headers && npm run build",
-    "test:smoke": "node scripts/smoke-domain.mjs"
+    "security:verify": "bun run governance:verify && bun run security:headers && bun run test:i18n && bun run build",
+    "test:smoke": "node scripts/smoke-domain.mjs",
+    "test:truth-trail": "node scripts/smoke-truth-trail.mjs",
+    "test:i18n": "node scripts/verify-i18n-smoke.mjs",
+    "verify:all": "bun run security:verify && bun run test:smoke"
   },
   "dependencies": {
     "next": "15.5.12",
+    "next-intl": "^4.8.3",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "typescript": "^5.3.3",
     "@types/node": "^20.11.5",
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
     "eslint": "^8.56.0",
-    "eslint-config-next": "^15.5.12"
+    "eslint-config-next": "^15.5.12",
+    "typescript": "^5.3.3"
   }
 }

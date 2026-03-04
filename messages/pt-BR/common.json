@@ -1,0 +1,274 @@
+{
+  "skipToContent": "Pular para o conteúdo principal",
+  "language": {
+    "label": "Idioma",
+    "pt-BR": "Português (Brasil)",
+    "en-US": "Inglês (Estados Unidos)",
+    "es-ES": "Espanhol (Espanha)"
+  },
+  "nav": {
+    "news": "Notícias Oficiais",
+    "agents": "Galeria de Agentes",
+    "privacy": "Privacidade (LGPD)",
+    "cookies": "Cookies e Cache",
+    "terms": "Termos de Uso",
+    "compliance": "Conformidade",
+    "accessibility": "Acessibilidade"
+  },
+  "footer": {
+    "copy": "PortaCivis — Portal do Cidadão. Direitos, deveres, serviços e transparência."
+  },
+  "home": {
+    "mainNav": "Navegação principal",
+    "title": "PortaCivis — Portal do Cidadão",
+    "description": "Canal oficial para o cidadão conhecer seus direitos e deveres, acessar serviços e acompanhar informações e transparência da cidade.",
+    "sections": {
+      "servicesTitle": "Serviços ao Cidadão",
+      "servicesText": "Solicitações, atendimento e orientações municipais.",
+      "newsTitle": "Notícias Oficiais",
+      "newsText": "Atualizações institucionais e comunicados da prefeitura.",
+      "transparencyTitle": "Transparência",
+      "transparencyText": "Dados públicos, relatórios e atos oficiais com referência de fonte.",
+      "accessibilityTitle": "Acessibilidade",
+      "accessibilityText": "O portal possui suporte para alto contraste, aumento de fonte, leitura por voz, destaque de links e redução de movimento."
+    }
+  },
+  "territory": {
+    "title": "Seleção inicial do visitante",
+    "description": "Veja o mapa do Brasil, escolha seu estado e selecione qualquer cidade para iniciar a trilha da verdade.",
+    "mapAria": "Mapa do Brasil com seleção por UF",
+    "mapTitle": "Mapa do Brasil",
+    "mapDescription": "Mapa estilizado com pontos de seleção das unidades federativas",
+    "fields": {
+      "uf": "Estado (UF)",
+      "ufPlaceholder": "Selecione o estado",
+      "city": "Cidade",
+      "cityPlaceholder": "Selecione a cidade",
+      "cityLoading": "Carregando cidades...",
+      "cityManualPlaceholder": "Digite sua cidade",
+      "cityManualHint": "Não foi possível carregar a lista automática. Digite a cidade manualmente."
+    },
+    "cta": "Iniciar trilha da verdade",
+    "summaryPending": "Selecione estado e cidade para continuar.",
+    "summarySelected": "Território selecionado: {city} - {uf}"
+  },
+  "truthTrail": {
+    "title": "Trilha da Verdade",
+    "description": "Esta rota dedicada consolida o contexto inicial do visitante para orientar decisões, evidências e comunicação institucional.",
+    "contextTitle": "Contexto de entrada",
+    "territory": "Território: {cidade} - {uf}",
+    "correlationId": "Correlation ID: {value}",
+    "traceId": "Trace ID: {value}",
+    "classification": "Classificação inicial: público",
+    "missingTerritory": "Nenhum território foi informado. Retorne à seleção inicial para estruturar a trilha.",
+    "governanceTitle": "Detalhes que robustecem o portal",
+    "governance1": "Rastreabilidade por correlationId e traceId desde a primeira interação.",
+    "governance2": "Classificação explícita da interação para reduzir ambiguidades de tratamento de dados.",
+    "governance3": "Separação de contexto (entrada) e conteúdo (notícias e serviços) para facilitar auditoria.",
+    "governance4": "Base para cadeia de evidências com evolução incremental e verificável.",
+    "auditTitle": "Registro de auditoria local",
+    "auditRecorded": "Entrada registrada na trilha append-only com hash encadeado.",
+    "auditExists": "Esta entrada já estava registrada para a correlação atual.",
+    "auditError": "Não foi possível registrar a auditoria local neste momento.",
+    "auditServerPreferred": "Persistência remota habilitada com fallback local em contingência.",
+    "auditHash": "Hash atual da cadeia: {hash}",
+    "nextActions": "Próximas ações",
+    "verifyAudit": "Verificar cadeia de auditoria",
+    "restart": "Refazer seleção inicial"
+  },
+  "agents": {
+    "title": "Galeria de Agentes do PortaCivis",
+    "description": "Estes são agentes de inteligência que agregam, checam e apresentam notícias verificadas em uma nova roupagem, com linguagem cidadã, rastreabilidade de fontes e revisão de conformidade.",
+    "howTitle": "Como eles atuam",
+    "how1": "Coletam e organizam informações de fontes oficiais verificáveis.",
+    "how2": "Checam consistência editorial, legal, ética e de acessibilidade.",
+    "how3": "Publicam conteúdo em formato mais claro para o cidadão.",
+    "listLabel": "Lista de agentes",
+    "area": "Área",
+    "cards": {
+      "chief_editor_agent": {
+        "name": "Agente Editor-Chefe",
+        "area": "Coordenação Editorial",
+        "role": "Prioriza pautas, organiza o fluxo e aprova a publicação final."
+      },
+      "news_official_agent": {
+        "name": "Agente de Notícias Oficiais",
+        "area": "Notícias Oficiais",
+        "role": "Consolida fontes oficiais e redige a primeira versão da notícia."
+      },
+      "citizen_services_agent": {
+        "name": "Agente de Serviços ao Cidadão",
+        "area": "Serviços ao Cidadão",
+        "role": "Traduz conteúdo técnico para linguagem clara e prática de serviço público."
+      },
+      "transparency_agent": {
+        "name": "Agente de Transparência",
+        "area": "Transparência",
+        "role": "Valida dados públicos e garante rastreabilidade da informação."
+      },
+      "city_alerts_agent": {
+        "name": "Agente de Alertas da Cidade",
+        "area": "Alertas",
+        "role": "Organiza comunicados urgentes com clareza e prioridade pública."
+      },
+      "social_distribution_agent": {
+        "name": "Agente de Distribuição Social",
+        "area": "Distribuição",
+        "role": "Adapta o conteúdo para canais de divulgação sem perder o sentido original."
+      },
+      "compliance_lgpd_agent": {
+        "name": "Agente de Conformidade e LGPD",
+        "area": "Conformidade e LGPD",
+        "role": "Mitiga riscos legais e revisa privacidade e integridade institucional."
+      },
+      "quality_accessibility_agent": {
+        "name": "Agente de Qualidade e Acessibilidade",
+        "area": "Qualidade e Acessibilidade",
+        "role": "Assegura legibilidade, inclusão e padrão de acessibilidade digital."
+      }
+    }
+  },
+  "newsPage": {
+    "title": "Notícias Oficiais",
+    "description": "Atualizações institucionais, comunicados da prefeitura e conteúdos verificados, com foco em linguagem cidadã e rastreabilidade de fontes.",
+    "highlightsTitle": "Destaques",
+    "highlightsText": "Esta página reúne publicações oficiais em formato acessível. Novas matérias serão exibidas aqui conforme o fluxo editorial e de conformidade do PortaCivis.",
+    "criteriaTitle": "Critérios de publicação",
+    "criteria1": "Fonte oficial verificável e link de referência.",
+    "criteria2": "Separação clara entre fato, contexto e interpretação.",
+    "criteria3": "Revisão de conformidade e qualidade de acessibilidade.",
+    "relatedLinks": "Atalhos relacionados"
+  },
+  "accessibilityPage": {
+    "title": "Recursos de Acessibilidade",
+    "description": "Este portal segue práticas de acessibilidade digital para ampliar o acesso de pessoas com deficiência auditiva, baixa visão e outras necessidades de navegação assistida.",
+    "deafTitle": "Pessoas com surdez",
+    "deaf1": "Conteúdo textual prioritário para comunicados críticos.",
+    "deaf2": "Recomendação editorial de legendas e transcrição para conteúdo audiovisual.",
+    "deaf3": "Linguagem clara e estrutura por tópicos para leitura rápida.",
+    "lowVisionTitle": "Pessoas com baixa visão",
+    "lowVision1": "Modo de alto contraste no painel de acessibilidade.",
+    "lowVision2": "Ajuste de tamanho de fonte sem perda de layout.",
+    "lowVision3": "Leitura por voz da página (sintetizador do navegador).",
+    "colorBlindTitle": "Pessoas com daltonismo",
+    "colorBlind1": "Seleção simples de modo de cores: padrão, protanopia, deuteranopia e tritanopia.",
+    "colorBlind2": "Destaque adicional de links para reduzir dependência exclusiva de cor.",
+    "colorBlind3": "Combinação com alto contraste para leitura de avisos críticos.",
+    "mobilityTitle": "Mobilidade reduzida e cognição",
+    "mobility1": "Navegação por teclado com foco visível.",
+    "mobility2": "Atalho para pular direto ao conteúdo principal.",
+    "mobility3": "Redução de movimento para evitar desconforto visual."
+  },
+  "compliancePage": {
+    "title": "Conformidade e Governança",
+    "description": "O PortaCivis adota padrões de conformidade para garantir segurança jurídica, transparência editorial e respeito a direitos fundamentais.",
+    "milestonesTitle": "Marcos de conformidade",
+    "milestone1": "LGPD (proteção de dados pessoais).",
+    "milestone2": "Acessibilidade digital e linguagem cidadã.",
+    "milestone3": "Rastreabilidade de fontes e decisões editoriais.",
+    "milestone4": "Prevenção de apropriação indevida e risco institucional.",
+    "controlsTitle": "Controles aplicados",
+    "control1": "Fluxo de aprovação editorial e conformidade.",
+    "control2": "Política de citação de fonte oficial.",
+    "control3": "Checklist executável de decisão nacional/internacional/híbrido.",
+    "control4": "Padrões de segurança HTTP e verificação contínua.",
+    "auditVerificationTitle": "Verificação da cadeia de auditoria",
+    "auditVerificationDescription": "Acompanhe a integridade da cadeia append-only da Trilha da Verdade com validação de hash encadeado.",
+    "auditOpenLink": "Abrir painel de verificação",
+    "auditLoading": "Carregando status da cadeia...",
+    "auditStatusLabel": "Status da cadeia",
+    "auditStatusHealthy": "Íntegra",
+    "auditStatusBroken": "Com inconsistências",
+    "auditChainLength": "Quantidade de eventos",
+    "auditHeadHash": "Hash de cabeçalho",
+    "auditIssuesTitle": "Inconsistências encontradas",
+    "auditNoIssues": "Nenhuma inconsistência detectada.",
+    "auditRefresh": "Atualizar verificação",
+    "auditRequestError": "Não foi possível consultar a verificação remota neste momento.",
+    "auditNavigation": "Navegação de auditoria",
+    "auditBackTrail": "Voltar para Trilha da Verdade",
+    "auditBackCompliance": "Voltar para Conformidade"
+  },
+  "privacyPage": {
+    "title": "Política de Privacidade e Proteção de Dados (LGPD)",
+    "description": "O PortaCivis trata dados pessoais de forma mínima e proporcional, em conformidade com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018), para atender interesse público e garantir segurança do serviço.",
+    "dataTitle": "Quais dados podem ser tratados",
+    "data1": "Dados de navegação técnica para segurança e integridade do portal.",
+    "data2": "Registros de acesso estritamente necessários para prevenção de fraudes e auditoria.",
+    "data3": "Dados fornecidos voluntariamente pelo cidadão em canais oficiais de atendimento.",
+    "purposesTitle": "Finalidades",
+    "purpose1": "Disponibilizar serviços e informações públicas.",
+    "purpose2": "Garantir funcionamento, disponibilidade e segurança da plataforma.",
+    "purpose3": "Atender obrigações legais e regulatórias aplicáveis.",
+    "purpose4": "Realizar pesquisa de uso anônima e agregada (opcional), exclusivamente para melhoria de serviço público digital.",
+    "limitsTitle": "Limites éticos de pesquisa de visitantes",
+    "limit1": "Não realizamos perfilamento sensível de visitantes.",
+    "limit2": "Não realizamos reidentificação a partir de cache, cookies ou telemetria.",
+    "limit3": "Coleta opcional para pesquisa de uso é agregada, minimizada e auditável.",
+    "rightsTitle": "Direitos do titular",
+    "right1": "Confirmação da existência de tratamento.",
+    "right2": "Acesso e correção de dados quando aplicável.",
+    "right3": "Informação sobre compartilhamentos, base legal e retenção.",
+    "right4": "Solicitação de revisão de decisões automatizadas, quando houver.",
+    "contactTitle": "Contato para privacidade",
+    "contactText": "Para solicitações de dados e privacidade, utilize os canais oficiais divulgados na página de atendimento institucional do município."
+  },
+  "cookiesPage": {
+    "title": "Política de Cookies e Cache",
+    "description": "O PortaCivis utiliza cookies e armazenamento local apenas no nível necessário para segurança, acessibilidade e continuidade de navegação, com controles de consentimento para pesquisa de uso anônima.",
+    "typesTitle": "Tipos de dados armazenados",
+    "type1": "Essenciais: preferências técnicas, segurança e sessão de navegação.",
+    "type2": "Acessibilidade: contraste, tamanho de fonte, redução de movimento e leitura.",
+    "type3": "Pesquisa anônima (opcional): métricas agregadas de uso, sem identificação pessoal direta ou indireta.",
+    "limitsTitle": "Limites de tratamento",
+    "limit1": "É vedado perfilamento sensível por raça, religião, saúde, orientação ou ideologia.",
+    "limit2": "É vedado cruzamento de dados para reidentificação de visitantes.",
+    "limit3": "É vedado uso de cookies para finalidade incompatível com interesse público.",
+    "legalTitle": "Base legal e proteção",
+    "legal1": "Base legal: interesse público, segurança e conformidade regulatória aplicável.",
+    "legal2": "Minimização: somente dados necessários para a finalidade declarada.",
+    "legal3": "Retenção: prazo limitado e proporcional, com descarte seguro."
+  },
+  "termsPage": {
+    "title": "Termos de Uso do PortaCivis",
+    "description": "Este portal é um canal institucional para divulgação de informações públicas, orientação sobre serviços e transparência, com foco em direitos e deveres do cidadão.",
+    "generalTitle": "Condições gerais",
+    "general1": "Uso para fins lícitos e de interesse público.",
+    "general2": "Vedação de uso que comprometa segurança, integridade ou disponibilidade do portal.",
+    "general3": "Respeito aos direitos autorais, marcas e sinais institucionais.",
+    "contentTitle": "Conteúdo e fontes",
+    "content1": "Conteúdo oficial é publicado com referência de fonte verificável.",
+    "content2": "A reprodução por terceiros deve manter atribuição e contexto.",
+    "content3": "Imagens e mídias podem ter regras específicas de uso.",
+    "responsibilitiesTitle": "Responsabilidades",
+    "responsibility1": "O portal busca precisão, atualização e linguagem acessível.",
+    "responsibility2": "Em caso de divergência, prevalece o ato oficial na fonte primária.",
+    "responsibility3": "Incidentes e indisponibilidades seguem protocolo institucional de comunicação."
+  },
+  "consent": {
+    "aria": "Consentimento de privacidade",
+    "text": "Utilizamos apenas dados estritamente necessários para operação e segurança do portal. A pesquisa de uso é sempre anônima, opcional e sem perfilamento sensível. Saiba mais em",
+    "privacy": "Política de Privacidade",
+    "and": "e",
+    "cookies": "Política de Cookies e Cache",
+    "essential": "Apenas essenciais",
+    "anonymous": "Permitir pesquisa anônima"
+  },
+  "accessibilityPanel": {
+    "aria": "Painel de acessibilidade",
+    "toggle": "Acessibilidade",
+    "title": "Ajustes de navegação",
+    "fontSize": "Tamanho do texto",
+    "highContrast": "Alto contraste",
+    "underlineLinks": "Destacar links",
+    "reduceMotion": "Reduzir movimento",
+    "colorMode": "Modo de cores",
+    "default": "Padrão",
+    "protanopia": "Daltonismo (protanopia)",
+    "deuteranopia": "Daltonismo (deuteranopia)",
+    "tritanopia": "Daltonismo (tritanopia)",
+    "readPage": "Ler página",
+    "stopReading": "Parar leitura",
+    "restore": "Restaurar padrão"
+  }
+}

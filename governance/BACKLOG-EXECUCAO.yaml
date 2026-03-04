@@ -1,0 +1,79 @@
+version: 1
+updatedAt: 2026-03-04
+
+program:
+  name: portacivis-smart-cities-b2g
+  sprintLengthWeeks: 2
+
+epics:
+  - id: EPIC-00
+    title: Fundacao de Plataforma e Governanca
+    priority: 1
+    stories:
+      - id: US-0001
+        title: Ambientes e padroes de engenharia
+        acceptance:
+          - ambientes_documentados
+          - ci_cd_com_gates
+          - runbook_rollback
+      - id: US-0002
+        title: Observabilidade minima operacional
+        acceptance:
+          - dashboard_sli_slo
+          - alertas_ativos
+      - id: US-0003
+        title: Governanca executavel
+        acceptance:
+          - governance_verify_no_ci
+          - artefatos_versionados
+
+  - id: EPIC-01
+    title: MVP Editorial e Captacao
+    priority: 2
+    stories:
+      - id: US-0101
+        title: Home e paginas por tema
+      - id: US-0102
+        title: CMS headless integrado
+      - id: US-0103
+        title: Newsletter e captura de leads
+
+  - id: EPIC-02
+    title: Lead Generation B2G e CRM
+    priority: 3
+    stories:
+      - id: US-0201
+        title: Formularios progressivos
+      - id: US-0202
+        title: Scoring de intencao
+      - id: US-0203
+        title: Integracao CRM
+
+  - id: EPIC-03
+    title: Comunidade Fechada e Matchmaking
+    priority: 4
+    stories:
+      - id: US-0301
+        title: Area autenticada para gestores
+      - id: US-0302
+        title: Foruns e grupos tematicos
+      - id: US-0303
+        title: Matchmaking de solucoes
+
+  - id: EPIC-04
+    title: Inteligencia B2G e Receita Premium
+    priority: 5
+    stories:
+      - id: US-0401
+        title: Data lake de engajamento e dados publicos
+      - id: US-0402
+        title: Dashboards premium
+      - id: US-0403
+        title: Assinatura e paywall
+
+dod:
+  - criterio_funcional_validado
+  - verify_all_pass
+  - sem_regressao_seguranca_governanca
+  - documentacao_operacao_atualizada
+  - evidencia_em_reports

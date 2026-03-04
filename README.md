@@ -2,36 +2,57 @@
 
 Portal do Cidadão: serviços, informações e transparência.
 
+[![PortaCivis CI](https://github.com/leoamerico/portacivis/actions/workflows/ci.yml/badge.svg)](https://github.com/leoamerico/portacivis/actions/workflows/ci.yml)
+[![Security Foundation](https://github.com/leoamerico/portacivis/actions/workflows/security-foundation.yml/badge.svg)](https://github.com/leoamerico/portacivis/actions/workflows/security-foundation.yml)
+[![i18n Regression](https://github.com/leoamerico/portacivis/actions/workflows/i18n.yml/badge.svg)](https://github.com/leoamerico/portacivis/actions/workflows/i18n.yml)
+[![Canonical Smoke](https://github.com/leoamerico/portacivis/actions/workflows/smoke.yml/badge.svg)](https://github.com/leoamerico/portacivis/actions/workflows/smoke.yml)
+
 ## Requisitos
 
 - Node.js 20+
-- npm
+- Bun 1.3+
 
 ## Execução local
 
 ```bash
-npm install
-npm run dev
+bun install
+bun run dev
 ```
+
+Compatibilidade (opcional): também é possível executar com `npm`, quando necessário.
 
 ## Build
 
 ```bash
-npm run build
-npm run start
+bun run build
+bun run start
 ```
 
 ## Segurança (fundação)
 
 ```bash
-npm run security:headers
-npm run security:verify
-npm run test:smoke
+bun run security:headers
+bun run security:verify
+bun run governance:verify
+bun run test:i18n
+bun run test:smoke
+bun run verify:all
 ```
 
+- `governance:verify`: valida presença e integridade mínima dos artefatos operacionais (`MANIFESTO-OPERACIONAL`, `RACI`, `SLO-RUNBOOK`).
 - `security:headers`: valida presença de headers de segurança no `next.config.js`.
-- `security:verify`: executa validação de segurança + build bloqueante.
-- `test:smoke`: verifica saúde da URL canônica (`CANONICAL_URL`, padrão `https://portacivis.vercel.app`).
+- `security:verify`: executa validação de segurança + regressão i18n + build bloqueante.
+- `test:i18n`: valida conteúdo multilíngue (pt-BR, en-US, es-ES) por smoke checks com cookie de locale.
+- `test:smoke`: verifica saúde da URL canônica (`CANONICAL_URL`, padrão `https://www.portacivis.com.br`).
+- `verify:all`: executa `security:verify` + `test:smoke` em sequência para validação pré-deploy.
+- Workflow `smoke.yml`: monitoramento automático diário do domínio canônico (10:00 UTC), além de push/PR e execução manual.
+- Em falha do `smoke.yml` no agendamento diário, uma issue automática é aberta (ou atualizada) para resposta de incidente.
+
+## Governança operacional (resiliência)
+
+- `governance/MANIFESTO-OPERACIONAL.yaml`: princípios, gates obrigatórios e diretrizes de resiliência.
+- `governance/RACI-OPERACAO.yaml`: ownership e responsabilidades por processo.
+- `governance/SLO-RUNBOOK.yaml`: SLI/SLO, orçamento de erro e resposta a incidentes.
 
 ## Criar repositório no GitHub
 

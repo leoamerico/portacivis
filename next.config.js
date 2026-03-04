@@ -1,11 +1,31 @@
+const createNextIntlPlugin = require('next-intl/plugin');
+
+const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'portacivis.com' }],
+        destination: 'https://portacivis.com.br/:path*',
+        permanent: true,
+      },
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.portacivis.com' }],
+        destination: 'https://www.portacivis.com.br/:path*',
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     const securityHeaders = [
       {
         key: 'Content-Security-Policy',
-        value: "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self'; upgrade-insecure-requests",
+        value: "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data: https://r2cdn.perplexity.ai; script-src 'self' 'unsafe-inline' https://vercel.live; script-src-elem 'self' 'unsafe-inline' https://vercel.live; connect-src 'self'; upgrade-insecure-requests",
       },
       {
         key: 'Strict-Transport-Security',
@@ -38,4 +58,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = withNextIntl(nextConfig);
