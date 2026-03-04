@@ -112,3 +112,24 @@ Execução em `2026-03-04T16:22:04.548Z`:
 Conclusão:
 
 - Status permanece **FAIL** no host canônico após confirmação adicional.
+
+## Recheck pós-push (commit `43027a6`)
+
+Validação executada após push para `main` em `2026-03-04`:
+
+- `GET /` -> `HTTP_CODE=200`
+- Home contém `href="#mapa-brasil"`
+- Home contém `id="mapa-brasil"`
+- `GET /api/truth-trail/verify` -> `HTTP_CODE=200`
+- `GET /api/truth-trail/audit` -> `HTTP_CODE=405` (método inválido para GET, endpoint ativo)
+- `GET /verificacao-auditoria` -> `HTTP_CODE=200`
+
+Teste de `POST /api/truth-trail/audit`:
+
+- Payload incompleto -> `HTTP_CODE=400` com mensagens de campos obrigatórios
+- Payload com campos de cadeia porém `previousHash` inválido -> `HTTP_CODE=409` (`Invalid previousHash for current chain head`)
+
+Conclusão deste recheck:
+
+- **Mapa na home: PASS** (âncora e seção em produção).
+- **Rotas Truth Trail: ativas em produção** (`verify` e página em `200`; `audit` exige `POST` válido e integridade da cadeia).
