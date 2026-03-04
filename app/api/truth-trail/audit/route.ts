@@ -10,15 +10,36 @@ import {
 
 export const runtime = 'nodejs';
 
-const AUDIT_DIR = path.join(process.cwd(), 'governance', 'audit');
+// Em ambientes serverless (Vercel) o diretório do projeto é somente-leitura.
+// Usamos /tmp para gravação em produção, e o diretório do projeto em dev,
+// onde o arquivo bundled serve como semente inicial.
+const AUDIT_DIR =
+  process.env.NODE_ENV === 'production'
+    ? '/tmp/portacivis-audit'
+    : path.join(process.cwd(), 'governance', 'audit');
+
 const AUDIT_FILE = path.join(AUDIT_DIR, 'truth-trail-chain.json');
 
+// Arquivo semente bundled (leitura em desenvolvimento ou cold-start em produção)
+const SEED_FILE = path.join(process.cwd(), 'governance', 'audit', 'truth-trail-chain.json');
+
 async function readChain(): Promise<TruthTrailAuditEvent[]> {
+  // Tenta ler do destino de escrita (tmp em prod, projeto em dev)
   try {
     const raw = await readFile(AUDIT_FILE, 'utf8');
     const parsed = JSON.parse(raw) as TruthTrailAuditEvent[];
     return Array.isArray(parsed) ? parsed : [];
   } catch {
+    // Em produção (cold-start), tenta o arquivo semente bundled
+    if (process.env.NODE_ENV === 'production' && SEED_FILE !== AUDIT_FILE) {
+      try {
+        const raw = await readFile(SEED_FILE, 'utf8');
+        const parsed = JSON.parse(raw) as TruthTrailAuditEvent[];
+        return Array.isArray(parsed) ? parsed : [];
+      } catch {
+        return [];
+      }
+    }
     return [];
   }
 }

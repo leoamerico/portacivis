@@ -5,11 +5,23 @@ import {type TruthTrailAuditEvent, validateChain} from '../../../lib/truthTrailA
 
 export const runtime = 'nodejs';
 
-const AUDIT_FILE = path.join(process.cwd(), 'governance', 'audit', 'truth-trail-chain.json');
+// Espelha a lógica de AUDIT_FILE: em produção lê /tmp primeiro, cai de volta
+// no semente bundled se /tmp ainda não existir (cold-start).
+const AUDIT_FILE_TMP = '/tmp/portacivis-audit/truth-trail-chain.json';
+const AUDIT_FILE_SEED = path.join(process.cwd(), 'governance', 'audit', 'truth-trail-chain.json');
+const AUDIT_FILE = process.env.NODE_ENV === 'production' ? AUDIT_FILE_TMP : AUDIT_FILE_SEED;
 
 async function readChain(): Promise<TruthTrailAuditEvent[]> {
+  // Em produção: tenta /tmp primeiro (escrito após POs), depois o semente bundled
+  if (process.env.NODE_ENV === 'production') {
+    try {
+      const raw = await readFile(AUDIT_FILE_TMP, 'utf8');
+      const parsed = JSON.parse(raw) as TruthTrailAuditEvent[];
+      if (Array.isArray(parsed)) return parsed;
+    } catch { /* /tmp não existe ainda — cold start */ }
+  }
   try {
-    const raw = await readFile(AUDIT_FILE, 'utf8');
+    const raw = await readFile(AUDIT_FILE_SEED, 'utf8');
     const parsed = JSON.parse(raw) as TruthTrailAuditEvent[];
     return Array.isArray(parsed) ? parsed : [];
   } catch {
