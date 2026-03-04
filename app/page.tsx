@@ -4,11 +4,19 @@ export default function HomePage() {
   return (
     <main id="conteudo-principal" role="main">
       <nav aria-label="Navegação principal" className="card">
-        <Link href="/accessibilidade">Recursos de Acessibilidade</Link>
+        <div className="quick-links">
+          <Link href="/accessibilidade">Recursos de Acessibilidade</Link>
+          <Link href="/privacidade">Privacidade (LGPD)</Link>
+          <Link href="/termos">Termos de uso</Link>
+          <Link href="/conformidade">Conformidade</Link>
+        </div>
       </nav>
 
       <h1>PortaCivis — Portal do Cidadão</h1>
-      <p>Canal oficial para serviços, informações e transparência da cidade.</p>
+      <p>
+        Canal oficial para o cidadão conhecer seus direitos e deveres, acessar serviços e
+        acompanhar informações e transparência da cidade.
+      </p>
 
       <section className="card">
         <h2>Serviços ao Cidadão</h2>
