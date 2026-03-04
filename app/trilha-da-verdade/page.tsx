@@ -37,8 +37,20 @@ export default async function TrilhaDaVerdadePage({
 
   return (
     <main id="conteudo-principal" role="main">
-      <h1>{t('title')}</h1>
-      <p>{t('description')}</p>
+
+      <div className="inner-breadcrumb">
+        <Link href="/" className="inner-breadcrumb-back">← Início</Link>
+        <span aria-hidden="true">/</span>
+        <span>{t('title')}</span>
+      </div>
+
+      <div className="page-hero">
+        <h1>
+          <span className="page-hero-icon" aria-hidden="true">🔍</span>
+          {t('title')}
+        </h1>
+        <p>{t('description')}</p>
+      </div>
 
       <section className="card" aria-labelledby="trilha-boas-vindas">
         <h2 id="trilha-boas-vindas">{t('welcomeTitle')}</h2>
@@ -93,24 +105,41 @@ export default async function TrilhaDaVerdadePage({
       <nav className="card" aria-label={t('nextActions')}>
         <h2>{t('quickPathsTitle')}</h2>
         <p>{t('quickPathsDescription')}</p>
-        <ol>
+        <ol className="quickpaths-list">
           {quickPaths.map((path) => (
-            <li key={path.id}>
-              <Link href={path.href}>{t(`quickPaths.${path.id}.label`)}</Link>{' '}
-              {path.recommended ? <strong>({t('recommended')})</strong> : null}
-              <div>{t(`quickPaths.${path.id}.description`)}</div>
+            <li key={path.id} className="quickpaths-item">
+              <Link href={path.href} className="quickpaths-link">
+                <span className="quickpaths-label">
+                  {t(`quickPaths.${path.id}.label`)}
+                  {path.recommended && <span className="quickpaths-badge">{t('recommended')}</span>}
+                </span>
+                <span className="quickpaths-desc">{t(`quickPaths.${path.id}.description`)}</span>
+              </Link>
             </li>
           ))}
         </ol>
-        <div className="quick-links">
-          <Link href={hasTerritory ? `/noticias?uf=${encodeURIComponent(uf)}&cidade=${encodeURIComponent(cidade)}` : '/noticias'}>
+        <nav className="quicknav" aria-label="Navegação rápida">
+          <Link href={hasTerritory ? `/noticias?uf=${encodeURIComponent(uf)}&cidade=${encodeURIComponent(cidade)}` : '/noticias'} className="quicknav-item">
+            <span className="quicknav-icon" aria-hidden="true">📰</span>
             {common('nav.news')}
           </Link>
-          <Link href="/agentes">{common('nav.agents')}</Link>
-          <Link href="/conformidade">{common('nav.compliance')}</Link>
-          <Link href="/verificacao-auditoria">{t('verifyAudit')}</Link>
-          <Link href="/">{t('restart')}</Link>
-        </div>
+          <Link href="/agentes" className="quicknav-item">
+            <span className="quicknav-icon" aria-hidden="true">🤖</span>
+            {common('nav.agents')}
+          </Link>
+          <Link href="/conformidade" className="quicknav-item">
+            <span className="quicknav-icon" aria-hidden="true">✅</span>
+            {common('nav.compliance')}
+          </Link>
+          <Link href="/verificacao-auditoria" className="quicknav-item">
+            <span className="quicknav-icon" aria-hidden="true">🔗</span>
+            {t('verifyAudit')}
+          </Link>
+          <Link href="/" className="quicknav-item quicknav-item--highlight">
+            <span className="quicknav-icon" aria-hidden="true">🏠</span>
+            {t('restart')}
+          </Link>
+        </nav>
       </nav>
     </main>
   );

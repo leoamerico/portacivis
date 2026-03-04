@@ -7,29 +7,48 @@ export default async function NoticiasPage() {
 
   return (
     <main id="conteudo-principal" role="main">
-      <h1>{t('title')}</h1>
-      <p>{t('description')}</p>
 
-      <section className="card" aria-labelledby="noticias-destaques">
+      <div className="inner-breadcrumb">
+        <Link href="/" className="inner-breadcrumb-back">← Início</Link>
+        <span aria-hidden="true">/</span>
+        <span>{t('title')}</span>
+      </div>
+
+      <div className="page-hero">
+        <h1>
+          <span className="page-hero-icon" aria-hidden="true">📰</span>
+          {t('title')}
+        </h1>
+        <p>{t('description')}</p>
+      </div>
+
+      <section className="card card-accented" data-accent="blue" aria-labelledby="noticias-destaques">
         <h2 id="noticias-destaques">{t('highlightsTitle')}</h2>
         <p>{t('highlightsText')}</p>
       </section>
 
       <section className="card" aria-labelledby="noticias-fontes">
         <h2 id="noticias-fontes">{t('criteriaTitle')}</h2>
-        <ul>
+        <ul className="styled-list">
           <li>{t('criteria1')}</li>
           <li>{t('criteria2')}</li>
           <li>{t('criteria3')}</li>
         </ul>
       </section>
 
-      <nav className="card" aria-label={t('relatedLinks')}>
-        <div className="quick-links">
-          <Link href="/agentes">{common('nav.agents')}</Link>
-          <Link href="/conformidade">{common('nav.compliance')}</Link>
-          <Link href="/privacidade">{common('nav.privacy')}</Link>
-        </div>
+      <nav className="quicknav" aria-label={t('relatedLinks')}>
+        <Link href="/agentes" className="quicknav-item">
+          <span className="quicknav-icon" aria-hidden="true">🤖</span>
+          {common('nav.agents')}
+        </Link>
+        <Link href="/conformidade" className="quicknav-item">
+          <span className="quicknav-icon" aria-hidden="true">✅</span>
+          {common('nav.compliance')}
+        </Link>
+        <Link href="/privacidade" className="quicknav-item">
+          <span className="quicknav-icon" aria-hidden="true">🔒</span>
+          {common('nav.privacy')}
+        </Link>
       </nav>
     </main>
   );
