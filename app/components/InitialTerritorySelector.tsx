@@ -92,21 +92,54 @@ const PROSPECTION_LAYERS: ProspectionLayer[] = [
 
 const DEFAULT_LAYERS = ['public_services', 'alerts', 'compliance'];
 
+const STORAGE_KEY = 'portacivis_territory';
+
+type SavedSelection = {
+  uf?: string;
+  city?: string;
+  layers?: string[];
+};
+
+function readSaved(): SavedSelection | null {
+  if (typeof window === 'undefined') return null;
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? (JSON.parse(raw) as SavedSelection) : null;
+  } catch {
+    return null;
+  }
+}
+
 export default function InitialTerritorySelector() {
   const t = useTranslations('territory');
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<LeafletMap | null>(null);
   const markersRef = useRef<Record<string, CircleMarker>>({});
-  const [selectedUf, setSelectedUf] = useState('');
-  const [city, setCity] = useState('');
+
+  // Lazy initialisers read localStorage synchronously on first client render
+  const [selectedUf, setSelectedUf] = useState<string>(() => readSaved()?.uf ?? '');
+  const [city, setCity] = useState<string>('');
   const [cityOptions, setCityOptions] = useState<string[]>([]);
   const [loadingCities, setLoadingCities] = useState(false);
   const [cityFetchFailed, setCityFetchFailed] = useState(false);
-  const [selectedLayers, setSelectedLayers] = useState<string[]>(DEFAULT_LAYERS);
+  const [selectedLayers, setSelectedLayers] = useState<string[]>(
+    () => readSaved()?.layers ?? DEFAULT_LAYERS
+  );
   const [hideSelectedLayerItems, setHideSelectedLayerItems] = useState(false);
   const [ctaShake, setCtaShake] = useState(false);
   const [ctaAttempted, setCtaAttempted] = useState(false);
+  const [restoredCity, setRestoredCity] = useState<string | null>(null);
   const autoSelectCityRef = useRef<string | null>(null);
+
+  // On mount: if localStorage had a city, prime autoSelectCityRef so IBGE fetch
+  // picks it up and marks the selection as restored
+  useEffect(() => {
+    const saved = readSaved();
+    if (saved?.city) {
+      autoSelectCityRef.current = saved.city;
+      setRestoredCity(saved.city);
+    }
+  }, []);
 
   useEffect(() => {
     let disposed = false;
@@ -195,7 +228,8 @@ export default function InitialTerritorySelector() {
   useEffect(() => {
     if (!selectedUf) {
       setCityOptions([]);
-      setCity('');
+      // Only clear city when UF is explicitly deselected (not on first mount restore)
+      if (autoSelectCityRef.current === null) setCity('');
       setCityFetchFailed(false);
       return;
     }
@@ -203,7 +237,8 @@ export default function InitialTerritorySelector() {
     const controller = new AbortController();
     setLoadingCities(true);
     setCityFetchFailed(false);
-    setCity('');
+    // Don't wipe city if autoSelectCityRef is waiting to restore it
+    if (!autoSelectCityRef.current) setCity('');
 
     fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUf}/municipios`, {
       signal: controller.signal,
@@ -222,13 +257,17 @@ export default function InitialTerritorySelector() {
           const match = options.find(
             (name) => name.toLowerCase() === target.toLowerCase()
           );
-          if (match) setCity(match);
-          else setCity(target);
+          setCity(match ?? target);
         }
       })
       .catch(() => {
         setCityOptions([]);
         setCityFetchFailed(true);
+        // IBGE failed — apply target city directly into manual input and enable field
+        if (autoSelectCityRef.current) {
+          setCity(autoSelectCityRef.current);
+          autoSelectCityRef.current = null;
+        }
       })
       .finally(() => setLoadingCities(false));
 
