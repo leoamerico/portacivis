@@ -1,9 +1,10 @@
 # SMOKE-TRUTH-TRAIL-LAST
 
-Data: 2026-03-04T16:22:04.548Z
+Data: 2026-03-04T22:22:28.053Z
 Base URL: https://www.portacivis.com.br
 
-- VERIFY_BEFORE status: 404
+- VERIFY_BEFORE status: 200
+- AUDIT_POST status: 500
 
 Resultado: FAIL
-Erro: verify endpoint returned non-200
+Erro: audit endpoint returned non-200

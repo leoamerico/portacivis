@@ -342,13 +342,19 @@ export default function InitialTerritorySelector() {
     setCtaAttempted(false);
   };
 
+  const fillAurora = () => {
+    autoSelectCityRef.current = 'Cidade Aurora';
+    setSelectedUf('MG');
+    setCtaAttempted(false);
+  };
+
   return (
     <section className="card territory-selector" aria-labelledby="territory-selector-title">
       <h2 id="territory-selector-title">{t('title')}</h2>
       <p>{t('description')}</p>
 
-      <div className="territory-validation-bar" role="note" aria-label="Caso de validação fixo">
-        <span className="territory-validation-label">🧪 Caso de validação:</span>
+      <div className="territory-validation-bar" role="note" aria-label="Casos demonstrativos disponíveis">
+        <span className="territory-validation-label">🧪 Demo:</span>
         <button
           type="button"
           className="territory-validation-pill"
@@ -357,6 +363,21 @@ export default function InitialTerritorySelector() {
         >
           📍 Amparo — SP
         </button>
+        <button
+          type="button"
+          className="territory-validation-pill territory-validation-pill--aurora"
+          onClick={fillAurora}
+          aria-label="Carregar Cidade Aurora — ambiente Smart City demonstrativo"
+        >
+          🌆 Cidade Aurora — MG
+        </button>
+        <a
+          href="/cidade-aurora"
+          className="territory-validation-pill territory-validation-pill--link"
+          aria-label="Ver painel completo de Cidade Aurora"
+        >
+          Ver painel →
+        </a>
       </div>
 
       <div className="territory-layout">

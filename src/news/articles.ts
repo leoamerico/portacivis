@@ -124,6 +124,42 @@ export const NEWS_ARTICLES: NewsArticle[] = [
     accessibilityReviewed: true
   },
   {
+    id: 'cidade-aurora-lancamento-demo',
+    kind: 'fato',
+    publishedAt: '2026-03-10',
+    title: 'Cidade Aurora: PortaCivis lança ambiente demonstrativo de prefeitura digital completa',
+    summary:
+      'O ecossistema EnvNeo disponibiliza Cidade Aurora, um ambiente demonstrativo que simula uma prefeitura inteiramente digitalizada com 84 serviços, 12 secretarias, orçamento de R$ 420 milhões e indicadores de gestão em tempo real. O painel permite que cidadãos, gestores, especialistas e desenvolvedores experimentem o ecossistema antes da implantação real.',
+    source: {
+      name: 'PortaCivis — Painel Cidade Aurora',
+      url: 'https://www.portacivis.com.br/cidade-aurora',
+      type: 'portal-governo'
+    },
+    tags: ['Cidade Aurora', 'Smart City', 'EnvNeo', 'governança digital', 'demo'],
+    complianceReviewed: true,
+    accessibilityReviewed: true
+  },
+  {
+    id: 'cidade-aurora-indice-transparencia',
+    kind: 'analise',
+    publishedAt: '2026-03-08',
+    title: 'Índice de Transparência 94/100: como Cidade Aurora chegou ao topo do ranking simulado',
+    summary:
+      'A análise do painel demonstrativo de Cidade Aurora evidencia quais práticas contribuíram para o índice de transparência 94/100 — topo entre municípios do porte simulado. A ausência de contratos sem objeto definido, a publicação proativa de indicadores e a rastreabilidade dos dados em cadeia criptográfica são os fatores determinantes.',
+    context:
+      'Cidade Aurora é um ambiente fictício criado para demonstrar boas práticas de governança digital no ecossistema EnvNeo. Os critérios de avaliação seguem a metodologia do Tribunal de Contas da União (TCU) para transparência ativa.',
+    interpretation:
+      'Municípios reais podem usar o painel de Cidade Aurora como referência de estrutura mínima: catálogo de serviços com status, contratos com modalidade e vigência, obras com percentual de execução e indicadores com tendência temporal.',
+    source: {
+      name: 'PortaCivis — Análise Editorial',
+      url: 'https://www.portacivis.com.br/cidade-aurora#indicadores',
+      type: 'portal-governo'
+    },
+    tags: ['transparência', 'Cidade Aurora', 'ranking', 'boas práticas', 'EnvNeo'],
+    complianceReviewed: true,
+    accessibilityReviewed: true
+  },
+  {
     id: 'e-social-municipios-obrigatoriedade-2026',
     kind: 'contexto',
     publishedAt: '2026-01-15',

@@ -36,6 +36,10 @@ export default async function HomePage() {
           <span className="quicknav-icon" aria-hidden="true">✅</span>
           {common('nav.compliance')}
         </Link>
+        <Link href="/cidade-aurora" className="quicknav-item quicknav-item--aurora">
+          <span className="quicknav-icon" aria-hidden="true">🌆</span>
+          Smart City Demo
+        </Link>
       </nav>
 
       {/* ── Hero ── */}
