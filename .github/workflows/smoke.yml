@@ -45,6 +45,9 @@ jobs:
       - name: Truth Trail canonical smoke (blocking)
         run: BASE_URL=${CANONICAL_URL} bun run test:truth-trail
 
+      - name: AMPARO fixed-case validation (blocking)
+        run: BASE_URL=${CANONICAL_URL} bun run test:amparo
+
       - name: Open issue on scheduled failure
         if: ${{ always() && failure() && github.event_name == 'schedule' }}
         uses: actions/github-script@v7

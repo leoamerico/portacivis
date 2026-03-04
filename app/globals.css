@@ -294,6 +294,55 @@ input:focus-visible {
   margin-top: 0;
 }
 
+/* ── Barra de caso de validação fixo (AMPARO) ── */
+
+.territory-validation-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgb(254 252 232);
+  border: 1px solid rgb(253 230 138);
+  border-radius: 8px;
+  padding: 7px 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.territory-validation-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgb(92 67 0);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.territory-validation-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgb(255 255 255);
+  border: 1.5px solid rgb(253 186 26);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  color: rgb(92 45 0);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.12s ease, box-shadow 0.15s ease;
+}
+
+.territory-validation-pill:hover {
+  background: rgb(253 224 71);
+  border-color: rgb(234 164 0);
+  box-shadow: 0 2px 8px rgba(234, 164, 0, 0.30);
+  transform: translateY(-1px);
+}
+
+.territory-validation-pill:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
 .territory-layout {
   margin-top: 12px;
   display: grid;

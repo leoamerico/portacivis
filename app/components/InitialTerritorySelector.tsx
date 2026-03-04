@@ -106,6 +106,7 @@ export default function InitialTerritorySelector() {
   const [hideSelectedLayerItems, setHideSelectedLayerItems] = useState(false);
   const [ctaShake, setCtaShake] = useState(false);
   const [ctaAttempted, setCtaAttempted] = useState(false);
+  const autoSelectCityRef = useRef<string | null>(null);
 
   useEffect(() => {
     let disposed = false;
@@ -213,7 +214,17 @@ export default function InitialTerritorySelector() {
           throw new Error('IBGE request failed');
         }
         const data = (await response.json()) as IbgeCity[];
-        setCityOptions(data.map((item) => item.nome));
+        const options = data.map((item) => item.nome);
+        setCityOptions(options);
+        if (autoSelectCityRef.current) {
+          const target = autoSelectCityRef.current;
+          autoSelectCityRef.current = null;
+          const match = options.find(
+            (name) => name.toLowerCase() === target.toLowerCase()
+          );
+          if (match) setCity(match);
+          else setCity(target);
+        }
       })
       .catch(() => {
         setCityOptions([]);
@@ -286,10 +297,28 @@ export default function InitialTerritorySelector() {
     localStorage.setItem('portacivis_territory', JSON.stringify(payload));
   };
 
+  const fillAmparo = () => {
+    autoSelectCityRef.current = 'Amparo';
+    setSelectedUf('SP');
+    setCtaAttempted(false);
+  };
+
   return (
     <section className="card territory-selector" aria-labelledby="territory-selector-title">
       <h2 id="territory-selector-title">{t('title')}</h2>
       <p>{t('description')}</p>
+
+      <div className="territory-validation-bar" role="note" aria-label="Caso de validação fixo">
+        <span className="territory-validation-label">🧪 Caso de validação:</span>
+        <button
+          type="button"
+          className="territory-validation-pill"
+          onClick={fillAmparo}
+          aria-label="Pré-preencher com Amparo SP para validação"
+        >
+          📍 Amparo — SP
+        </button>
+      </div>
 
       <div className="territory-layout">
         <div className="territory-map-wrap" aria-label={t('mapAria')}>

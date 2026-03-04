@@ -15,6 +15,7 @@
     "security:verify": "bun run governance:verify && bun run security:headers && bun run test:i18n && bun run build",
     "test:smoke": "node scripts/smoke-domain.mjs",
     "test:truth-trail": "node scripts/smoke-truth-trail.mjs",
+    "test:amparo": "node scripts/smoke-amparo-validation.mjs",
     "test:i18n": "node scripts/verify-i18n-smoke.mjs",
     "verify:all": "bun run security:verify && bun run test:smoke"
   },
