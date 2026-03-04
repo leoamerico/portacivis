@@ -166,7 +166,18 @@
     "criteria1": "Verifiable official source and reference link.",
     "criteria2": "Clear separation between fact, context and interpretation.",
     "criteria3": "Compliance and accessibility quality review.",
-    "relatedLinks": "Related shortcuts"
+    "relatedLinks": "Related shortcuts",
+    "articlesSectionTitle": "Recent publications",
+    "kindFato": "Fact",
+    "kindContexto": "Context",
+    "kindAnalise": "Analysis",
+    "sourceLabel": "Source:",
+    "publishedLabel": "Published on",
+    "complianceReviewedLabel": "Compliance reviewed",
+    "contextLabel": "Context",
+    "interpretationLabel": "Analysis and interpretation",
+    "readSourceLabel": "Read source",
+    "tagsLabel": "Categories"
   },
   "accessibilityPage": {
     "title": "Accessibility Features",

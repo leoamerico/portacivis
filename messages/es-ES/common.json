@@ -166,7 +166,18 @@
     "criteria1": "Fuente oficial verificable y enlace de referencia.",
     "criteria2": "Separación clara entre hecho, contexto e interpretación.",
     "criteria3": "Revisión de cumplimiento y calidad de accesibilidad.",
-    "relatedLinks": "Accesos relacionados"
+    "relatedLinks": "Accesos relacionados",
+    "articlesSectionTitle": "Publicaciones recientes",
+    "kindFato": "Hecho",
+    "kindContexto": "Contexto",
+    "kindAnalise": "Análisis",
+    "sourceLabel": "Fuente:",
+    "publishedLabel": "Publicado el",
+    "complianceReviewedLabel": "Cumplimiento revisado",
+    "contextLabel": "Contexto",
+    "interpretationLabel": "Análisis e interpretación",
+    "readSourceLabel": "Leer fuente",
+    "tagsLabel": "Categorías"
   },
   "accessibilityPage": {
     "title": "Recursos de Accesibilidad",
