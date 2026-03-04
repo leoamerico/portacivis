@@ -55,6 +55,10 @@
   "truthTrail": {
     "title": "Trilha da Verdade",
     "description": "Esta rota dedicada consolida o contexto inicial do visitante para orientar decisões, evidências e comunicação institucional.",
+    "welcomeTitle": "Carta de boas-vindas",
+    "welcomeCity": "Bem-vindo(a) a {cidade} - {uf}. Este espaço foi preparado para acelerar seu acesso a informações e decisões confiáveis.",
+    "welcomeGeneric": "Bem-vindo(a). Para melhorar sua experiência, confirme seu território e siga os caminhos orientados abaixo.",
+    "welcomeGuide": "Selecionamos os próximos passos mais rápidos para chegar ao resultado desejado nesta etapa.",
     "contextTitle": "Contexto de entrada",
     "territory": "Território: {cidade} - {uf}",
     "correlationId": "Correlation ID: {value}",
@@ -73,6 +77,31 @@
     "auditServerPreferred": "Persistência remota habilitada com fallback local em contingência.",
     "auditHash": "Hash atual da cadeia: {hash}",
     "nextActions": "Próximas ações",
+    "quickPathsTitle": "Caminhos rápidos recomendados",
+    "quickPathsDescription": "Escolha uma rota abaixo para avançar com mais rapidez.",
+    "recommended": "recomendado",
+    "quickPaths": {
+      "news": {
+        "label": "Ver notícias oficiais da sua cidade",
+        "description": "Acessa notícias já filtradas pelo território selecionado."
+      },
+      "verify": {
+        "label": "Verificar cadeia de auditoria",
+        "description": "Confere a integridade técnica dos registros desta trilha."
+      },
+      "agents": {
+        "label": "Conhecer a galeria de agentes",
+        "description": "Mostra quem estrutura, revisa e publica o conteúdo institucional."
+      },
+      "compliance": {
+        "label": "Ler conformidade e governança",
+        "description": "Explica regras, controles e garantias de transparência aplicadas."
+      },
+      "restart": {
+        "label": "Refazer seleção inicial",
+        "description": "Retorna para corrigir estado e cidade antes de continuar."
+      }
+    },
     "verifyAudit": "Verificar cadeia de auditoria",
     "restart": "Refazer seleção inicial"
   },

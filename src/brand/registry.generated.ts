@@ -1,6 +1,6 @@
 /* AUTO-GENERATED FILE — DO NOT EDIT
  * Source: governance/catalog/BRANDS.yml
- * Source-Hash: 0ea7353721b82d7d1f9ac2ae643d2a254dba6e25007d20c556e07d2311e974e8
+ * Source-Hash: c8064e510772a1d97ba258fce59b8fe8c94acd15a41ca02dfc85f4afabac4000
  */
 export type BrandId = "GOVEVIA" | "PORTACIVIS" | "ENVLIVE" | "LEOAMERICO";
 
@@ -39,7 +39,7 @@ export const BRANDS = [
     "category": "civic_information_portal",
     "slogan": "Informação pública para todos os cidadãos",
     "owner": "ENVNEO",
-    "assets_path": "public/brands/portacivis/",
+    "assets_path": "public/brand/portacivis/",
     "tokens_path": "tokens/brands/portacivis/",
     "docs_path": "docs/brand/PORTACIVIS/",
     "governance": {

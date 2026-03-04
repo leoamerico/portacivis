@@ -17,7 +17,7 @@ brands:
     category: civic_information_portal
     slogan: "Informação pública para todos os cidadãos"
     owner: ENVNEO
-    assets_path: public/brands/portacivis/
+    assets_path: public/brand/portacivis/
     tokens_path: tokens/brands/portacivis/
     docs_path: docs/brand/PORTACIVIS/
     governance:

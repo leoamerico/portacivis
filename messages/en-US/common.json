@@ -55,6 +55,10 @@
   "truthTrail": {
     "title": "Truth Trail",
     "description": "This dedicated route consolidates the visitor's initial context to guide decisions, evidence and institutional communication.",
+    "welcomeTitle": "Welcome letter",
+    "welcomeCity": "Welcome to {city} - {uf}. This space is prepared to speed up your access to reliable information and decisions.",
+    "welcomeGeneric": "Welcome. To improve your experience, confirm your territory and follow the guided paths below.",
+    "welcomeGuide": "We selected the fastest next steps to reach your intended outcome at this stage.",
     "contextTitle": "Entry context",
     "territory": "Territory: {city} - {uf}",
     "correlationId": "Correlation ID: {value}",
@@ -73,6 +77,31 @@
     "auditServerPreferred": "Server persistence enabled with local fallback under contingency.",
     "auditHash": "Current chain hash: {hash}",
     "nextActions": "Next actions",
+    "quickPathsTitle": "Recommended quick paths",
+    "quickPathsDescription": "Choose one route below to move forward faster.",
+    "recommended": "recommended",
+    "quickPaths": {
+      "news": {
+        "label": "See official news for your city",
+        "description": "Opens news already filtered by the selected territory."
+      },
+      "verify": {
+        "label": "Verify audit chain",
+        "description": "Checks technical integrity of records in this trail."
+      },
+      "agents": {
+        "label": "Explore the agents gallery",
+        "description": "Shows who structures, reviews and publishes institutional content."
+      },
+      "compliance": {
+        "label": "Read compliance and governance",
+        "description": "Explains rules, controls and transparency guarantees in place."
+      },
+      "restart": {
+        "label": "Redo initial selection",
+        "description": "Returns to correct state and city before continuing."
+      }
+    },
     "verifyAudit": "Verify audit chain",
     "restart": "Redo initial selection"
   },

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import {getTranslations} from 'next-intl/server';
 import TruthTrailAuditRecorder from '../components/TruthTrailAuditRecorder';
+import {buildTruthTrailQuickPaths} from '../../src/truthTrail/pathRecommendations';
 
 type SearchParams = Record<string, string | string[] | undefined>;
 
@@ -26,11 +27,22 @@ export default async function TrilhaDaVerdadePage({
   const correlationId = pick(params, 'correlationId');
   const traceId = pick(params, 'traceId');
   const hasTerritory = uf.trim().length > 0 && cidade.trim().length > 0;
+  const quickPaths = buildTruthTrailQuickPaths({hasTerritory, uf, cidade});
 
   return (
     <main id="conteudo-principal" role="main">
       <h1>{t('title')}</h1>
       <p>{t('description')}</p>
+
+      <section className="card" aria-labelledby="trilha-boas-vindas">
+        <h2 id="trilha-boas-vindas">{t('welcomeTitle')}</h2>
+        <p>
+          {hasTerritory
+            ? t('welcomeCity', {cidade, uf})
+            : t('welcomeGeneric')}
+        </p>
+        <p>{t('welcomeGuide')}</p>
+      </section>
 
       <section className="card" aria-labelledby="trilha-contexto">
         <h2 id="trilha-contexto">{t('contextTitle')}</h2>
@@ -65,6 +77,17 @@ export default async function TrilhaDaVerdadePage({
       />
 
       <nav className="card" aria-label={t('nextActions')}>
+        <h2>{t('quickPathsTitle')}</h2>
+        <p>{t('quickPathsDescription')}</p>
+        <ol>
+          {quickPaths.map((path) => (
+            <li key={path.id}>
+              <Link href={path.href}>{t(`quickPaths.${path.id}.label`)}</Link>{' '}
+              {path.recommended ? <strong>({t('recommended')})</strong> : null}
+              <div>{t(`quickPaths.${path.id}.description`)}</div>
+            </li>
+          ))}
+        </ol>
         <div className="quick-links">
           <Link href={hasTerritory ? `/noticias?uf=${encodeURIComponent(uf)}&cidade=${encodeURIComponent(cidade)}` : '/noticias'}>
             {common('nav.news')}

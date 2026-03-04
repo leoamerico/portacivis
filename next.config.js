@@ -19,6 +19,18 @@ const nextConfig = {
         destination: 'https://portacivis.com.br/:path*',
         permanent: true,
       },
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'portacivis.online' }],
+        destination: 'https://portacivis.com.br/:path*',
+        permanent: true,
+      },
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.portacivis.online' }],
+        destination: 'https://portacivis.com.br/:path*',
+        permanent: true,
+      },
     ];
   },
   async headers() {
