@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import {getTranslations} from 'next-intl/server';
 import TruthTrailAuditRecorder from '../components/TruthTrailAuditRecorder';
+import ContextInsightPanel from '../components/ContextInsightPanel';
 import {buildTruthTrailQuickPaths} from '../../src/truthTrail/pathRecommendations';
 
 type SearchParams = Record<string, string | string[] | undefined>;
@@ -26,6 +27,11 @@ export default async function TrilhaDaVerdadePage({
   const cidade = pick(params, 'cidade');
   const correlationId = pick(params, 'correlationId');
   const traceId = pick(params, 'traceId');
+  const layersRaw = pick(params, 'layers');
+  const selectedLayers = layersRaw
+    .split(',')
+    .map((item) => item.trim())
+    .filter(Boolean);
   const hasTerritory = uf.trim().length > 0 && cidade.trim().length > 0;
   const quickPaths = buildTruthTrailQuickPaths({hasTerritory, uf, cidade});
 
@@ -67,6 +73,14 @@ export default async function TrilhaDaVerdadePage({
           <li>{t('governance4')}</li>
         </ul>
       </section>
+
+      <ContextInsightPanel
+        uf={uf}
+        cidade={cidade}
+        traceId={traceId}
+        correlationId={correlationId}
+        layers={selectedLayers}
+      />
 
       <TruthTrailAuditRecorder
         uf={uf}

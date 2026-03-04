@@ -1,14 +1,15 @@
 'use client';
 
-import {useEffect, useMemo, useState} from 'react';
+import {useEffect, useMemo, useRef, useState} from 'react';
 import Link from 'next/link';
 import {useTranslations} from 'next-intl';
+import type {CircleMarker, Map as LeafletMap} from 'leaflet';
 
 type FederativeUnit = {
   code: string;
   name: string;
-  x: number;
-  y: number;
+  lat: number;
+  lng: number;
 };
 
 type IbgeCity = {
@@ -16,43 +17,175 @@ type IbgeCity = {
   nome: string;
 };
 
+type ProspectionLayer = {
+  id: string;
+  label: string;
+  description: string;
+  source: string;
+};
+
 const FEDERATIVE_UNITS: FederativeUnit[] = [
-  {code: 'AC', name: 'Acre', x: 88, y: 250},
-  {code: 'AL', name: 'Alagoas', x: 420, y: 242},
-  {code: 'AP', name: 'Amapá', x: 284, y: 60},
-  {code: 'AM', name: 'Amazonas', x: 170, y: 140},
-  {code: 'BA', name: 'Bahia', x: 370, y: 236},
-  {code: 'CE', name: 'Ceará', x: 410, y: 170},
-  {code: 'DF', name: 'Distrito Federal', x: 312, y: 230},
-  {code: 'ES', name: 'Espírito Santo', x: 366, y: 286},
-  {code: 'GO', name: 'Goiás', x: 292, y: 238},
-  {code: 'MA', name: 'Maranhão', x: 354, y: 154},
-  {code: 'MT', name: 'Mato Grosso', x: 240, y: 220},
-  {code: 'MS', name: 'Mato Grosso do Sul', x: 260, y: 292},
-  {code: 'MG', name: 'Minas Gerais', x: 332, y: 262},
-  {code: 'PA', name: 'Pará', x: 292, y: 124},
-  {code: 'PB', name: 'Paraíba', x: 444, y: 190},
-  {code: 'PR', name: 'Paraná', x: 300, y: 342},
-  {code: 'PE', name: 'Pernambuco', x: 432, y: 210},
-  {code: 'PI', name: 'Piauí', x: 382, y: 176},
-  {code: 'RJ', name: 'Rio de Janeiro', x: 352, y: 302},
-  {code: 'RN', name: 'Rio Grande do Norte', x: 454, y: 176},
-  {code: 'RS', name: 'Rio Grande do Sul', x: 286, y: 404},
-  {code: 'RO', name: 'Rondônia', x: 138, y: 228},
-  {code: 'RR', name: 'Roraima', x: 208, y: 48},
-  {code: 'SC', name: 'Santa Catarina', x: 298, y: 370},
-  {code: 'SP', name: 'São Paulo', x: 312, y: 314},
-  {code: 'SE', name: 'Sergipe', x: 408, y: 252},
-  {code: 'TO', name: 'Tocantins', x: 312, y: 182}
+  {code: 'AC', name: 'Acre', lat: -9.9754, lng: -67.8249},
+  {code: 'AL', name: 'Alagoas', lat: -9.6498, lng: -35.7089},
+  {code: 'AP', name: 'Amapá', lat: 0.0356, lng: -51.0705},
+  {code: 'AM', name: 'Amazonas', lat: -3.119, lng: -60.0217},
+  {code: 'BA', name: 'Bahia', lat: -12.9777, lng: -38.5016},
+  {code: 'CE', name: 'Ceará', lat: -3.7319, lng: -38.5267},
+  {code: 'DF', name: 'Distrito Federal', lat: -15.7939, lng: -47.8828},
+  {code: 'ES', name: 'Espírito Santo', lat: -20.3155, lng: -40.3128},
+  {code: 'GO', name: 'Goiás', lat: -16.6869, lng: -49.2648},
+  {code: 'MA', name: 'Maranhão', lat: -2.5307, lng: -44.3068},
+  {code: 'MT', name: 'Mato Grosso', lat: -15.6014, lng: -56.0979},
+  {code: 'MS', name: 'Mato Grosso do Sul', lat: -20.4697, lng: -54.6201},
+  {code: 'MG', name: 'Minas Gerais', lat: -19.9167, lng: -43.9345},
+  {code: 'PA', name: 'Pará', lat: -1.4558, lng: -48.5044},
+  {code: 'PB', name: 'Paraíba', lat: -7.1195, lng: -34.845},
+  {code: 'PR', name: 'Paraná', lat: -25.4284, lng: -49.2733},
+  {code: 'PE', name: 'Pernambuco', lat: -8.0476, lng: -34.877},
+  {code: 'PI', name: 'Piauí', lat: -5.0919, lng: -42.8034},
+  {code: 'RJ', name: 'Rio de Janeiro', lat: -22.9068, lng: -43.1729},
+  {code: 'RN', name: 'Rio Grande do Norte', lat: -5.7945, lng: -35.211},
+  {code: 'RS', name: 'Rio Grande do Sul', lat: -30.0346, lng: -51.2177},
+  {code: 'RO', name: 'Rondônia', lat: -8.7612, lng: -63.9039},
+  {code: 'RR', name: 'Roraima', lat: 2.8235, lng: -60.6753},
+  {code: 'SC', name: 'Santa Catarina', lat: -27.5949, lng: -48.5482},
+  {code: 'SP', name: 'São Paulo', lat: -23.5505, lng: -46.6333},
+  {code: 'SE', name: 'Sergipe', lat: -10.9472, lng: -37.0731},
+  {code: 'TO', name: 'Tocantins', lat: -10.184, lng: -48.3336}
 ];
+
+const MARKER_BORDER_COLOR = 'var(--color-text-primary, rgb(15 23 42))';
+const MARKER_FILL_COLOR = 'var(--color-brand-primary, rgb(29 78 216))';
+
+const PROSPECTION_LAYERS: ProspectionLayer[] = [
+  {
+    id: 'news_signals',
+    label: 'Sinais e notícias locais',
+    description: 'Fatos recentes e sinais públicos para priorização comunitária.',
+    source: 'Base editorial e clipping público'
+  },
+  {
+    id: 'public_services',
+    label: 'Serviços públicos',
+    description: 'Leitura de oferta e acesso a serviços essenciais para a população.',
+    source: 'Bases abertas municipais/estaduais'
+  },
+  {
+    id: 'compliance',
+    label: 'Conformidade e transparência',
+    description: 'Indicadores de governança, controle social e obrigações públicas.',
+    source: 'Portais de transparência e marcos normativos'
+  },
+  {
+    id: 'mobility',
+    label: 'Mobilidade urbana',
+    description: 'Contexto de deslocamento e gargalos de mobilidade com impacto cidadão.',
+    source: 'Dados públicos de mobilidade'
+  },
+  {
+    id: 'alerts',
+    label: 'Alertas prioritários',
+    description: 'Ocorrências e alertas com potencial efeito imediato para o território.',
+    source: 'Fontes oficiais de alerta'
+  }
+];
+
+const DEFAULT_LAYERS = ['public_services', 'alerts', 'compliance'];
 
 export default function InitialTerritorySelector() {
   const t = useTranslations('territory');
+  const mapContainerRef = useRef<HTMLDivElement | null>(null);
+  const mapRef = useRef<LeafletMap | null>(null);
+  const markersRef = useRef<Record<string, CircleMarker>>({});
   const [selectedUf, setSelectedUf] = useState('');
   const [city, setCity] = useState('');
   const [cityOptions, setCityOptions] = useState<string[]>([]);
   const [loadingCities, setLoadingCities] = useState(false);
   const [cityFetchFailed, setCityFetchFailed] = useState(false);
+  const [selectedLayers, setSelectedLayers] = useState<string[]>(DEFAULT_LAYERS);
+
+  useEffect(() => {
+    let disposed = false;
+
+    const setupMap = async () => {
+      if (!mapContainerRef.current || mapRef.current) {
+        return;
+      }
+
+      const L = await import('leaflet');
+
+      if (disposed || !mapContainerRef.current) {
+        return;
+      }
+
+      const map = L.map(mapContainerRef.current, {
+        center: [-14.235, -51.9253],
+        zoom: 4,
+        minZoom: 3,
+        maxZoom: 7,
+        zoomControl: true
+      });
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(map);
+
+      for (const uf of FEDERATIVE_UNITS) {
+        const marker = L.circleMarker([uf.lat, uf.lng], {
+          radius: 6,
+          color: MARKER_BORDER_COLOR,
+          weight: 1,
+          fillColor: MARKER_FILL_COLOR,
+          fillOpacity: 0.9
+        })
+          .addTo(map)
+          .bindTooltip(`${uf.name} (${uf.code})`, {direction: 'top'});
+
+        marker.on('click', () => {
+          setSelectedUf(uf.code);
+        });
+
+        markersRef.current[uf.code] = marker;
+      }
+
+      mapRef.current = map;
+    };
+
+    void setupMap();
+
+    return () => {
+      disposed = true;
+      if (mapRef.current) {
+        mapRef.current.remove();
+        mapRef.current = null;
+      }
+      markersRef.current = {};
+    };
+  }, []);
+
+  useEffect(() => {
+    const selected = FEDERATIVE_UNITS.find((uf) => uf.code === selectedUf);
+
+    for (const uf of FEDERATIVE_UNITS) {
+      const marker = markersRef.current[uf.code];
+      if (!marker) {
+        continue;
+      }
+
+      marker.setStyle(
+        uf.code === selectedUf
+          ? {radius: 8, fillColor: MARKER_BORDER_COLOR, color: MARKER_BORDER_COLOR}
+          : {radius: 6, fillColor: MARKER_FILL_COLOR, color: MARKER_BORDER_COLOR}
+      );
+    }
+
+    if (selected && mapRef.current) {
+      mapRef.current.setView([selected.lat, selected.lng], 5, {
+        animate: true,
+        duration: 0.6
+      });
+    }
+  }, [selectedUf]);
 
   useEffect(() => {
     if (!selectedUf) {
@@ -94,19 +227,21 @@ export default function InitialTerritorySelector() {
 
   const canProceed = selectedUf.trim().length > 0 && city.trim().length > 0;
 
+  const effectiveLayers = selectedLayers.length > 0 ? selectedLayers : DEFAULT_LAYERS;
+
   const correlationId = useMemo(() => {
     if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
       return crypto.randomUUID();
     }
     return `cid-${Date.now()}`;
-  }, [selectedUf, city]);
+  }, []);
 
   const traceId = useMemo(() => {
     if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
       return crypto.randomUUID();
     }
     return `tid-${Date.now()}`;
-  }, [selectedUf, city]);
+  }, []);
 
   const persistSelection = () => {
     if (!canProceed) {
@@ -120,7 +255,8 @@ export default function InitialTerritorySelector() {
       selectedAt: new Date().toISOString(),
       correlationId,
       traceId,
-      classification: 'publico'
+      classification: 'publico',
+      layers: effectiveLayers
     };
 
     localStorage.setItem('portacivis_territory', JSON.stringify(payload));
@@ -133,32 +269,9 @@ export default function InitialTerritorySelector() {
 
       <div className="territory-layout">
         <div className="territory-map-wrap" aria-label={t('mapAria')}>
-          <svg viewBox="0 0 540 460" className="territory-map" role="img" aria-labelledby="map-title map-desc">
-            <title id="map-title">{t('mapTitle')}</title>
-            <desc id="map-desc">{t('mapDescription')}</desc>
-            <path
-              className="territory-outline"
-              d="M112 108 L168 78 L248 52 L330 76 L408 132 L462 188 L458 250 L432 292 L378 336 L320 410 L250 432 L192 412 L136 350 L96 282 L74 220 L82 166 Z"
-            />
-
-            {FEDERATIVE_UNITS.map((uf) => {
-              const active = uf.code === selectedUf;
-              return (
-                <g key={uf.code}>
-                  <circle
-                    cx={uf.x}
-                    cy={uf.y}
-                    r={active ? 8 : 6}
-                    className={active ? 'uf-dot active' : 'uf-dot'}
-                    onClick={() => setSelectedUf(uf.code)}
-                  />
-                  <text x={uf.x + 9} y={uf.y + 3} className="uf-label" onClick={() => setSelectedUf(uf.code)}>
-                    {uf.code}
-                  </text>
-                </g>
-              );
-            })}
-          </svg>
+          <h3 className="territory-map-title">{t('mapTitle')}</h3>
+          <p className="territory-map-description">{t('mapDescription')}</p>
+          <div ref={mapContainerRef} className="territory-map-canvas" role="img" aria-label={t('mapAria')} />
         </div>
 
         <div className="territory-controls">
@@ -206,9 +319,37 @@ export default function InitialTerritorySelector() {
 
           {cityFetchFailed && <p className="territory-hint">{t('fields.cityManualHint')}</p>}
 
+          <fieldset className="territory-layers" aria-label="Camadas de contexto para prospecção cidadã">
+            <legend>Camadas para análise populacional</legend>
+            {PROSPECTION_LAYERS.map((layer) => {
+              const checked = effectiveLayers.includes(layer.id);
+              return (
+                <label key={layer.id} className="territory-layer-option">
+                  <input
+                    type="checkbox"
+                    checked={checked}
+                    onChange={(event) => {
+                      setSelectedLayers((current) => {
+                        if (event.target.checked) {
+                          return current.includes(layer.id) ? current : [...current, layer.id];
+                        }
+
+                        return current.filter((item) => item !== layer.id);
+                      });
+                    }}
+                  />
+                  <span>
+                    <strong>{layer.label}</strong>
+                    <small>{layer.description} • Fonte: {layer.source}</small>
+                  </span>
+                </label>
+              );
+            })}
+          </fieldset>
+
           <Link
             href={canProceed
-              ? `/trilha-da-verdade?uf=${encodeURIComponent(selectedUf)}&cidade=${encodeURIComponent(city.trim())}&correlationId=${encodeURIComponent(correlationId)}&traceId=${encodeURIComponent(traceId)}`
+              ? `/trilha-da-verdade?uf=${encodeURIComponent(selectedUf)}&cidade=${encodeURIComponent(city.trim())}&correlationId=${encodeURIComponent(correlationId)}&traceId=${encodeURIComponent(traceId)}&layers=${encodeURIComponent(effectiveLayers.join(','))}`
               : '/trilha-da-verdade'
             }
             className={canProceed ? 'territory-cta' : 'territory-cta disabled'}

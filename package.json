@@ -19,12 +19,14 @@
     "verify:all": "bun run security:verify && bun run test:smoke"
   },
   "dependencies": {
+    "leaflet": "^1.9.4",
     "next": "15.5.12",
     "next-intl": "^4.8.3",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
+    "@types/leaflet": "^1.9.21",
     "@types/node": "^20.11.5",
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",

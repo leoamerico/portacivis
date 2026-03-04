@@ -1,4 +1,5 @@
 import './globals.css';
+import 'leaflet/dist/leaflet.css';
 import '../styles/brand.css';
 import type { Metadata } from 'next';
 import {getLocale, getMessages, getTranslations} from 'next-intl/server';
@@ -92,9 +93,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                     loading="eager"
                     decoding="async"
                   />
-                  <span className="site-header-text">
-                    <small>{brand.slogan}</small>
-                  </span>
                 </Link>
                 <div className="site-utilities" aria-label="Ferramentas de interface">
                   <LanguageSwitcher />
