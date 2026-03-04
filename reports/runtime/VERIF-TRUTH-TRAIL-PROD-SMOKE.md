@@ -133,3 +133,23 @@ Conclusão deste recheck:
 
 - **Mapa na home: PASS** (âncora e seção em produção).
 - **Rotas Truth Trail: ativas em produção** (`verify` e página em `200`; `audit` exige `POST` válido e integridade da cadeia).
+
+## Smoke determinístico de `POST /audit` (ponta-a-ponta)
+
+Execução adicional em `2026-03-04` para obter `200` no `POST` com assinatura correta:
+
+- `GET /api/truth-trail/verify` antes: `200`, `chainLength=3`, `head=8f93e0de455ef7982753a48b3fb812b8ac8e8eeb7634dce25b0531c1fe22b9fd`
+- `POST /api/truth-trail/audit` com:
+  - todos os campos obrigatórios (`eventId`, `eventType`, `actorId`, `delegationContext`, `delegationId`, `timestamp`, `action`, `payload`, `payloadHash`, `correlationId`, `traceId`, `classification`, `previousHash`)
+  - `previousHash` igual ao `head` retornado no `verify`
+  - `payloadHash` calculado por SHA-256 do payload serializado
+
+Resultado:
+
+- `POST /api/truth-trail/audit` -> `HTTP_CODE=422`
+- body: `{"success":false,"error":"Chain validation failed before persistence","issues":["Invalid hash at index 3"]}`
+- `GET /api/truth-trail/verify` após: `200`, `chainLength=3` (sem evolução)
+
+Conclusão desta etapa:
+
+- A rota de auditoria está ativa, mas a persistência append-only em produção permanece bloqueada por validação de hash da cadeia.
