@@ -21,6 +21,7 @@ const agents: AgentMeta[] = [
 
 export default async function AgentsGalleryPage() {
   const t = await getTranslations('agents');
+  const common = await getTranslations();
 
   return (
     <main id="conteudo-principal" role="main">
@@ -67,6 +68,25 @@ export default async function AgentsGalleryPage() {
         population={120000}
         region="Sudeste — Minas Gerais"
       />
+
+      <nav className="quicknav" aria-label={common('nav.backNavigation')}>
+        <Link href="/trilha-da-verdade" className="quicknav-item">
+          <span className="quicknav-icon" aria-hidden="true">🔍</span>
+          {common('truthTrail.title')}
+        </Link>
+        <Link href="/conformidade" className="quicknav-item">
+          <span className="quicknav-icon" aria-hidden="true">✅</span>
+          {common('nav.compliance')}
+        </Link>
+        <Link href="/cidade-aurora" className="quicknav-item quicknav-item--aurora">
+          <span className="quicknav-icon" aria-hidden="true">🌆</span>
+          Cidade Aurora
+        </Link>
+        <Link href="/" className="quicknav-item quicknav-item--highlight">
+          <span className="quicknav-icon" aria-hidden="true">🏠</span>
+          {common('nav.backHome')}
+        </Link>
+      </nav>
     </main>
   );
 }

@@ -13,7 +13,9 @@
     "cookies": "Cookies and Cache",
     "terms": "Terms of Use",
     "compliance": "Compliance",
-    "accessibility": "Accessibility"
+    "accessibility": "Accessibility",
+    "backHome": "Back to Home",
+    "backNavigation": "Return navigation"
   },
   "footer": {
     "copy": "PortaCivis — Citizen Portal. Rights, duties, services and transparency."

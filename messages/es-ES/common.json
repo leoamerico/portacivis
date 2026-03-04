@@ -13,7 +13,9 @@
     "cookies": "Cookies y Caché",
     "terms": "Términos de Uso",
     "compliance": "Cumplimiento",
-    "accessibility": "Accesibilidad"
+    "accessibility": "Accesibilidad",
+    "backHome": "Volver al Inicio",
+    "backNavigation": "Navegación de retorno"
   },
   "footer": {
     "copy": "PortaCivis — Portal Ciudadano. Derechos, deberes, servicios y transparencia."

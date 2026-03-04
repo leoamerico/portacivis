@@ -362,6 +362,26 @@ export default async function CidadeAuroraPage({
         </div>
       </section>
 
+      {/* ── Quick navigation ── */}
+      <nav className="quicknav" aria-label="Navegação de retorno">
+        <Link href="/trilha-da-verdade" className="quicknav-item">
+          <span className="quicknav-icon" aria-hidden="true">🔍</span>
+          Trilha da Verdade
+        </Link>
+        <Link href="/conformidade" className="quicknav-item">
+          <span className="quicknav-icon" aria-hidden="true">✅</span>
+          Conformidade
+        </Link>
+        <Link href="/agentes" className="quicknav-item">
+          <span className="quicknav-icon" aria-hidden="true">🤖</span>
+          Galeria de Agentes
+        </Link>
+        <Link href="/" className="quicknav-item quicknav-item--highlight">
+          <span className="quicknav-icon" aria-hidden="true">🏠</span>
+          Voltar ao Início
+        </Link>
+      </nav>
+
       {/* ── Nota de conformidade ── */}
       <aside id="demo-section-conclusion" className="aurora-disclaimer" role="note" aria-label="Nota sobre dados demonstrativos">
         <p>
@@ -370,6 +390,26 @@ export default async function CidadeAuroraPage({
           e não representam nenhum município real brasileiro.
         </p>
       </aside>
+
+      {/* ── Quick navigation ── */}
+      <nav className="quicknav" aria-label="Navegação de retorno">
+        <Link href="/trilha-da-verdade" className="quicknav-item">
+          <span className="quicknav-icon" aria-hidden="true">🔍</span>
+          Trilha da Verdade
+        </Link>
+        <Link href="/conformidade" className="quicknav-item">
+          <span className="quicknav-icon" aria-hidden="true">✅</span>
+          Conformidade
+        </Link>
+        <Link href="/agentes" className="quicknav-item">
+          <span className="quicknav-icon" aria-hidden="true">🤖</span>
+          Galeria de Agentes
+        </Link>
+        <Link href="/" className="quicknav-item quicknav-item--highlight">
+          <span className="quicknav-icon" aria-hidden="true">🏠</span>
+          Voltar ao Início
+        </Link>
+      </nav>
 
     </main>
   );

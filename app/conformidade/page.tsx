@@ -4,6 +4,7 @@ import ComplianceScorePanel from '../components/ComplianceScorePanel';
 
 export default async function CompliancePage() {
   const t = await getTranslations('compliancePage');
+  const common = await getTranslations();
 
   return (
     <main id="conteudo-principal" role="main">
@@ -53,6 +54,25 @@ export default async function CompliancePage() {
       </section>
 
       <ComplianceScorePanel />
+
+      <nav className="quicknav" aria-label={t('auditNavigation')}>
+        <Link href="/trilha-da-verdade" className="quicknav-item">
+          <span className="quicknav-icon" aria-hidden="true">🔍</span>
+          {t('auditBackTrail')}
+        </Link>
+        <Link href="/agentes" className="quicknav-item">
+          <span className="quicknav-icon" aria-hidden="true">🤖</span>
+          {common('nav.agents')}
+        </Link>
+        <Link href="/cidade-aurora" className="quicknav-item quicknav-item--aurora">
+          <span className="quicknav-icon" aria-hidden="true">🌆</span>
+          Cidade Aurora
+        </Link>
+        <Link href="/" className="quicknav-item quicknav-item--highlight">
+          <span className="quicknav-icon" aria-hidden="true">🏠</span>
+          {common('nav.backHome')}
+        </Link>
+      </nav>
     </main>
   );
 }

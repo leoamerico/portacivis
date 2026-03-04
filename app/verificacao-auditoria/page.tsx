@@ -25,11 +25,23 @@ export default async function VerificacaoAuditoriaPage() {
         }}
       />
 
-      <nav className="card" aria-label={t('auditNavigation')}>
-        <div className="quick-links">
-          <Link href="/trilha-da-verdade">{t('auditBackTrail')}</Link>
-          <Link href="/conformidade">{t('auditBackCompliance')}</Link>
-        </div>
+      <nav className="quicknav" aria-label={t('auditNavigation')}>
+        <Link href="/trilha-da-verdade" className="quicknav-item">
+          <span className="quicknav-icon" aria-hidden="true">🔍</span>
+          {t('auditBackTrail')}
+        </Link>
+        <Link href="/conformidade" className="quicknav-item">
+          <span className="quicknav-icon" aria-hidden="true">✅</span>
+          {t('auditBackCompliance')}
+        </Link>
+        <Link href="/cidade-aurora" className="quicknav-item quicknav-item--aurora">
+          <span className="quicknav-icon" aria-hidden="true">🌆</span>
+          Cidade Aurora
+        </Link>
+        <Link href="/" className="quicknav-item quicknav-item--highlight">
+          <span className="quicknav-icon" aria-hidden="true">🏠</span>
+          Voltar ao Início
+        </Link>
       </nav>
     </main>
   );

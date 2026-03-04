@@ -138,6 +138,10 @@ export default async function TrilhaDaVerdadePage({
             <span className="quicknav-icon" aria-hidden="true">🔗</span>
             {t('verifyAudit')}
           </Link>
+          <Link href="/cidade-aurora" className="quicknav-item quicknav-item--aurora">
+            <span className="quicknav-icon" aria-hidden="true">🌆</span>
+            Cidade Aurora
+          </Link>
           <Link href="/" className="quicknav-item quicknav-item--highlight">
             <span className="quicknav-icon" aria-hidden="true">🏠</span>
             {t('restart')}
