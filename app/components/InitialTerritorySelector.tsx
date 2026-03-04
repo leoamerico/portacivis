@@ -103,6 +103,7 @@ export default function InitialTerritorySelector() {
   const [loadingCities, setLoadingCities] = useState(false);
   const [cityFetchFailed, setCityFetchFailed] = useState(false);
   const [selectedLayers, setSelectedLayers] = useState<string[]>(DEFAULT_LAYERS);
+  const [hideSelectedLayerItems, setHideSelectedLayerItems] = useState(false);
 
   useEffect(() => {
     let disposed = false;
@@ -228,6 +229,9 @@ export default function InitialTerritorySelector() {
   const canProceed = selectedUf.trim().length > 0 && city.trim().length > 0;
 
   const effectiveLayers = selectedLayers.length > 0 ? selectedLayers : DEFAULT_LAYERS;
+  const visibleLayers = hideSelectedLayerItems
+    ? PROSPECTION_LAYERS.filter((layer) => !effectiveLayers.includes(layer.id))
+    : PROSPECTION_LAYERS;
 
   const correlationId = useMemo(() => {
     if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
@@ -321,7 +325,41 @@ export default function InitialTerritorySelector() {
 
           <fieldset className="territory-layers" aria-label="Camadas de contexto para prospecção cidadã">
             <legend>Camadas para análise populacional</legend>
-            {PROSPECTION_LAYERS.map((layer) => {
+
+            <label className="territory-hide-selected-toggle">
+              <input
+                type="checkbox"
+                checked={hideSelectedLayerItems}
+                onChange={(event) => setHideSelectedLayerItems(event.target.checked)}
+              />
+              <span>Ocultar itens selecionados</span>
+            </label>
+
+            {effectiveLayers.length > 0 ? (
+              <div className="territory-selected-chips" aria-label="Camadas selecionadas">
+                {effectiveLayers.map((layerId) => {
+                  const layer = PROSPECTION_LAYERS.find((item) => item.id === layerId);
+                  if (!layer) {
+                    return null;
+                  }
+
+                  return (
+                    <button
+                      key={layer.id}
+                      type="button"
+                      className="territory-layer-chip"
+                      onClick={() => {
+                        setSelectedLayers((current) => current.filter((item) => item !== layer.id));
+                      }}
+                    >
+                      {layer.label} ×
+                    </button>
+                  );
+                })}
+              </div>
+            ) : null}
+
+            {visibleLayers.map((layer) => {
               const checked = effectiveLayers.includes(layer.id);
               return (
                 <label key={layer.id} className="territory-layer-option">

@@ -105,6 +105,30 @@ input:focus-visible {
   padding: 10px;
 }
 
+.territory-hide-selected-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 0 8px;
+}
+
+.territory-selected-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.territory-layer-chip {
+  border: 1px solid rgb(148 163 184);
+  background: rgb(248 250 252);
+  color: rgb(15 23 42);
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
 .territory-layer-option {
   display: grid;
   grid-template-columns: 18px 1fr;
