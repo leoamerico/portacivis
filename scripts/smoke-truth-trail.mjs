@@ -1,4 +1,5 @@
 import {mkdirSync, writeFileSync} from 'node:fs';
+import {createHash, randomUUID} from 'node:crypto';
 
 const baseUrl = process.env.BASE_URL || 'https://www.portacivis.com.br';
 
@@ -14,6 +15,10 @@ function assert(condition, message) {
 
 function randomId(prefix) {
   return `${prefix}-${Math.random().toString(16).slice(2, 10)}`;
+}
+
+function sha256Hex(value) {
+  return createHash('sha256').update(value).digest('hex');
 }
 
 async function getJson(path, cookie) {
@@ -65,14 +70,22 @@ async function getHtml(path, cookie) {
 }
 
 function buildAuditPayload(previousHash) {
+  const payload = {
+    source: 'truth-trail-smoke',
+    scope: 'post-deploy-validation',
+    timestamp: nowIso()
+  };
+
   return {
-    eventId: crypto.randomUUID(),
+    eventId: randomUUID(),
     eventType: 'TRUTH_TRAIL_ENTRY',
     actorId: 'visitor-anonymous',
+    delegationContext: 'smoke-validation',
     delegationId: 'self',
     timestamp: nowIso(),
     action: 'view_truth_trail',
-    payloadHash: randomId('payload'),
+    payload,
+    payloadHash: sha256Hex(JSON.stringify(payload)),
     correlationId: randomId('corr'),
     traceId: randomId('trace'),
     classification: 'publico',

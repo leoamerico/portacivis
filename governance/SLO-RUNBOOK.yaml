@@ -11,6 +11,9 @@ sli:
   security_headers:
     description: required_http_headers_presence
     source: scripts/verify-security-headers.mjs
+  truth_trail_integrity:
+    description: verify_and_audit_append_only_chain_consistency
+    source: scripts/smoke-truth-trail.mjs
 
 slo:
   availability:
@@ -20,6 +23,9 @@ slo:
     target: 99.95
     window: 30d
   security_headers:
+    target: 100
+    window: 30d
+  truth_trail_integrity:
     target: 100
     window: 30d
 
@@ -32,6 +38,7 @@ error_budget:
 automation:
   daily_smoke_workflow: .github/workflows/smoke.yml
   ci_gates_workflow: .github/workflows/ci.yml
+  truth_trail_smoke_script: scripts/smoke-truth-trail.mjs
 
 incident_response:
   severity_levels:
@@ -52,6 +59,7 @@ incident_response:
 runbook_steps:
   smoke_failure:
     - validate_dns_and_tls
+    - validate_truth_trail_verify_and_audit_post
     - run_local_verify_all
     - inspect_last_deployment
     - execute_rollback_if_needed

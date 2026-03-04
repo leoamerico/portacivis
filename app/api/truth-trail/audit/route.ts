@@ -51,7 +51,19 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({success: false, error: `Missing fields: ${missing.join(', ')}`}, {status: 400});
     }
 
-    const input = body as TruthTrailAuditInput;
+    const input: TruthTrailAuditInput = {
+      eventId: String(body.eventId),
+      eventType: String(body.eventType),
+      actorId: String(body.actorId),
+      delegationId: String(body.delegationId),
+      timestamp: String(body.timestamp),
+      action: String(body.action),
+      payloadHash: String(body.payloadHash),
+      correlationId: String(body.correlationId),
+      traceId: String(body.traceId),
+      classification: String(body.classification),
+      previousHash: String(body.previousHash)
+    };
     const chain = await readChain();
 
     const duplicate = chain.find(
@@ -84,7 +96,17 @@ export async function POST(request: NextRequest) {
 
     const hash = computeEventHash(input);
     const event: TruthTrailAuditEvent = {
-      ...input,
+      eventId: input.eventId,
+      eventType: input.eventType,
+      actorId: input.actorId,
+      delegationId: input.delegationId,
+      timestamp: input.timestamp,
+      action: input.action,
+      payloadHash: input.payloadHash,
+      correlationId: input.correlationId,
+      traceId: input.traceId,
+      classification: input.classification,
+      previousHash: input.previousHash,
       hash
     };
 

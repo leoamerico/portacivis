@@ -43,7 +43,10 @@ function checkSlo(content) {
     'sli:',
     'slo:',
     'error_budget:',
-    'incident_response:'
+    'incident_response:',
+    'truth_trail_integrity:',
+    'scripts/smoke-truth-trail.mjs',
+    'validate_truth_trail_verify_and_audit_post'
   ];
 
   for (const token of requiredTokens) {

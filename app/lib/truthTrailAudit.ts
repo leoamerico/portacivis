@@ -17,12 +17,29 @@ export type TruthTrailAuditEvent = {
 
 export type TruthTrailAuditInput = Omit<TruthTrailAuditEvent, 'hash'>;
 
+function canonicalAuditInput(event: TruthTrailAuditInput) {
+  return {
+    eventId: event.eventId,
+    eventType: event.eventType,
+    actorId: event.actorId,
+    delegationId: event.delegationId,
+    timestamp: event.timestamp,
+    action: event.action,
+    payloadHash: event.payloadHash,
+    correlationId: event.correlationId,
+    traceId: event.traceId,
+    classification: event.classification,
+    previousHash: event.previousHash
+  };
+}
+
 export function sha256Hex(value: string) {
   return createHash('sha256').update(value).digest('hex');
 }
 
 export function computeEventHash(event: TruthTrailAuditInput) {
-  return sha256Hex(`${event.previousHash}:${JSON.stringify(event)}`);
+  const normalized = canonicalAuditInput(event);
+  return sha256Hex(`${normalized.previousHash}:${JSON.stringify(normalized)}`);
 }
 
 export function validateChain(chain: TruthTrailAuditEvent[]) {
