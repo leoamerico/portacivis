@@ -19,6 +19,11 @@ export type ArticleSource = {
   type: 'lei' | 'portal-governo' | 'orgao-oficial' | 'imprensa-oficial';
 };
 
+export type ArticleImage = {
+  src: string;
+  alt: string;
+};
+
 export type NewsArticle = {
   id: string;
   /** Tipo de conteúdo — obrigatório para separação editorial */
@@ -34,6 +39,8 @@ export type NewsArticle = {
   tags: string[];
   complianceReviewed: boolean;
   accessibilityReviewed: boolean;
+  /** Imagem ilustrativa do artigo */
+  image?: ArticleImage;
 };
 
 export const NEWS_ARTICLES: NewsArticle[] = [
@@ -51,7 +58,11 @@ export const NEWS_ARTICLES: NewsArticle[] = [
     },
     tags: ['transparência', 'LAI', 'municípios', 'prazo', 'conformidade'],
     complianceReviewed: true,
-    accessibilityReviewed: true
+    accessibilityReviewed: true,
+    image: {
+      src: '/images/news/lai-cumprimento-prazo.svg',
+      alt: 'Ilustração da Lei de Acesso à Informação com prazo de junho de 2026 para adequação de portais municipais'
+    }
   },
   {
     id: 'lgpd-setor-publico-2026',
@@ -69,7 +80,11 @@ export const NEWS_ARTICLES: NewsArticle[] = [
     },
     tags: ['LGPD', 'privacidade', 'dados pessoais', 'gestão pública'],
     complianceReviewed: true,
-    accessibilityReviewed: true
+    accessibilityReviewed: true,
+    image: {
+      src: '/images/news/lgpd-setor-publico.svg',
+      alt: 'Diagrama da Lei Geral de Proteção de Dados aplicada ao setor público com pilares de dados pessoais, DPO municipal e privacidade'
+    }
   },
   {
     id: 'acessibilidade-digital-nbr-2025',
@@ -85,7 +100,11 @@ export const NEWS_ARTICLES: NewsArticle[] = [
     },
     tags: ['acessibilidade', 'WCAG', 'ABNT', 'inclusão digital', 'serviço público'],
     complianceReviewed: true,
-    accessibilityReviewed: true
+    accessibilityReviewed: true,
+    image: {
+      src: '/images/news/acessibilidade-digital.svg',
+      alt: 'Símbolo de acessibilidade digital com os padrões WCAG 2.2, NBR 17060 e conformidade nível AA'
+    }
   },
   {
     id: 'transparencia-ativa-ranking-2026',
@@ -105,7 +124,11 @@ export const NEWS_ARTICLES: NewsArticle[] = [
     },
     tags: ['transparência ativa', 'ranking', 'TCU', 'municípios', 'governança'],
     complianceReviewed: true,
-    accessibilityReviewed: true
+    accessibilityReviewed: true,
+    image: {
+      src: '/images/news/transparencia-ranking.svg',
+      alt: 'Gráfico de barras do ranking de transparência 2025 por região, com destaque para São Paulo e melhoria de 12% na média nacional'
+    }
   },
   {
     id: 'portacivis-caso-amparo-validacao',
@@ -121,7 +144,11 @@ export const NEWS_ARTICLES: NewsArticle[] = [
     },
     tags: ['Amparo', 'validação', 'trilha da verdade', 'auditoria', 'PortaCivis'],
     complianceReviewed: true,
-    accessibilityReviewed: true
+    accessibilityReviewed: true,
+    image: {
+      src: '/images/news/portacivis-validacao.svg',
+      alt: 'Fluxo de validação da Trilha da Verdade para Amparo (SP): seleção territorial, registro criptográfico e verificação de integridade'
+    }
   },
   {
     id: 'cidade-aurora-lancamento-demo',
@@ -137,7 +164,11 @@ export const NEWS_ARTICLES: NewsArticle[] = [
     },
     tags: ['Cidade Aurora', 'Smart City', 'EnvNeo', 'governança digital', 'demo'],
     complianceReviewed: true,
-    accessibilityReviewed: true
+    accessibilityReviewed: true,
+    image: {
+      src: '/images/news/cidade-aurora-lancamento.svg',
+      alt: 'Skyline estilizado de Cidade Aurora representando a prefeitura digital com 84 serviços e 12 secretarias'
+    }
   },
   {
     id: 'cidade-aurora-indice-transparencia',
@@ -157,7 +188,11 @@ export const NEWS_ARTICLES: NewsArticle[] = [
     },
     tags: ['transparência', 'Cidade Aurora', 'ranking', 'boas práticas', 'EnvNeo'],
     complianceReviewed: true,
-    accessibilityReviewed: true
+    accessibilityReviewed: true,
+    image: {
+      src: '/images/news/cidade-aurora-transparencia.svg',
+      alt: 'Indicador circular mostrando índice de transparência 94 de 100 para Cidade Aurora com pilares de transparência, conformidade e rastreabilidade'
+    }
   },
   {
     id: 'e-social-municipios-obrigatoriedade-2026',
@@ -175,7 +210,11 @@ export const NEWS_ARTICLES: NewsArticle[] = [
     },
     tags: ['eSocial', 'gestão pública', 'servidores', 'obrigações', 'municípios'],
     complianceReviewed: true,
-    accessibilityReviewed: true
+    accessibilityReviewed: true,
+    image: {
+      src: '/images/news/esocial-municipios.svg',
+      alt: 'Interface simplificada do eSocial para o setor público com destaque para a inclusão de 2.800 municípios em 2026'
+    }
   }
 ];
 

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" fill="none">
+  <rect width="800" height="400" rx="12" fill="#FFFBEB"/>
+  <rect x="200" y="200" width="60" height="130" rx="4" fill="#FDE68A" stroke="#F59E0B" stroke-width="2"/>
+  <rect x="280" y="160" width="60" height="170" rx="4" fill="#FDE68A" stroke="#F59E0B" stroke-width="2"/>
+  <rect x="360" y="120" width="80" height="210" rx="4" fill="#FCD34D" stroke="#F59E0B" stroke-width="2"/>
+  <rect x="460" y="150" width="60" height="180" rx="4" fill="#FDE68A" stroke="#F59E0B" stroke-width="2"/>
+  <rect x="540" y="180" width="60" height="150" rx="4" fill="#FDE68A" stroke="#F59E0B" stroke-width="2"/>
+  <rect x="210" y="220" width="40" height="20" rx="2" fill="#FEF3C7"/>
+  <rect x="210" y="250" width="40" height="20" rx="2" fill="#FEF3C7"/>
+  <rect x="290" y="180" width="40" height="20" rx="2" fill="#FEF3C7"/>
+  <rect x="290" y="210" width="40" height="20" rx="2" fill="#FEF3C7"/>
+  <rect x="375" y="140" width="50" height="25" rx="2" fill="#FEF3C7"/>
+  <rect x="375" y="175" width="50" height="25" rx="2" fill="#FEF3C7"/>
+  <rect x="375" y="210" width="50" height="25" rx="2" fill="#FEF3C7"/>
+  <line x1="180" y1="335" x2="620" y2="335" stroke="#F59E0B" stroke-width="3"/>
+  <circle cx="400" cy="70" r="35" fill="#FCD34D" stroke="#F59E0B" stroke-width="2"/>
+  <text x="400" y="78" text-anchor="middle" font-family="system-ui" font-size="28">🌆</text>
+  <text x="400" y="375" text-anchor="middle" font-family="system-ui" font-size="18" font-weight="700" fill="#92400E">Cidade Aurora — Prefeitura Digital</text>
+</svg>

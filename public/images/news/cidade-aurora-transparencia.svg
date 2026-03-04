@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" fill="none">
+  <rect width="800" height="400" rx="12" fill="#F5F3FF"/>
+  <circle cx="400" cy="180" r="120" fill="none" stroke="#DDD6FE" stroke-width="12"/>
+  <path d="M400 60 A120 120 0 1 1 327 283" fill="none" stroke="#8B5CF6" stroke-width="12" stroke-linecap="round"/>
+  <text x="400" y="170" text-anchor="middle" font-family="system-ui" font-size="56" font-weight="800" fill="#6D28D9">94</text>
+  <text x="400" y="205" text-anchor="middle" font-family="system-ui" font-size="18" fill="#7C3AED">/100</text>
+  <rect x="160" y="330" width="130" height="40" rx="8" fill="#EDE9FE"/>
+  <text x="225" y="356" text-anchor="middle" font-family="system-ui" font-size="12" font-weight="600" fill="#6D28D9">Transparência</text>
+  <rect x="310" y="330" width="130" height="40" rx="8" fill="#DCFCE7"/>
+  <text x="375" y="356" text-anchor="middle" font-family="system-ui" font-size="12" font-weight="600" fill="#15803D">Conformidade</text>
+  <rect x="460" y="330" width="160" height="40" rx="8" fill="#DBEAFE"/>
+  <text x="540" y="356" text-anchor="middle" font-family="system-ui" font-size="12" font-weight="600" fill="#1D4ED8">Rastreabilidade</text>
+</svg>

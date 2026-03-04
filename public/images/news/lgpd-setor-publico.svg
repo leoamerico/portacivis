@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" fill="none">
+  <rect width="800" height="400" rx="12" fill="#F0FDFA"/>
+  <rect x="300" y="50" width="200" height="200" rx="100" fill="#CCFBF1" stroke="#5EEAD4" stroke-width="3"/>
+  <path d="M400 100 L400 180 M370 140 L430 140" stroke="#0D9488" stroke-width="8" stroke-linecap="round"/>
+  <rect x="340" y="110" width="120" height="120" rx="60" fill="none" stroke="#14B8A6" stroke-width="2" stroke-dasharray="8 4"/>
+  <rect x="100" y="290" width="180" height="60" rx="10" fill="#CCFBF1" stroke="#5EEAD4" stroke-width="2"/>
+  <text x="190" y="326" text-anchor="middle" font-family="system-ui" font-size="16" font-weight="600" fill="#0D9488">Dados Pessoais</text>
+  <rect x="310" y="290" width="180" height="60" rx="10" fill="#CCFBF1" stroke="#5EEAD4" stroke-width="2"/>
+  <text x="400" y="326" text-anchor="middle" font-family="system-ui" font-size="16" font-weight="600" fill="#0D9488">DPO Municipal</text>
+  <rect x="520" y="290" width="180" height="60" rx="10" fill="#CCFBF1" stroke="#5EEAD4" stroke-width="2"/>
+  <text x="610" y="326" text-anchor="middle" font-family="system-ui" font-size="16" font-weight="600" fill="#0D9488">Privacidade</text>
+  <text x="400" y="270" text-anchor="middle" font-family="system-ui" font-size="28" font-weight="700" fill="#0F766E">LGPD</text>
+</svg>

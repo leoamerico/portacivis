@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" fill="none">
+  <rect width="800" height="400" rx="12" fill="#EFF6FF"/>
+  <rect x="150" y="100" width="500" height="60" rx="10" fill="#DBEAFE" stroke="#93C5FD" stroke-width="2"/>
+  <text x="400" y="138" text-anchor="middle" font-family="system-ui" font-size="18" font-weight="600" fill="#1D4ED8">Seleção Territorial → Amparo (SP)</text>
+  <path d="M400 160 L400 185" stroke="#93C5FD" stroke-width="2"/>
+  <polygon points="395,182 405,182 400,190" fill="#93C5FD"/>
+  <rect x="150" y="190" width="500" height="60" rx="10" fill="#DBEAFE" stroke="#93C5FD" stroke-width="2"/>
+  <text x="400" y="228" text-anchor="middle" font-family="system-ui" font-size="18" font-weight="600" fill="#1D4ED8">Registro de Auditoria Criptográfica</text>
+  <path d="M400 250 L400 275" stroke="#93C5FD" stroke-width="2"/>
+  <polygon points="395,272 405,272 400,280" fill="#93C5FD"/>
+  <rect x="150" y="280" width="500" height="60" rx="10" fill="#DCFCE7" stroke="#86EFAC" stroke-width="2"/>
+  <text x="370" y="318" text-anchor="middle" font-family="system-ui" font-size="18" font-weight="600" fill="#15803D">Verificação de Integridade</text>
+  <text x="610" y="318" font-family="system-ui" font-size="22" fill="#16A34A">✓</text>
+  <text x="400" y="60" text-anchor="middle" font-family="system-ui" font-size="14" fill="#3B82F6">Trilha da Verdade — Validação Completa</text>
+</svg>

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import {getTranslations} from 'next-intl/server';
 import {getPublishedArticles, type ArticleKind} from '../../src/news/articles';
@@ -87,6 +88,18 @@ export default async function NoticiasPage() {
                     {t('publishedLabel')}: {formatDate(article.publishedAt)}
                   </time>
                 </header>
+
+                {article.image && (
+                  <div className="news-card-image">
+                    <Image
+                      src={article.image.src}
+                      alt={article.image.alt}
+                      width={800}
+                      height={400}
+                      className="news-card-img"
+                    />
+                  </div>
+                )}
 
                 <h3 className="news-card-title">{article.title}</h3>
 

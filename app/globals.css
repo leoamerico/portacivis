@@ -770,6 +770,29 @@ details[open] .news-criteria-summary::before {
   margin-left: auto;
 }
 
+/* ── Card image ── */
+
+.news-card-image {
+  margin: 0 -20px;
+  overflow: hidden;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.news-card-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  max-height: 280px;
+}
+
+@media (min-width: 640px) {
+  .news-card-img {
+    max-height: 340px;
+  }
+}
+
 /* ── Card body ── */
 
 .news-card-title {
