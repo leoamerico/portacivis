@@ -65,7 +65,7 @@ export default function TrailPermalinkPanel({ city, uf, layers, provenances }: P
               {t('createdAt')}: {new Date(permalink.createdAt).toLocaleString('pt-BR')}
             </p>
             <p className="trail-permalink-hash">
-              Hash: <code>{permalink.snapshotHash.slice(0, 16)}…</code>
+              Selo de verificação: <code>{permalink.snapshotHash.slice(0, 16)}…</code>
             </p>
           </div>
           <div className="trail-permalink-actions">

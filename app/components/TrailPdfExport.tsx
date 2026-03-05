@@ -26,7 +26,7 @@ export default function TrailPdfExport({ city, uf, layers, provenances, stalenes
     lines.push('');
     lines.push(`Município: ${data.city} — ${data.uf}`);
     lines.push(`Data de geração: ${new Date(data.generatedAt).toLocaleString('pt-BR')}`);
-    lines.push(`Assinatura digital: ${data.signatureHash}`);
+    lines.push(`Selo de verificação: ${data.signatureHash}`);
     lines.push('');
     lines.push('─'.repeat(60));
     lines.push('CAMADAS ANALISADAS');
@@ -40,7 +40,7 @@ export default function TrailPdfExport({ city, uf, layers, provenances, stalenes
       lines.push(`  • ${p.source.name}`);
       lines.push(`    URL: ${p.source.url}`);
       lines.push(`    Última atualização: ${new Date(p.lastUpdated).toLocaleDateString('pt-BR')}`);
-      lines.push(`    Hash de verificação: ${p.contentHash}`);
+      lines.push(`    Código de verificação: ${p.contentHash}`);
       lines.push('');
     });
     if (data.stalenessAlerts.length > 0) {

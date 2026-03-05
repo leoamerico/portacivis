@@ -102,7 +102,7 @@ export default function ContextInsightPanel({uf, cidade, traceId, correlationId,
         }
       } catch {
         if (!cancelled) {
-          setError('Não foi possível inicializar o contexto inteligente agora.');
+          setError('Não foi possível carregar as informações da sua cidade agora.');
         }
       }
     };
@@ -148,7 +148,7 @@ export default function ContextInsightPanel({uf, cidade, traceId, correlationId,
         }
       } catch {
         if (!cancelled) {
-          setError('Falha ao acompanhar a consolidação de contexto.');
+          setError('Não foi possível completar a análise detalhada.');
         }
       }
     };
@@ -171,17 +171,16 @@ export default function ContextInsightPanel({uf, cidade, traceId, correlationId,
 
   return (
     <section className="card" aria-live="polite">
-      <h2>Panorama Contextual</h2>
-      <p>Resposta em duas fases para {cidade}/{uf}.</p>
-      <p>Camadas ativas: {activeLayers.join(', ')}</p>
+      <h2>Panorama da Cidade</h2>
+      <p>Informações sobre {cidade}/{uf}.</p>
 
       {error && <p>{error}</p>}
 
-      {!error && !phaseA && <p>Preparando leitura contextual...</p>}
+      {!error && !phaseA && <p>Carregando informações...</p>}
 
       {phaseA && (
         <>
-          <h3>Fase A (rápida)</h3>
+          <h3>Resumo inicial</h3>
           <p>{phaseA.summary}</p>
           <ul>
             {phaseA.highlights.map((highlight) => (
@@ -193,15 +192,14 @@ export default function ContextInsightPanel({uf, cidade, traceId, correlationId,
 
       {status && (
         <>
-          <h3>Fase B (consolidação)</h3>
-          <p>Status: {status.phaseB}</p>
+          <h3>Análise detalhada</h3>
           <p>Progresso: {status.progress}%</p>
         </>
       )}
 
       {phaseB && (
         <>
-          <h3>Próximos Atos</h3>
+          <h3>Próximos passos</h3>
           <ul>
             {phaseB.nextActs.map((item) => (
               <li key={item}>{item}</li>

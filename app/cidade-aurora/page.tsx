@@ -44,7 +44,7 @@ const PERSONAS = [
     id: 'especialista',
     label: 'Especialista',
     icon: '📊',
-    descricao: 'Analise contratos, licitações e obras com rastreabilidade completa e trilha de auditoria criptográfica.',
+    descricao: 'Analise contratos, licitações e obras com rastreabilidade completa e verificação de integridade.',
     cta: 'Ver contratos',
     href: '#contratos',
     accent: 'rgb(124 58 237)'
@@ -344,7 +344,7 @@ export default async function CidadeAuroraPage({
           <h2>🔍 Auditar Cidade Aurora</h2>
           <p>
             Use a Trilha da Verdade para verificar a integridade dos dados públicos de Cidade Aurora.
-            Cada consulta gera um registro criptográfico auditável e rastreável.
+            Cada consulta gera um registro verificável com garantia de integridade.
           </p>
           <div className="aurora-audit-actions">
             <Link
