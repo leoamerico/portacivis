@@ -63,7 +63,7 @@
     "welcomeGuide": "Selecionamos os próximos passos mais rápidos para chegar ao resultado desejado nesta etapa.",
     "contextTitle": "Contexto de entrada",
     "territory": "Território: {cidade} - {uf}",
-    "contextLayers": "{count, plural, =0 {Nenhuma camada selecionada} =1 {1 área de consulta selecionada} other {# áreas de consulta selecionadas}}",
+    "contextLayers": "{count, plural, =0 {Nenhuma área de consulta selecionada} =1 {1 área de consulta selecionada} other {# áreas de consulta selecionadas}}",
     "classification": "Acesso: público",
     "missingTerritory": "Nenhum território foi informado. Retorne à seleção inicial para estruturar a trilha.",
     "governanceTitle": "Como garantimos a confiabilidade",

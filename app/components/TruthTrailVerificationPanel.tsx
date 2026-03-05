@@ -81,7 +81,7 @@ export default function TruthTrailVerificationPanel({labels}: {labels: Labels}) 
           <ul>
             <li>{labels.status}: {statusText}</li>
             <li>{labels.chainLength}: {data.chainLength}</li>
-            <li>{labels.headHash}: <code>{data.head.slice(0, 12)}…</code></li>
+            <li>{labels.headHash}: <code>{data.head.slice(0, 16)}…</code></li>
           </ul>
 
           <h2>{labels.issuesTitle}</h2>
