@@ -68,9 +68,8 @@ export default async function TrilhaDaVerdadePage({
         {hasTerritory ? (
           <ul>
             <li>{t('territory', {cidade, uf})}</li>
-            <li>{t('correlationId', {value: correlationId || '-'})}</li>
-            <li>{t('traceId', {value: traceId || '-'})}</li>
             <li>{t('classification')}</li>
+            <li>{t('contextLayers', {count: selectedLayers.length})}</li>
           </ul>
         ) : (
           <p>{t('missingTerritory')}</p>

@@ -74,7 +74,7 @@ export default function DataProvenanceCard({ provenance, stalenessAlert }: Props
             <div className="provenance-detail-row">
               <dt>{t('verificationHash')}</dt>
               <dd>
-                <code className="provenance-hash">{provenance.contentHash}</code>
+                <code className="provenance-hash">{provenance.contentHash.slice(0, 12)}…</code>
               </dd>
             </div>
           </dl>
