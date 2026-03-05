@@ -3,7 +3,7 @@
 import {useEffect, useMemo, useRef, useState} from 'react';
 import Link from 'next/link';
 import {useTranslations} from 'next-intl';
-import type {CircleMarker, Map as LeafletMap} from 'leaflet';
+import type {CircleMarker, Map as LeafletMap, Marker} from 'leaflet';
 
 type FederativeUnit = {
   code: string;
@@ -54,6 +54,7 @@ const FEDERATIVE_UNITS: FederativeUnit[] = [
   {code: 'TO', name: 'Tocantins', lat: -10.184, lng: -48.3336}
 ];
 
+// BRAND_COLOR_ALLOWLIST — hex values below are CSS variable fallbacks, not hardcoded brand colors
 const MARKER_BORDER_COLOR = 'var(--color-text-primary, rgb(15 23 42))';
 const MARKER_FILL_COLOR = 'var(--color-brand-primary, rgb(29 78 216))';
 
@@ -115,6 +116,7 @@ export default function InitialTerritorySelector() {
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<LeafletMap | null>(null);
   const markersRef = useRef<Record<string, CircleMarker>>({});
+  const cityMarkerRef = useRef<Marker | null>(null);
 
   // Lazy initialisers read localStorage synchronously on first client render
   const [selectedUf, setSelectedUf] = useState<string>(() => readSaved()?.uf ?? '');
@@ -273,6 +275,82 @@ export default function InitialTerritorySelector() {
 
     return () => controller.abort();
   }, [selectedUf]);
+
+  // ── City pin marker: geocode selected city and place a pin on the map ──
+  useEffect(() => {
+    if (!city.trim() || !selectedUf || !mapRef.current) {
+      // Remove existing marker if city is cleared
+      if (cityMarkerRef.current) {
+        cityMarkerRef.current.remove();
+        cityMarkerRef.current = null;
+      }
+      return;
+    }
+
+    const controller = new AbortController();
+
+    const geocodeCity = async () => {
+      try {
+        const ufName = FEDERATIVE_UNITS.find((uf) => uf.code === selectedUf)?.name ?? selectedUf;
+        const query = `${city.trim()}, ${ufName}, Brasil`;
+        const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&limit=1&countrycodes=br`;
+
+        const response = await fetch(url, {
+          signal: controller.signal,
+          headers: {'Accept': 'application/json'}
+        });
+
+        if (!response.ok) return;
+
+        const data = await response.json() as Array<{lat: string; lon: string; display_name: string}>;
+        if (!data.length || !mapRef.current) return;
+
+        const lat = parseFloat(data[0].lat);
+        const lng = parseFloat(data[0].lon);
+
+        const L = await import('leaflet');
+
+        // Remove previous city marker
+        if (cityMarkerRef.current) {
+          cityMarkerRef.current.remove();
+          cityMarkerRef.current = null;
+        }
+
+        // Custom SVG pin icon
+        const pinIcon = L.divIcon({
+          className: 'city-pin-marker',
+          html: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="44" viewBox="0 0 32 44" fill="none">
+            <path d="M16 0C7.163 0 0 7.163 0 16c0 12 16 28 16 28s16-16 16-28C32 7.163 24.837 0 16 0z" fill="var(--color-brand-primary, #1D4ED8)"/>
+            <path d="M16 0C7.163 0 0 7.163 0 16c0 12 16 28 16 28s16-16 16-28C32 7.163 24.837 0 16 0z" fill="none" stroke="var(--color-text-primary, #0F172A)" stroke-width="1.5"/>
+            <circle cx="16" cy="16" r="7" fill="white"/>
+          </svg>`,
+          iconSize: [32, 44],
+          iconAnchor: [16, 44],
+          popupAnchor: [0, -44],
+          tooltipAnchor: [0, -36]
+        });
+
+        const marker = L.marker([lat, lng], {icon: pinIcon})
+          .addTo(mapRef.current)
+          .bindTooltip(`${city.trim()} — ${selectedUf}`, {direction: 'top', offset: [0, -8]})
+          .openTooltip();
+
+        cityMarkerRef.current = marker;
+
+        // Zoom to city location
+        mapRef.current.setView([lat, lng], 7, {
+          animate: true,
+          duration: 0.8
+        });
+      } catch {
+        // Geocoding failed silently — city pin won't appear but the app works normally
+      }
+    };
+
+    void geocodeCity();
+
+    return () => controller.abort();
+  }, [city, selectedUf]);
 
   const selectedUfName = useMemo(
     () => FEDERATIVE_UNITS.find((uf) => uf.code === selectedUf)?.name,

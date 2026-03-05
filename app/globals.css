@@ -376,6 +376,33 @@ input:focus-visible {
   border: 1px solid rgb(203 213 225);
 }
 
+/* ── City pin marker ── */
+
+.city-pin-marker {
+  background: transparent !important;
+  border: none !important;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  animation: city-pin-drop 0.4s ease-out;
+}
+
+@keyframes city-pin-drop {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(2px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 .territory-layers {
   margin-top: 12px;
   border: 1px solid rgb(203 213 225);
