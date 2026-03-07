@@ -1,0 +1,285 @@
+openapi: 3.0.3
+info:
+  title: PortaCivis API
+  version: 1.0.0
+  description: >
+    APIs públicas de interoperabilidade gov.br do Portal PortaCivis.
+    Conforme padrões e-PING (Padrões de Interoperabilidade de Governo Eletrônico)
+    e INDA (Infraestrutura Nacional de Dados Abertos).
+  contact:
+    name: Env Neo - Suporte Técnico
+    email: api@portacivis.com.br
+  license:
+    name: Creative Commons Attribution 4.0
+    url: https://creativecommons.org/licenses/by/4.0/
+
+servers:
+  - url: https://www.portacivis.com.br/api/v1
+    description: Produção
+  - url: http://localhost:3000/api/v1
+    description: Desenvolvimento local
+
+tags:
+  - name: Transparência
+    description: Endpoints de dados abertos e transparência pública
+  - name: Serviços
+    description: Endpoints de consulta de serviços públicos
+
+paths:
+  /dados-abertos/catalog:
+    get:
+      operationId: getCatalogDadosAbertos
+      summary: Catálogo de dados abertos
+      description: >
+        Retorna o catálogo de datasets disponíveis conforme padrão DCAT/INDA
+        (Infraestrutura Nacional de Dados Abertos). Segue o perfil
+        project-open-data v1.1.
+      tags:
+        - Transparência
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+            default: application/json
+          description: Formato de resposta desejado
+      responses:
+        '200':
+          description: Lista de datasets disponíveis
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+              description: Diretiva de cache
+            X-Content-Type-Options:
+              schema:
+                type: string
+              description: Proteção MIME sniffing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DcatCatalog'
+              example:
+                '@context': 'https://project-open-data.cio.gov/v1.1/schema/catalog.jsonld'
+                '@type': 'dcat:Catalog'
+                conformsTo: 'https://project-open-data.cio.gov/v1.1/schema'
+                dataset:
+                  - '@type': 'dcat:Dataset'
+                    title: 'Serviços Disponíveis'
+                    description: 'Catálogo de serviços públicos oferecidos'
+                    keyword:
+                      - serviços
+                      - gov.br
+                      - transparência
+                    issued: '2026-03-07'
+                    modified: '2026-03-07'
+                    publisher:
+                      name: 'ENV NEO LTDA'
+                    distribution:
+                      - '@type': 'dcat:Distribution'
+                        mediaType: 'application/json'
+                        accessURL: 'https://www.portacivis.com.br/dados-abertos/servicos.json'
+                    license: 'http://opendefinition.org/licenses/cc-by/'
+        '500':
+          description: Erro interno do servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /servicos/consulta:
+    get:
+      operationId: consultarServicos
+      summary: Consultar serviços disponíveis
+      description: >
+        Lista os serviços públicos disponíveis no portal PortaCivis.
+        Retorna informações sobre cada serviço, incluindo nome, descrição,
+        categoria e canal de acesso.
+      tags:
+        - Serviços
+      parameters:
+        - name: categoria
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - educacao
+              - saude
+              - transporte
+              - habitacao
+              - seguranca
+              - meio-ambiente
+          description: Filtrar por categoria de serviço
+        - name: q
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Termo de busca livre
+      responses:
+        '200':
+          description: Lista de serviços disponíveis
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                    description: Total de registros
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Servico'
+        '400':
+          description: Parâmetros inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Erro interno do servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >
+        Token JWT para autenticação. Necessário apenas para endpoints
+        autenticados. Os endpoints de dados abertos são públicos.
+
+  schemas:
+    DcatCatalog:
+      type: object
+      required:
+        - '@context'
+        - '@type'
+        - conformsTo
+        - dataset
+      properties:
+        '@context':
+          type: string
+          description: Contexto JSON-LD
+        '@type':
+          type: string
+          description: Tipo do recurso RDF
+          example: dcat:Catalog
+        conformsTo:
+          type: string
+          description: Perfil de conformidade do catálogo
+        dataset:
+          type: array
+          items:
+            $ref: '#/components/schemas/DcatDataset'
+
+    DcatDataset:
+      type: object
+      required:
+        - '@type'
+        - title
+        - description
+        - issued
+        - modified
+        - publisher
+        - distribution
+        - license
+      properties:
+        '@type':
+          type: string
+          example: dcat:Dataset
+        title:
+          type: string
+          description: Título do dataset
+        description:
+          type: string
+          description: Descrição do dataset
+        keyword:
+          type: array
+          items:
+            type: string
+          description: Palavras-chave
+        issued:
+          type: string
+          format: date
+          description: Data de publicação (ISO 8601)
+        modified:
+          type: string
+          format: date
+          description: Data de última modificação (ISO 8601)
+        publisher:
+          type: object
+          properties:
+            name:
+              type: string
+        distribution:
+          type: array
+          items:
+            $ref: '#/components/schemas/DcatDistribution'
+        license:
+          type: string
+          description: URI da licença de uso
+
+    DcatDistribution:
+      type: object
+      required:
+        - '@type'
+        - mediaType
+        - accessURL
+      properties:
+        '@type':
+          type: string
+          example: dcat:Distribution
+        mediaType:
+          type: string
+          description: Tipo MIME do arquivo
+          example: application/json
+        accessURL:
+          type: string
+          description: URL de acesso ao arquivo
+        format:
+          type: string
+          description: Formato do arquivo (JSON, CSV, XML)
+        title:
+          type: string
+          description: Título da distribuição
+
+    Servico:
+      type: object
+      properties:
+        id:
+          type: string
+        nome:
+          type: string
+          description: Nome do serviço
+        descricao:
+          type: string
+          description: Descrição do serviço
+        categoria:
+          type: string
+          description: Categoria do serviço
+        canal:
+          type: string
+          description: Canal de acesso (online, presencial, telefone)
+        url:
+          type: string
+          description: URL de acesso ao serviço
+
+    Error:
+      type: object
+      required:
+        - error
+        - message
+      properties:
+        error:
+          type: string
+          description: Código do erro
+        message:
+          type: string
+          description: Mensagem descritiva do erro
