@@ -1,5 +1,5 @@
 version: 1
-updatedAt: 2026-03-04
+updatedAt: 2026-03-07
 
 roles:
   platform_owner:
@@ -27,6 +27,16 @@ roles:
     responsibilities:
       - deploy_approval
       - rollback_coordination
+  dpo:
+    title: Data Protection Officer (Encarregado LGPD)
+    contact: dpo@envneo.com.br
+    responsibilities:
+      - lgpd_data_inventory_maintenance
+      - titular_rights_requests
+      - data_incident_response
+      - compliance_audit_coordination
+      - team_privacy_training
+      - anpd_communication
 
 matrix:
   - process: change_governance_policy
@@ -67,3 +77,47 @@ matrix:
       - platform_owner
     informed:
       - localization_lead
+
+  - process: titular_rights_requests
+    accountable: dpo
+    responsible:
+      - dpo
+    consulted:
+      - platform_owner
+      - security_lead
+    informed:
+      - release_manager
+
+  - process: data_incident_response
+    accountable: dpo
+    responsible:
+      - dpo
+      - security_lead
+      - sre_oncall
+    consulted:
+      - platform_owner
+    informed:
+      - release_manager
+
+  - process: lgpd_compliance_audit
+    accountable: dpo
+    responsible:
+      - dpo
+      - platform_owner
+    consulted:
+      - security_lead
+    informed:
+      - sre_oncall
+      - release_manager
+
+  - process: team_privacy_training
+    accountable: dpo
+    responsible:
+      - dpo
+    consulted:
+      - platform_owner
+    informed:
+      - security_lead
+      - localization_lead
+      - sre_oncall
+      - release_manager

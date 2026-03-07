@@ -50,6 +50,34 @@ export default async function PrivacyPage() {
         <h2>{t('contactTitle')}</h2>
         <p>{t('contactText')}</p>
       </section>
+
+      <section className="card" aria-labelledby="dpo-section-title">
+        <h2 id="dpo-section-title">{t('dpoTitle')}</h2>
+        <p>{t('dpoDescription')}</p>
+        <p>
+          <strong>{t('dpoEmailLabel')}:</strong>{' '}
+          <a href="mailto:dpo@envneo.com.br">dpo@envneo.com.br</a>
+        </p>
+        <h3>{t('dpoRightsFormTitle')}</h3>
+        <p>{t('dpoRightsFormDescription')}</p>
+        <ul>
+          <li>{t('dpoRight1')}</li>
+          <li>{t('dpoRight2')}</li>
+          <li>{t('dpoRight3')}</li>
+          <li>{t('dpoRight4')}</li>
+          <li>{t('dpoRight5')}</li>
+          <li>{t('dpoRight6')}</li>
+          <li>{t('dpoRight7')}</li>
+          <li>{t('dpoRight8')}</li>
+        </ul>
+        <p>{t('dpoRightsFormInstructions')}</p>
+        <p>
+          <a href="mailto:dpo@envneo.com.br?subject=Exercício de Direitos LGPD — PortaCivis">
+            {t('dpoRightsFormLink')}
+          </a>
+        </p>
+        <p>{t('dpoSlaNote')}</p>
+      </section>
     </main>
   );
 }
