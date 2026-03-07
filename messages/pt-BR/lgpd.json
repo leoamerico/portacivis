@@ -1,0 +1,72 @@
+{
+  "meusDados": {
+    "title": "Meus Dados — Portal do Titular",
+    "description": "Exerça seus direitos previstos na Lei Geral de Proteção de Dados (Lei nº 13.709/2018). Todas as solicitações são registradas com prazo de resposta de até 15 dias.",
+    "breadcrumbHome": "Início",
+    "breadcrumbCurrent": "Meus Dados",
+    "sessionLabel": "Sessão anônima",
+    "sessionHint": "Suas solicitações são vinculadas a um identificador anônimo de sessão. Guarde o número de protocolo para acompanhamento.",
+    "rightsTitle": "Seus Direitos LGPD",
+    "rightsDescription": "Conforme os Arts. 9º e 18 da LGPD, você tem os seguintes direitos sobre seus dados pessoais:",
+    "rights": {
+      "access": {
+        "title": "Confirmação e Acesso",
+        "description": "Confirme a existência de tratamento e acesse os dados pessoais que mantemos sobre você.",
+        "button": "Solicitar acesso",
+        "article": "Art. 18, I e II"
+      },
+      "rectify": {
+        "title": "Correção de Dados",
+        "description": "Solicite a correção de dados incompletos, inexatos ou desatualizados.",
+        "button": "Solicitar correção",
+        "article": "Art. 18, III"
+      },
+      "anonymize": {
+        "title": "Anonimização, Bloqueio ou Eliminação",
+        "description": "Solicite a anonimização, bloqueio ou eliminação de dados desnecessários, excessivos ou tratados em desconformidade com a LGPD.",
+        "button": "Solicitar anonimização/eliminação",
+        "article": "Art. 18, IV"
+      },
+      "portability": {
+        "title": "Portabilidade",
+        "description": "Receba seus dados em formato estruturado e interoperável (JSON/CSV) para transferência a outro fornecedor.",
+        "button": "Exportar meus dados",
+        "article": "Art. 18, V"
+      },
+      "delete": {
+        "title": "Eliminação de Dados",
+        "description": "Solicite a eliminação dos dados pessoais tratados com base em seu consentimento.",
+        "button": "Solicitar exclusão",
+        "article": "Art. 18, VI"
+      },
+      "consent": {
+        "title": "Revogação de Consentimento",
+        "description": "Revogue o consentimento previamente fornecido para o tratamento de dados pessoais.",
+        "button": "Revogar consentimento",
+        "article": "Art. 18, IX"
+      },
+      "oppose": {
+        "title": "Oposição ao Tratamento",
+        "description": "Oponha-se ao tratamento de dados realizado com fundamento em outras bases legais que não o consentimento.",
+        "button": "Manifestar oposição",
+        "article": "Art. 18, § 2º"
+      }
+    },
+    "submitSuccess": "Solicitação registrada com sucesso.",
+    "submitError": "Não foi possível registrar a solicitação. Tente novamente.",
+    "requestId": "Protocolo",
+    "deadline": "Prazo de resposta",
+    "statusPending": "Pendente",
+    "statusInProgress": "Em andamento",
+    "statusCompleted": "Concluída",
+    "statusRejected": "Rejeitada",
+    "dpoNotified": "DPO notificado",
+    "requestsTitle": "Minhas Solicitações",
+    "noRequests": "Nenhuma solicitação registrada nesta sessão.",
+    "loadingRequests": "Carregando solicitações...",
+    "requestsError": "Não foi possível carregar as solicitações.",
+    "refreshRequests": "Atualizar",
+    "legalNotice": "Este portal registra solicitações conforme os Arts. 9º e 18 da LGPD. O prazo legal de resposta é de até 15 dias corridos. O DPO é notificado automaticamente a cada solicitação.",
+    "dpoContact": "Para contato direto com o Encarregado de Proteção de Dados (DPO), utilize os canais institucionais divulgados na página de atendimento."
+  }
+}

@@ -1,0 +1,102 @@
+name: PortaCivis LGPD Rights Monitor
+
+on:
+  schedule:
+    - cron: '0 8 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  lgpd-sla-monitor:
+    name: LGPD SLA Monitor
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: '1.3.3'
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Check LGPD SLA compliance
+        id: lgpd-check
+        run: node scripts/lgpd-sla-check.mjs
+        continue-on-error: true
+
+      - name: Open issue on SLA breach
+        if: ${{ always() && steps.lgpd-check.outcome == 'failure' }}
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const marker = '[AUTO-LGPD-SLA-BREACH]';
+            const workflowUrl = `https://github.com/${owner}/${repo}/actions/runs/${context.runId}`;
+
+            const {data: issues} = await github.rest.issues.listForRepo({
+              owner,
+              repo,
+              state: 'open',
+              per_page: 50
+            });
+
+            const existing = issues.find(issue =>
+              issue.title.includes('Solicitações LGPD com prazo vencido') &&
+              issue.body &&
+              issue.body.includes(marker)
+            );
+
+            const body = [
+              marker,
+              '',
+              '## ⚠️ Alerta: Solicitações LGPD com prazo de resposta vencido',
+              '',
+              'O monitor de SLA LGPD detectou solicitações pendentes há mais de **10 dias** sem resposta.',
+              '',
+              '**Obrigação legal:** Art. 18 da LGPD — prazo de 15 dias corridos para resposta.',
+              '',
+              `- Repositório: ${owner}/${repo}`,
+              `- Run: ${workflowUrl}`,
+              `- Horário UTC: ${new Date().toISOString()}`,
+              '',
+              '### Ação obrigatória do DPO:',
+              '1. Acessar `governance/audit/lgpd-requests.json` e identificar solicitações com status `pending` ou `in_progress`.',
+              '2. Verificar prazo (`deadline`) de cada solicitação.',
+              '3. Responder às solicitações em aberto dentro do prazo legal restante.',
+              '4. Atualizar status para `completed` ou `rejected` com `response_date`.',
+              '5. Registrar evidências conforme `governance/LGPD-SUBJECT-REQUESTS-LOG.yaml`.',
+              '',
+              '### Runbook:',
+              'Consultar `governance/SLO-RUNBOOK.yaml` seção `runbook_steps.lgpd_sla_breach`.'
+            ].join('\n');
+
+            if (existing) {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: existing.number,
+                body: `Nova verificação em ${new Date().toISOString()}\n\nRun: ${workflowUrl}`
+              });
+            } else {
+              await github.rest.issues.create({
+                owner,
+                repo,
+                title: 'Solicitações LGPD com prazo vencido — ação do DPO necessária',
+                body,
+                labels: ['lgpd', 'compliance', 'dpo']
+              });
+            }

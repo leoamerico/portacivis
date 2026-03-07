@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import {getTranslations} from 'next-intl/server';
 
 export default async function PrivacyPage() {
@@ -44,6 +45,9 @@ export default async function PrivacyPage() {
           <li>{t('right3')}</li>
           <li>{t('right4')}</li>
         </ul>
+        <Link href="/meus-dados" className="section-card-cta">
+          {t('rightsPortalLink')} <span aria-hidden="true">→</span>
+        </Link>
       </section>
 
       <section className="card">

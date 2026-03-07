@@ -132,6 +132,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 <Link href="/noticias">{t('nav.news')}</Link>
                 <Link href="/agentes">{t('nav.agents')}</Link>
                 <Link href="/privacidade">{t('nav.privacy')}</Link>
+                <Link href="/meus-dados">{t('nav.myData')}</Link>
                 <Link href="/cookies-e-cache">{t('nav.cookies')}</Link>
                 <Link href="/termos">{t('nav.terms')}</Link>
                 <Link href="/conformidade">{t('nav.compliance')}</Link>

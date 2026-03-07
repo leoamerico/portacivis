@@ -7,8 +7,11 @@ export default getRequestConfig(async () => {
   const cookieLocale = cookieStore.get(localeCookieName)?.value;
   const locale = cookieLocale && isValidLocale(cookieLocale) ? cookieLocale : defaultLocale;
 
+  const common = (await import(`../messages/${locale}/common.json`)).default;
+  const lgpd = (await import(`../messages/${locale}/lgpd.json`)).default;
+
   return {
     locale,
-    messages: (await import(`../messages/${locale}/common.json`)).default
+    messages: {...common, ...lgpd}
   };
 });

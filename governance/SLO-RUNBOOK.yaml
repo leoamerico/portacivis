@@ -1,5 +1,5 @@
 version: 1
-updatedAt: 2026-03-04
+updatedAt: 2026-03-07
 
 sli:
   availability:
@@ -14,6 +14,10 @@ sli:
   truth_trail_integrity:
     description: verify_and_audit_append_only_chain_consistency
     source: scripts/smoke-truth-trail.mjs
+  lgpd_sla:
+    description: lgpd_subject_rights_requests_responded_within_15_days
+    source: scripts/lgpd-sla-check.mjs
+    legal_basis: Art. 18 da Lei nº 13.709/2018
 
 slo:
   availability:
@@ -28,17 +32,25 @@ slo:
   truth_trail_integrity:
     target: 100
     window: 30d
+  lgpd_sla:
+    target: 95
+    window: 30d
+    description: 95% of LGPD subject rights requests responded within 15 calendar days
 
 error_budget:
   availability:
     monthly_budget_minutes: 43
   i18n_integrity:
     monthly_failed_runs: 2
+  lgpd_sla:
+    monthly_max_overdue_requests: 1
 
 automation:
   daily_smoke_workflow: .github/workflows/smoke.yml
   ci_gates_workflow: .github/workflows/ci.yml
   truth_trail_smoke_script: scripts/smoke-truth-trail.mjs
+  lgpd_rights_monitor_workflow: .github/workflows/lgpd-rights-monitor.yml
+  lgpd_sla_check_script: scripts/lgpd-sla-check.mjs
 
 incident_response:
   severity_levels:
@@ -74,3 +86,12 @@ runbook_steps:
     - patch_next_config
     - run_security_verify
     - re-deploy
+  lgpd_sla_breach:
+    - access_governance_audit_lgpd_requests_json
+    - identify_pending_requests_past_10_days
+    - notify_dpo_via_official_channels
+    - respond_to_open_requests_within_remaining_deadline
+    - update_status_to_completed_or_rejected_with_response_date
+    - document_evidence_in_lgpd_subject_requests_log_yaml
+    - verify_sla_with_lgpd_sla_check_script
+    - close_github_issue_after_resolution
