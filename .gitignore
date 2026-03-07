@@ -7,3 +7,6 @@ coverage
 *.log
 .DS_Store
 .vercel
+reports/accessibility/playwright/
+reports/accessibility/report.html
+reports/accessibility/report.json

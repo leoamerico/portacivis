@@ -17,7 +17,10 @@
     "test:truth-trail": "node scripts/smoke-truth-trail.mjs",
     "test:amparo": "node scripts/smoke-amparo-validation.mjs",
     "test:i18n": "node scripts/verify-i18n-smoke.mjs",
-    "verify:all": "bun run security:verify && bun run test:smoke"
+    "verify:all": "bun run security:verify && bun run test:smoke",
+    "test:a11y": "playwright test tests/accessibility/",
+    "a11y:report": "bun run scripts/a11y-report.ts",
+    "a11y:dev": "bun run dev & sleep 5 && bun run test:a11y"
   },
   "dependencies": {
     "leaflet": "^1.9.4",
@@ -27,10 +30,13 @@
     "react-dom": "18.2.0"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.11.1",
+    "@playwright/test": "^1.58.2",
     "@types/leaflet": "^1.9.21",
     "@types/node": "^20.11.5",
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
+    "axe-core": "^4.11.1",
     "eslint": "^8.56.0",
     "eslint-config-next": "^15.5.12",
     "typescript": "^5.3.3",

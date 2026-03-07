@@ -1,6 +1,6 @@
 /* AUTO-GENERATED FILE — DO NOT EDIT
  * Source: governance/catalog/BRANDS.yml
- * Source-Hash: c8064e510772a1d97ba258fce59b8fe8c94acd15a41ca02dfc85f4afabac4000
+ * Source-Hash: e0883c198689d60088d395315816224bdd6a3dc819e211cc2b6ba4bed31b4bdb
  */
 export type BrandId = "GOVEVIA" | "PORTACIVIS" | "ENVLIVE" | "LEOAMERICO";
 

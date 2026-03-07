@@ -1,0 +1,13 @@
+version: 1.0
+standard: WCAG 2.1
+level: AA
+last_audit: 2026-03-07
+score: 100
+violations: 0
+tools:
+  - axe-core 4.8.0
+  - Playwright
+manual_checks_pending:
+  - keyboard_navigation_full_flow
+  - screen_reader_compatibility
+  - color_contrast_edge_cases

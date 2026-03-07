@@ -23,6 +23,7 @@ required_gates:
   - build
   - test:smoke
   - governance:verify
+  - accessibility:wcag
 
 decision_record:
   adr_required: true
