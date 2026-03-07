@@ -1,0 +1,126 @@
+version: "1.0"
+updated_at: "2026-03-07"
+
+data_controller:
+  name: ENV NEO LTDA
+  cnpj: 36.207.211/0001-47
+  dpo_email: dpo@envneo.com.br
+  dpo_name: Encarregado de Proteção de Dados - ENV NEO LTDA
+
+personal_data_categories:
+  - category: identificacao
+    type: comum
+    fields: [nome, cpf, email, telefone]
+    legal_basis: consentimento
+    purpose: cadastro_cidadao
+    retention_days: 1825
+    sharing: []
+    security_measures:
+      - encryption_at_rest
+      - tls_in_transit
+      - access_log
+
+  - category: autenticacao
+    type: comum
+    fields: [senha_hash, token_sessao, ip_acesso, user_agent]
+    legal_basis: execucao_contrato
+    purpose: autenticacao_servico
+    retention_days: 90
+    sharing: []
+    security_measures:
+      - bcrypt_hash
+      - token_expiration
+      - rate_limiting
+
+  - category: navegacao_tecnica
+    type: comum
+    fields: [ip_acesso, user_agent, paginas_visitadas, timestamps]
+    legal_basis: legitimo_interesse
+    purpose: seguranca_integridade_portal
+    retention_days: 90
+    sharing: []
+    security_measures:
+      - tls_in_transit
+      - access_log
+      - data_minimization
+
+  - category: logs_auditoria
+    type: comum
+    fields: [event_id, actor_id, action, timestamp, payload_hash, correlation_id]
+    legal_basis: obrigacao_legal
+    purpose: auditoria_integridade_truth_trail
+    retention_days: 1825
+    sharing: []
+    security_measures:
+      - append_only_chain
+      - hash_integrity
+      - tls_in_transit
+      - encryption_at_rest
+
+  - category: canais_atendimento
+    type: comum
+    fields: [nome, email, mensagem, protocolo_atendimento]
+    legal_basis: consentimento
+    purpose: atendimento_solicitacoes_cidadao
+    retention_days: 365
+    sharing: []
+    security_measures:
+      - tls_in_transit
+      - access_log
+      - encryption_at_rest
+
+  - category: pesquisa_uso_anonima
+    type: comum
+    fields: [metricas_agregadas, paginas_acessadas_anonimas]
+    legal_basis: legitimo_interesse
+    purpose: melhoria_servico_publico_digital
+    retention_days: 180
+    sharing: []
+    security_measures:
+      - anonymization
+      - aggregation_only
+      - no_reidentification
+
+lgpd_rights_channels:
+  - right: confirmacao_existencia_tratamento
+    contact: dpo@envneo.com.br
+    sla_days: 15
+  - right: acesso_dados
+    contact: dpo@envneo.com.br
+    sla_days: 15
+  - right: correcao_dados
+    contact: dpo@envneo.com.br
+    sla_days: 15
+  - right: anonimizacao_bloqueio_eliminacao
+    contact: dpo@envneo.com.br
+    sla_days: 15
+  - right: portabilidade
+    contact: dpo@envneo.com.br
+    sla_days: 15
+  - right: eliminacao_dados_consentimento
+    contact: dpo@envneo.com.br
+    sla_days: 15
+  - right: informacao_compartilhamento
+    contact: dpo@envneo.com.br
+    sla_days: 15
+  - right: revisao_decisao_automatizada
+    contact: dpo@envneo.com.br
+    sla_days: 15
+
+incident_response:
+  notification_anpd_hours: 72
+  notification_titulares: sim_quando_risco_relevante
+  contact: dpo@envneo.com.br
+  runbook: governance/SLO-RUNBOOK.yaml
+
+third_party_processors: []
+
+international_transfers: []
+
+legal_references:
+  - lei: 13.709/2018
+    nome: Lei Geral de Proteção de Dados (LGPD)
+  - lei: 12.965/2014
+    nome: Marco Civil da Internet
+  - lei: 8.159/1991
+    nome: Lei de Arquivos Públicos
