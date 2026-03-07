@@ -17,7 +17,8 @@
     "test:truth-trail": "node scripts/smoke-truth-trail.mjs",
     "test:amparo": "node scripts/smoke-amparo-validation.mjs",
     "test:i18n": "node scripts/verify-i18n-smoke.mjs",
-    "verify:all": "bun run security:verify && bun run test:smoke"
+    "verify:all": "bun run security:verify && bun run test:smoke",
+    "qg:opendata": "node scripts/validate-opendata.mjs"
   },
   "dependencies": {
     "leaflet": "^1.9.4",

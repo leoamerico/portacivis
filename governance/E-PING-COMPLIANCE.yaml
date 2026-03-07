@@ -1,0 +1,182 @@
+version: 1
+project: portacivis
+standard: e-PING
+updatedAt: 2026-03-07
+owner: envneo
+
+description: >
+  Checklist de conformidade com o padrão e-PING (Padrões de Interoperabilidade
+  de Governo Eletrônico) e e-PING GAP para o Portal PortaCivis.
+
+references:
+  - name: e-PING v2024
+    url: https://www.gov.br/governodigital/pt-br/transformacao-digital/ferramentas/e-ping
+  - name: INDA - Infraestrutura Nacional de Dados Abertos
+    url: https://dados.gov.br/pagina/dados-abertos
+  - name: e-PMG - Padrão de Metadados do Governo
+    url: https://www.gov.br/governodigital/pt-br/transformacao-digital/ferramentas/e-pmg
+
+gaps:
+  - id: GAP-001
+    title: Documentação de APIs conforme e-PING
+    status: implemented
+    requirement: Publicar especificação OpenAPI 3.0 das APIs públicas
+    evidence:
+      - docs/api/openapi.yaml
+      - public/docs/api/openapi.yaml
+      - app/api/docs/page.tsx
+    notes: OpenAPI 3.0.3 com documentação interativa via Swagger UI
+
+  - id: GAP-012
+    title: Publicação de dados abertos (INDA)
+    status: implemented
+    requirement: Disponibilizar catálogo DCAT conforme INDA
+    evidence:
+      - public/dados-abertos/catalog.json
+      - app/api/v1/dados-abertos/catalog/route.ts
+      - app/dados-abertos/page.tsx
+    notes: Catálogo DCAT/JSON-LD com metadados completos e licença CC-BY
+
+categories:
+  web_services:
+    title: Padrões de Web Services (REST)
+    checks:
+      - id: WS-001
+        description: Uso de REST como estilo arquitetural de APIs públicas
+        status: compliant
+        evidence: docs/api/openapi.yaml
+      - id: WS-002
+        description: Especificação OpenAPI 3.0 publicada
+        status: compliant
+        evidence: docs/api/openapi.yaml
+      - id: WS-003
+        description: Endpoints versionados (/api/v1/)
+        status: compliant
+        evidence: app/api/v1/dados-abertos/catalog/route.ts
+      - id: WS-004
+        description: Respostas em formato JSON conforme padrão DCAT
+        status: compliant
+        evidence: app/api/v1/dados-abertos/catalog/route.ts
+      - id: WS-005
+        description: Headers CORS configurados para acesso público
+        status: compliant
+        evidence: app/api/v1/dados-abertos/catalog/route.ts
+      - id: WS-006
+        description: Documentação interativa disponível
+        status: compliant
+        evidence: app/api/docs/page.tsx
+
+  metadata_epmg:
+    title: Metadados e-PMG
+    checks:
+      - id: PMG-001
+        description: Título do dataset
+        status: compliant
+        evidence: public/dados-abertos/catalog.json
+      - id: PMG-002
+        description: Descrição do dataset
+        status: compliant
+        evidence: public/dados-abertos/catalog.json
+      - id: PMG-003
+        description: Data de publicação (issued) em ISO 8601
+        status: compliant
+        evidence: public/dados-abertos/catalog.json
+      - id: PMG-004
+        description: Data de modificação (modified) em ISO 8601
+        status: compliant
+        evidence: public/dados-abertos/catalog.json
+      - id: PMG-005
+        description: Publicador (publisher) identificado
+        status: compliant
+        evidence: public/dados-abertos/catalog.json
+      - id: PMG-006
+        description: Palavras-chave (keyword)
+        status: compliant
+        evidence: public/dados-abertos/catalog.json
+      - id: PMG-007
+        description: Licença de uso informada
+        status: compliant
+        evidence: public/dados-abertos/catalog.json
+      - id: PMG-008
+        description: Ponto de contato (contactPoint)
+        status: compliant
+        evidence: public/dados-abertos/catalog.json
+      - id: PMG-009
+        description: Cobertura espacial (spatial)
+        status: compliant
+        evidence: public/dados-abertos/catalog.json
+      - id: PMG-010
+        description: Idioma(s) do dataset (language)
+        status: compliant
+        evidence: public/dados-abertos/catalog.json
+
+  security:
+    title: Segurança (TLS 1.2+, headers)
+    checks:
+      - id: SEC-001
+        description: TLS 1.2+ exigido em produção
+        status: compliant
+        notes: Gerenciado pela infraestrutura de hospedagem (HTTPS obrigatório)
+      - id: SEC-002
+        description: Header X-Content-Type-Options
+        status: compliant
+        evidence: app/api/v1/dados-abertos/catalog/route.ts
+      - id: SEC-003
+        description: Header Cache-Control configurado
+        status: compliant
+        evidence: app/api/v1/dados-abertos/catalog/route.ts
+      - id: SEC-004
+        description: Autenticação via Bearer JWT disponível para endpoints protegidos
+        status: compliant
+        evidence: docs/api/openapi.yaml
+      - id: SEC-005
+        description: CORS configurado para endpoints públicos de dados abertos
+        status: compliant
+        evidence: app/api/v1/dados-abertos/catalog/route.ts
+
+  formats:
+    title: Formatos de dados (JSON, XML, CSV)
+    checks:
+      - id: FMT-001
+        description: Suporte a JSON (obrigatório)
+        status: compliant
+        evidence: app/api/v1/dados-abertos/catalog/route.ts
+      - id: FMT-002
+        description: Catálogo JSON-LD/DCAT
+        status: compliant
+        evidence: public/dados-abertos/catalog.json
+      - id: FMT-003
+        description: Tipo MIME application/json declarado
+        status: compliant
+        evidence: public/dados-abertos/catalog.json
+
+  open_data_inda:
+    title: Conformidade INDA
+    checks:
+      - id: INDA-001
+        description: Catálogo no perfil project-open-data v1.1
+        status: compliant
+        evidence: public/dados-abertos/catalog.json
+      - id: INDA-002
+        description: Endpoint de catálogo com URL pública e estável
+        status: compliant
+        evidence: app/api/v1/dados-abertos/catalog/route.ts
+      - id: INDA-003
+        description: Licença aberta declarada (CC-BY)
+        status: compliant
+        evidence: public/dados-abertos/catalog.json
+      - id: INDA-004
+        description: Página pública de dados abertos
+        status: compliant
+        evidence: app/dados-abertos/page.tsx
+      - id: INDA-005
+        description: Links para download dos datasets
+        status: compliant
+        evidence: app/dados-abertos/page.tsx
+
+summary:
+  total_checks: 22
+  compliant: 22
+  non_compliant: 0
+  not_applicable: 0
+  conformance_rate: '100%'
