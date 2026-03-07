@@ -26,7 +26,9 @@ required_gates:
 
 decision_record:
   adr_required: true
+  adr_path: docs/architecture/decisions/
   no_merge_without_traceability: true
+  template: docs/architecture/decisions/ADR-TEMPLATE.md
 
 resilience:
   deploy_strategy:
