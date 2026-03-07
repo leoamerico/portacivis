@@ -6,6 +6,8 @@ Portal do Cidadão: serviços, informações e transparência.
 [![Security Foundation](https://github.com/leoamerico/portacivis/actions/workflows/security-foundation.yml/badge.svg)](https://github.com/leoamerico/portacivis/actions/workflows/security-foundation.yml)
 [![i18n Regression](https://github.com/leoamerico/portacivis/actions/workflows/i18n.yml/badge.svg)](https://github.com/leoamerico/portacivis/actions/workflows/i18n.yml)
 [![Canonical Smoke](https://github.com/leoamerico/portacivis/actions/workflows/smoke.yml/badge.svg)](https://github.com/leoamerico/portacivis/actions/workflows/smoke.yml)
+[![ADR Validation](https://github.com/leoamerico/portacivis/actions/workflows/adr-validation.yml/badge.svg)](https://github.com/leoamerico/portacivis/actions/workflows/adr-validation.yml)
+![Compliance](https://img.shields.io/badge/compliance-47.5%25%20→%2075%25-yellow)
 
 ## Requisitos
 
@@ -53,6 +55,16 @@ bun run verify:all
 - `governance/MANIFESTO-OPERACIONAL.yaml`: princípios, gates obrigatórios e diretrizes de resiliência.
 - `governance/RACI-OPERACAO.yaml`: ownership e responsabilidades por processo.
 - `governance/SLO-RUNBOOK.yaml`: SLI/SLO, orçamento de erro e resposta a incidentes.
+
+## Arquitetura e Decisões
+
+O projeto adota **Architecture Decision Records (ADRs)** para documentar decisões arquiteturais significativas. Toda PR de arquitetura deve incluir uma ADR correspondente.
+
+- [`docs/architecture/decisions/`](docs/architecture/decisions/) — Índice de todas as ADRs
+- [`docs/architecture/decisions/ADR-001-governanca-de-compliance.md`](docs/architecture/decisions/ADR-001-governanca-de-compliance.md) — Governança de Compliance GovTech
+- [`docs/governance/DASHBOARD-GAPS.md`](docs/governance/DASHBOARD-GAPS.md) — Dashboard de gaps de compliance (e-PING, e-ARQ, LGPD, LAI)
+
+Frameworks de conformidade cobertos: **e-PING · e-ARQ Brasil · LGPD · LAI**
 
 ## Criar repositório no GitHub
 

@@ -26,6 +26,9 @@ required_gates:
 
 decision_record:
   adr_required: true
+  location: docs/architecture/decisions/
+  format: MADR
+  no_merge_without_adr: true
   no_merge_without_traceability: true
 
 resilience:

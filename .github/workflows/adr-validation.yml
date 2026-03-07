@@ -1,0 +1,151 @@
+name: ADR Validation
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/architecture/decisions/**'
+      - 'docs/architecture/**'
+      - 'governance/**'
+      - '.github/workflows/**'
+  push:
+    branches: [main]
+    paths:
+      - 'docs/architecture/decisions/**'
+
+permissions:
+  contents: read
+
+jobs:
+  validate-adrs:
+    name: Validate ADR Format and Integrity
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify ADR directory exists
+        run: |
+          if [ ! -d "docs/architecture/decisions" ]; then
+            echo "❌ ADR directory not found: docs/architecture/decisions"
+            exit 1
+          fi
+          echo "✅ ADR directory found"
+
+      - name: Validate MADR format for all ADRs
+        run: |
+          ERRORS=0
+          # Only validate numerically-numbered ADRs (new standard: ADR-NNN-*)
+          ADR_FILES=$(find docs/architecture/decisions -name "ADR-[0-9]*.md" ! -name "ADR-TEMPLATE.md")
+
+          if [ -z "$ADR_FILES" ]; then
+            echo "⚠️  No numbered ADR files found (excluding template)"
+            exit 0
+          fi
+
+          for FILE in $ADR_FILES; do
+            echo "--- Checking: $FILE"
+
+            # Check required sections
+            if ! grep -q "^## Contexto\|^## Context" "$FILE"; then
+              echo "❌ $FILE: missing required section '## Contexto' or '## Context'"
+              ERRORS=$((ERRORS + 1))
+            fi
+
+            if ! grep -q "^## Decisão\|^## Decision" "$FILE"; then
+              echo "❌ $FILE: missing required section '## Decisão' or '## Decision'"
+              ERRORS=$((ERRORS + 1))
+            fi
+
+            if ! grep -q "^## Consequências\|^## Consequences" "$FILE"; then
+              echo "❌ $FILE: missing required section '## Consequências' or '## Consequences'"
+              ERRORS=$((ERRORS + 1))
+            fi
+
+            # Check status field is present
+            if ! grep -qi "^Status:" "$FILE"; then
+              echo "❌ $FILE: missing 'Status:' field"
+              ERRORS=$((ERRORS + 1))
+            fi
+
+            # Check status is a known value
+            STATUS=$(grep -i "^Status:" "$FILE" | head -1 | sed 's/Status: *//I' | tr -d '\r')
+            case "$STATUS" in
+              Proposto|Aceito|Obsoleto|Rejeitado|Supersedido*|Proposed|Accepted|Deprecated|Rejected|Superseded*)
+                echo "✅ $FILE: status '$STATUS' is valid"
+                ;;
+              *)
+                echo "❌ $FILE: unknown status '$STATUS' (expected: Proposto, Aceito, Obsoleto, Rejeitado, Supersedido)"
+                ERRORS=$((ERRORS + 1))
+                ;;
+            esac
+          done
+
+          if [ "$ERRORS" -gt 0 ]; then
+            echo ""
+            echo "❌ ADR validation failed with $ERRORS error(s)"
+            echo "   See docs/architecture/decisions/ADR-TEMPLATE.md for the correct format."
+            exit 1
+          fi
+
+          echo ""
+          echo "✅ All ADRs passed MADR format validation"
+
+      - name: Check for broken internal links in ADRs
+        run: |
+          ERRORS=0
+          # Only check numerically-numbered ADRs (new standard)
+          ADR_FILES=$(find docs/architecture/decisions -name "ADR-[0-9]*.md" ! -name "ADR-TEMPLATE.md")
+
+          for FILE in $ADR_FILES; do
+            # Extract relative markdown links (excluding external http/https links)
+            LINKS=$(grep -oP '\[.*?\]\(\K[^)]+' "$FILE" | grep -v "^http" | grep -v "^#" || true)
+
+            for LINK in $LINKS; do
+              # Resolve relative to the file's directory
+              DIR=$(dirname "$FILE")
+              TARGET="$DIR/$LINK"
+              # Normalize path
+              TARGET=$(realpath --relative-to=. "$TARGET" 2>/dev/null || echo "$TARGET")
+
+              if [ ! -e "$TARGET" ]; then
+                echo "❌ $FILE: broken link → $LINK (resolved: $TARGET)"
+                ERRORS=$((ERRORS + 1))
+              fi
+            done
+          done
+
+          if [ "$ERRORS" -gt 0 ]; then
+            echo ""
+            echo "❌ Found $ERRORS broken internal link(s) in ADRs"
+            exit 1
+          fi
+
+          echo "✅ No broken internal links found in ADRs"
+
+      - name: Validate manifesto ADR configuration
+        run: |
+          MANIFESTO="governance/MANIFESTO-OPERACIONAL.yaml"
+
+          if [ ! -f "$MANIFESTO" ]; then
+            echo "❌ Manifesto not found: $MANIFESTO"
+            exit 1
+          fi
+
+          if ! grep -q "adr_required: true" "$MANIFESTO"; then
+            echo "❌ $MANIFESTO: 'adr_required: true' not set"
+            exit 1
+          fi
+
+          if ! grep -q "location: docs/architecture/decisions/" "$MANIFESTO"; then
+            echo "❌ $MANIFESTO: 'location' not pointing to docs/architecture/decisions/"
+            exit 1
+          fi
+
+          if ! grep -q "format: MADR" "$MANIFESTO"; then
+            echo "❌ $MANIFESTO: 'format: MADR' not set"
+            exit 1
+          fi
+
+          echo "✅ Manifesto ADR configuration is valid"
