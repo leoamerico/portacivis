@@ -1,0 +1,74 @@
+name: ADR Validation
+
+on:
+  pull_request:
+    paths:
+      - 'docs/architecture/decisions/**'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate ADR structure
+        run: |
+          set -e
+
+          DECISIONS_DIR="docs/architecture/decisions"
+          README="$DECISIONS_DIR/README.md"
+          VALID_STATUSES="Proposto|Aceito|Rejeitado|Substituído|Depreciado"
+          errors=0
+
+          echo "=== Validating ADR files in $DECISIONS_DIR ==="
+
+          for adr in "$DECISIONS_DIR"/ADR-[0-9]*.md; do
+            [ -f "$adr" ] || continue
+            filename=$(basename "$adr")
+            echo "Checking: $filename"
+
+            # Verify required sections
+            for section in "## Status" "## Contexto" "## Decisão" "## Consequências" "## Alternativas Consideradas"; do
+              if ! grep -q "^$section" "$adr"; then
+                echo "  ERROR: Missing section '$section' in $filename"
+                errors=$((errors + 1))
+              fi
+            done
+
+            # Verify valid status value
+            if ! grep -A1 "^## Status" "$adr" | grep -qE "$VALID_STATUSES"; then
+              echo "  ERROR: Invalid or missing status in $filename (must be one of: $VALID_STATUSES)"
+              errors=$((errors + 1))
+            fi
+
+            # Verify ADR is listed in README
+            if ! grep -q "$filename" "$README"; then
+              echo "  ERROR: $filename is not listed in $README"
+              errors=$((errors + 1))
+            fi
+          done
+
+          # Verify sequential numbering
+          prev=0
+          for adr in $(ls "$DECISIONS_DIR"/ADR-[0-9]*.md 2>/dev/null | sort); do
+            filename=$(basename "$adr")
+            num=$(echo "$filename" | grep -oP '(?<=ADR-)\d+')
+            num=$((10#$num))
+            if [ $((num - prev)) -gt 1 ]; then
+              echo "  WARNING: Gap in ADR numbering between ADR-$(printf '%03d' $prev) and ADR-$(printf '%03d' $num)"
+            fi
+            prev=$num
+          done
+
+          if [ $errors -gt 0 ]; then
+            echo ""
+            echo "=== $errors validation error(s) found ==="
+            exit 1
+          fi
+
+          echo ""
+          echo "=== All ADRs are valid ==="
