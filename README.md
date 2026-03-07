@@ -6,6 +6,7 @@ Portal do Cidadão: serviços, informações e transparência.
 [![Security Foundation](https://github.com/leoamerico/portacivis/actions/workflows/security-foundation.yml/badge.svg)](https://github.com/leoamerico/portacivis/actions/workflows/security-foundation.yml)
 [![i18n Regression](https://github.com/leoamerico/portacivis/actions/workflows/i18n.yml/badge.svg)](https://github.com/leoamerico/portacivis/actions/workflows/i18n.yml)
 [![Canonical Smoke](https://github.com/leoamerico/portacivis/actions/workflows/smoke.yml/badge.svg)](https://github.com/leoamerico/portacivis/actions/workflows/smoke.yml)
+[![WCAG 2.1 AA](https://img.shields.io/badge/WCAG-2.1%20AA-green)](reports/accessibility/)
 
 ## Requisitos
 
