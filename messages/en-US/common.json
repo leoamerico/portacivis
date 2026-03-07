@@ -13,7 +13,8 @@
     "cookies": "Cookies and Cache",
     "terms": "Terms of Use",
     "compliance": "Compliance",
-    "accessibility": "Accessibility"
+    "accessibility": "Accessibility",
+    "myData": "My Data (Data Subject)"
   },
   "footer": {
     "copy": "PortaCivis — Citizen Portal. Rights, duties, services and transparency."
@@ -250,6 +251,7 @@
     "right2": "Access and correction of data when applicable.",
     "right3": "Information about sharing, legal basis and retention.",
     "right4": "Request review of automated decisions, when applicable.",
+    "rightsPortalLink": "Exercise my LGPD rights",
     "contactTitle": "Privacy contact",
     "contactText": "For data and privacy requests, use the official channels published on the municipality institutional service page."
   },

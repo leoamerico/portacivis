@@ -13,7 +13,8 @@
     "cookies": "Cookies e Cache",
     "terms": "Termos de Uso",
     "compliance": "Conformidade",
-    "accessibility": "Acessibilidade"
+    "accessibility": "Acessibilidade",
+    "myData": "Meus Dados (Titular)"
   },
   "footer": {
     "copy": "PortaCivis — Portal do Cidadão. Direitos, deveres, serviços e transparência."
@@ -250,6 +251,7 @@
     "right2": "Acesso e correção de dados quando aplicável.",
     "right3": "Informação sobre compartilhamentos, base legal e retenção.",
     "right4": "Solicitação de revisão de decisões automatizadas, quando houver.",
+    "rightsPortalLink": "Exercer meus direitos LGPD",
     "contactTitle": "Contato para privacidade",
     "contactText": "Para solicitações de dados e privacidade, utilize os canais oficiais divulgados na página de atendimento institucional do município."
   },

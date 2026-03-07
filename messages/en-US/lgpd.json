@@ -1,0 +1,72 @@
+{
+  "meusDados": {
+    "title": "My Data — Data Subject Portal",
+    "description": "Exercise your rights under the Brazilian General Data Protection Law (Law No. 13.709/2018). All requests are recorded with a response deadline of up to 15 days.",
+    "breadcrumbHome": "Home",
+    "breadcrumbCurrent": "My Data",
+    "sessionLabel": "Anonymous session",
+    "sessionHint": "Your requests are linked to an anonymous session identifier. Save the request number for tracking purposes.",
+    "rightsTitle": "Your LGPD Rights",
+    "rightsDescription": "Under Arts. 9 and 18 of the LGPD, you have the following rights over your personal data:",
+    "rights": {
+      "access": {
+        "title": "Confirmation and Access",
+        "description": "Confirm the existence of processing and access the personal data we hold about you.",
+        "button": "Request access",
+        "article": "Art. 18, I and II"
+      },
+      "rectify": {
+        "title": "Data Rectification",
+        "description": "Request the correction of incomplete, inaccurate or outdated data.",
+        "button": "Request rectification",
+        "article": "Art. 18, III"
+      },
+      "anonymize": {
+        "title": "Anonymization, Blocking or Deletion",
+        "description": "Request anonymization, blocking or deletion of unnecessary, excessive or unlawfully processed data.",
+        "button": "Request anonymization/deletion",
+        "article": "Art. 18, IV"
+      },
+      "portability": {
+        "title": "Data Portability",
+        "description": "Receive your data in structured, interoperable format (JSON/CSV) for transfer to another provider.",
+        "button": "Export my data",
+        "article": "Art. 18, V"
+      },
+      "delete": {
+        "title": "Data Erasure",
+        "description": "Request erasure of personal data processed based on your consent.",
+        "button": "Request erasure",
+        "article": "Art. 18, VI"
+      },
+      "consent": {
+        "title": "Consent Withdrawal",
+        "description": "Withdraw previously given consent to the processing of personal data.",
+        "button": "Withdraw consent",
+        "article": "Art. 18, IX"
+      },
+      "oppose": {
+        "title": "Objection to Processing",
+        "description": "Object to processing carried out on legal bases other than consent.",
+        "button": "Raise objection",
+        "article": "Art. 18, § 2"
+      }
+    },
+    "submitSuccess": "Request successfully registered.",
+    "submitError": "Unable to register the request. Please try again.",
+    "requestId": "Reference number",
+    "deadline": "Response deadline",
+    "statusPending": "Pending",
+    "statusInProgress": "In progress",
+    "statusCompleted": "Completed",
+    "statusRejected": "Rejected",
+    "dpoNotified": "DPO notified",
+    "requestsTitle": "My Requests",
+    "noRequests": "No requests registered in this session.",
+    "loadingRequests": "Loading requests...",
+    "requestsError": "Unable to load requests.",
+    "refreshRequests": "Refresh",
+    "legalNotice": "This portal registers requests under Arts. 9 and 18 of the LGPD. The legal response deadline is up to 15 calendar days. The DPO is automatically notified for each request.",
+    "dpoContact": "For direct contact with the Data Protection Officer (DPO), use the official channels published on the institutional service page."
+  }
+}

@@ -1,0 +1,58 @@
+version: "1.0"
+updatedAt: 2026-03-07
+
+schema:
+  description: Registro estruturado de solicitações de direitos de titulares LGPD
+  legal_basis: Arts. 9º e 18 da Lei nº 13.709/2018
+  response_deadline_days: 15
+  dpo_notification: automatic
+
+fields:
+  id:
+    format: "REQ-{YEAR}-{SEQ}"
+    description: Identificador único da solicitação
+  date:
+    format: ISO 8601
+    description: Data e hora de registro da solicitação
+  user_id:
+    description: Hash SHA-256 anonimizado do identificador de sessão do titular
+    note: Dado pessoal anonimizado conforme Art. 5º, XI da LGPD
+  right_type:
+    description: Tipo de direito exercido
+    allowed_values:
+      - access
+      - rectify
+      - anonymize
+      - portability
+      - delete
+      - consent
+      - oppose
+  status:
+    description: Status atual da solicitação
+    allowed_values:
+      - pending
+      - in_progress
+      - completed
+      - rejected
+  deadline:
+    format: ISO 8601
+    description: Prazo máximo legal de resposta (15 dias a partir da data de registro)
+  response_date:
+    format: ISO 8601
+    description: Data efetiva de resposta ao titular (quando concluída)
+  dpo_notified:
+    type: boolean
+    description: Indica se o Encarregado de Proteção de Dados foi notificado automaticamente
+
+runtime_storage: governance/audit/lgpd-requests.json
+audit_trail: governance/audit/truth-trail-chain.json
+
+requests:
+  - id: REQ-2026-001
+    date: 2026-03-07T16:00:00Z
+    user_id: hash_anonimizado
+    right_type: access
+    status: completed
+    deadline: 2026-03-22T16:00:00Z
+    response_date: 2026-03-10T10:00:00Z
+    dpo_notified: true
