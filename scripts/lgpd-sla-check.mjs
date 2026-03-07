@@ -35,16 +35,23 @@ function main() {
 
   const total = requests.length;
   const pending = requests.filter(r => r.status === 'pending' || r.status === 'in_progress').length;
-  const completed = requests.filter(r => r.status === 'completed').length;
+  const completedWithinSla = requests.filter(r => {
+    if (r.status !== 'completed' || !r.responseDate) return false;
+    const deadline = new Date(r.deadline);
+    const responseDate = new Date(r.responseDate);
+    return responseDate <= deadline;
+  }).length;
 
-  const slaRate = total > 0
-    ? ((completed / total) * 100).toFixed(2)
+  const slaApplicable = requests.filter(r => r.status === 'completed' || r.status === 'rejected').length;
+  const slaRate = slaApplicable > 0
+    ? ((completedWithinSla / slaApplicable) * 100).toFixed(2)
     : '100.00';
 
   console.log('=== LGPD SLA Report ===');
   console.log(`Total requests: ${total}`);
   console.log(`Pending/In-progress: ${pending}`);
-  console.log(`Completed: ${completed}`);
+  console.log(`Responded (completed+rejected): ${slaApplicable}`);
+  console.log(`Responded within 15-day deadline: ${completedWithinSla}`);
   console.log(`SLA rate: ${slaRate}%`);
   console.log(`SLA target: 95% of requests responded in < ${DEADLINE_DAYS} days`);
 
