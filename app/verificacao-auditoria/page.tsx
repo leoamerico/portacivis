@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import {getTranslations} from 'next-intl/server';
 import TruthTrailVerificationPanel from '../components/TruthTrailVerificationPanel';
+import StandardQuickNav from '../components/StandardQuickNav';
 
 export default async function VerificacaoAuditoriaPage() {
   const t = await getTranslations('compliancePage');
@@ -25,24 +25,7 @@ export default async function VerificacaoAuditoriaPage() {
         }}
       />
 
-      <nav className="quicknav" aria-label={t('auditNavigation')}>
-        <Link href="/trilha-da-verdade" className="quicknav-item">
-          <span className="quicknav-icon" aria-hidden="true">🔍</span>
-          {t('auditBackTrail')}
-        </Link>
-        <Link href="/conformidade" className="quicknav-item">
-          <span className="quicknav-icon" aria-hidden="true">✅</span>
-          {t('auditBackCompliance')}
-        </Link>
-        <Link href="/cidade-aurora" className="quicknav-item quicknav-item--aurora">
-          <span className="quicknav-icon" aria-hidden="true">🌆</span>
-          Cidade Aurora
-        </Link>
-        <Link href="/" className="quicknav-item quicknav-item--highlight">
-          <span className="quicknav-icon" aria-hidden="true">🏠</span>
-          Voltar ao Início
-        </Link>
-      </nav>
+      <StandardQuickNav current="verificacao" />
     </main>
   );
 }

@@ -13,6 +13,8 @@ import {resolveBrand} from '../src/brand/resolve';
 import {getBrandConfig} from '../src/brand/load';
 import {loadBrandCssVars} from '../src/brand/tokens';
 import Link from 'next/link';
+import GlobalNav from './components/GlobalNav';
+import TerritoryContextBar from './components/TerritoryContextBar';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.portacivis.com.br'),
@@ -111,6 +113,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 </div>
               </div>
             </header>
+            <GlobalNav />
+            <TerritoryContextBar />
             <ConsentBanner />
             {children}
             <footer className="site-footer" aria-label="Rodapé institucional">
@@ -129,8 +133,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 </div>
               </div>
               <nav>
+                <Link href="/trilha-da-verdade">{t('truthTrail.title')}</Link>
                 <Link href="/noticias">{t('nav.news')}</Link>
                 <Link href="/agentes">{t('nav.agents')}</Link>
+                <Link href="/cidade-aurora">Cidade Aurora</Link>
                 <Link href="/privacidade">{t('nav.privacy')}</Link>
                 <Link href="/cookies-e-cache">{t('nav.cookies')}</Link>
                 <Link href="/termos">{t('nav.terms')}</Link>

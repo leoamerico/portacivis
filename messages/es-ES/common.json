@@ -444,6 +444,28 @@
     "handoffReason": "Algunos datos solicitados no están disponibles en las fuentes públicas consultadas. El agente no puede fabricar información.",
     "handoffChannel": "Defensoría Municipal de {city}"
   },
+  "globalNav": {
+    "aria": "Navegación principal",
+    "search": {
+      "placeholder": "Buscar servicios, páginas...",
+      "noResults": "No se encontraron resultados",
+      "resultsCount": "{count} resultados"
+    },
+    "menu": {
+      "open": "Abrir menú",
+      "close": "Cerrar menú"
+    }
+  },
+  "territoryBar": {
+    "aria": "Territorio seleccionado",
+    "change": "Cambiar",
+    "startTrail": "Iniciar Ruta"
+  },
+  "cidadeAurora": {
+    "navLabel": "Cidade Aurora",
+    "searchTitle": "Cidade Aurora",
+    "searchDescription": "Entorno demostrativo Smart City EnvNeo"
+  },
   "demoController": {
     "title": "Control de demostración",
     "demoMode": "MODO DEMO",

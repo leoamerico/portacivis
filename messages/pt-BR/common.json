@@ -444,6 +444,28 @@
     "handoffReason": "Alguns dados solicitados não estão disponíveis nas fontes públicas consultadas. O agente não pode fabricar informações.",
     "handoffChannel": "Ouvidoria Municipal de {city}"
   },
+  "globalNav": {
+    "aria": "Navegação principal",
+    "search": {
+      "placeholder": "Buscar serviços, páginas...",
+      "noResults": "Nenhum resultado encontrado",
+      "resultsCount": "{count} resultados"
+    },
+    "menu": {
+      "open": "Abrir menu",
+      "close": "Fechar menu"
+    }
+  },
+  "territoryBar": {
+    "aria": "Território selecionado",
+    "change": "Alterar",
+    "startTrail": "Iniciar Trilha"
+  },
+  "cidadeAurora": {
+    "navLabel": "Cidade Aurora",
+    "searchTitle": "Cidade Aurora",
+    "searchDescription": "Ambiente demonstrativo Smart City EnvNeo"
+  },
   "demoController": {
     "title": "Controle de demonstração",
     "demoMode": "MODO DEMO",

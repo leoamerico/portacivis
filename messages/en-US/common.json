@@ -444,6 +444,28 @@
     "handoffReason": "Some requested data is not available in the consulted public sources. The agent cannot fabricate information.",
     "handoffChannel": "Municipal Ombudsman of {city}"
   },
+  "globalNav": {
+    "aria": "Main navigation",
+    "search": {
+      "placeholder": "Search services, pages...",
+      "noResults": "No results found",
+      "resultsCount": "{count} results"
+    },
+    "menu": {
+      "open": "Open menu",
+      "close": "Close menu"
+    }
+  },
+  "territoryBar": {
+    "aria": "Selected territory",
+    "change": "Change",
+    "startTrail": "Start Trail"
+  },
+  "cidadeAurora": {
+    "navLabel": "Cidade Aurora",
+    "searchTitle": "Cidade Aurora",
+    "searchDescription": "EnvNeo Smart City demo environment"
+  },
   "demoController": {
     "title": "Demo control",
     "demoMode": "DEMO MODE",

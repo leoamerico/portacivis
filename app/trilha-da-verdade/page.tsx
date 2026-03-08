@@ -3,6 +3,7 @@ import {getTranslations} from 'next-intl/server';
 import TruthTrailAuditRecorder from '../components/TruthTrailAuditRecorder';
 import ContextInsightPanel from '../components/ContextInsightPanel';
 import ProvenanceSection from '../components/ProvenanceSection';
+import StandardQuickNav from '../components/StandardQuickNav';
 import {buildTruthTrailQuickPaths} from '../../src/truthTrail/pathRecommendations';
 
 type SearchParams = Record<string, string | string[] | undefined>;
@@ -120,32 +121,7 @@ export default async function TrilhaDaVerdadePage({
             </li>
           ))}
         </ol>
-        <nav className="quicknav" aria-label="Navegação rápida">
-          <Link href={hasTerritory ? `/noticias?uf=${encodeURIComponent(uf)}&cidade=${encodeURIComponent(cidade)}` : '/noticias'} className="quicknav-item">
-            <span className="quicknav-icon" aria-hidden="true">📰</span>
-            {common('nav.news')}
-          </Link>
-          <Link href="/agentes" className="quicknav-item">
-            <span className="quicknav-icon" aria-hidden="true">🤖</span>
-            {common('nav.agents')}
-          </Link>
-          <Link href="/conformidade" className="quicknav-item">
-            <span className="quicknav-icon" aria-hidden="true">✅</span>
-            {common('nav.compliance')}
-          </Link>
-          <Link href="/verificacao-auditoria" className="quicknav-item">
-            <span className="quicknav-icon" aria-hidden="true">🔗</span>
-            {t('verifyAudit')}
-          </Link>
-          <Link href="/cidade-aurora" className="quicknav-item quicknav-item--aurora">
-            <span className="quicknav-icon" aria-hidden="true">🌆</span>
-            Cidade Aurora
-          </Link>
-          <Link href="/" className="quicknav-item quicknav-item--highlight">
-            <span className="quicknav-icon" aria-hidden="true">🏠</span>
-            {t('restart')}
-          </Link>
-        </nav>
+        <StandardQuickNav current="trilha" />
       </nav>
     </main>
   );

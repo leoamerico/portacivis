@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import {getTranslations} from 'next-intl/server';
 import {getPublishedArticles, type ArticleKind} from '../../src/news/articles';
+import StandardQuickNav from '../components/StandardQuickNav';
 
 const KIND_ACCENT: Record<ArticleKind, string> = {
   fato: 'blue',
@@ -143,20 +144,7 @@ export default async function NoticiasPage() {
         </ol>
       </section>
 
-      <nav className="quicknav" aria-label={t('relatedLinks')}>
-        <Link href="/agentes" className="quicknav-item">
-          <span className="quicknav-icon" aria-hidden="true">🤖</span>
-          {common('nav.agents')}
-        </Link>
-        <Link href="/conformidade" className="quicknav-item">
-          <span className="quicknav-icon" aria-hidden="true">✅</span>
-          {common('nav.compliance')}
-        </Link>
-        <Link href="/verificacao-auditoria" className="quicknav-item">
-          <span className="quicknav-icon" aria-hidden="true">🔗</span>
-          Verificação de auditoria
-        </Link>
-      </nav>
+      <StandardQuickNav current="noticias" />
     </main>
   );
 }

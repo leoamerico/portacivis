@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import {getTranslations} from 'next-intl/server';
 import ComplianceScorePanel from '../components/ComplianceScorePanel';
+import StandardQuickNav from '../components/StandardQuickNav';
 
 export default async function CompliancePage() {
   const t = await getTranslations('compliancePage');
@@ -55,24 +56,7 @@ export default async function CompliancePage() {
 
       <ComplianceScorePanel />
 
-      <nav className="quicknav" aria-label={t('auditNavigation')}>
-        <Link href="/trilha-da-verdade" className="quicknav-item">
-          <span className="quicknav-icon" aria-hidden="true">🔍</span>
-          {t('auditBackTrail')}
-        </Link>
-        <Link href="/agentes" className="quicknav-item">
-          <span className="quicknav-icon" aria-hidden="true">🤖</span>
-          {common('nav.agents')}
-        </Link>
-        <Link href="/cidade-aurora" className="quicknav-item quicknav-item--aurora">
-          <span className="quicknav-icon" aria-hidden="true">🌆</span>
-          Cidade Aurora
-        </Link>
-        <Link href="/" className="quicknav-item quicknav-item--highlight">
-          <span className="quicknav-icon" aria-hidden="true">🏠</span>
-          {common('nav.backHome')}
-        </Link>
-      </nav>
+      <StandardQuickNav current="conformidade" />
     </main>
   );
 }

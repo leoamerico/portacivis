@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import {getTranslations} from 'next-intl/server';
-import CitizenAgentPanel from '../components/CitizenAgentPanel';
+import CitizenAgentTerritoryWrapper from '../components/CitizenAgentTerritoryWrapper';
+import StandardQuickNav from '../components/StandardQuickNav';
 
 type AgentMeta = {
   id: string;
@@ -62,31 +63,9 @@ export default async function AgentsGalleryPage() {
         ))}
       </section>
 
-      <CitizenAgentPanel
-        cityName="Cidade Aurora"
-        uf="MG"
-        population={120000}
-        region="Sudeste — Minas Gerais"
-      />
+      <CitizenAgentTerritoryWrapper />
 
-      <nav className="quicknav" aria-label={common('nav.backNavigation')}>
-        <Link href="/trilha-da-verdade" className="quicknav-item">
-          <span className="quicknav-icon" aria-hidden="true">🔍</span>
-          {common('truthTrail.title')}
-        </Link>
-        <Link href="/conformidade" className="quicknav-item">
-          <span className="quicknav-icon" aria-hidden="true">✅</span>
-          {common('nav.compliance')}
-        </Link>
-        <Link href="/cidade-aurora" className="quicknav-item quicknav-item--aurora">
-          <span className="quicknav-icon" aria-hidden="true">🌆</span>
-          Cidade Aurora
-        </Link>
-        <Link href="/" className="quicknav-item quicknav-item--highlight">
-          <span className="quicknav-icon" aria-hidden="true">🏠</span>
-          {common('nav.backHome')}
-        </Link>
-      </nav>
+      <StandardQuickNav current="agentes" />
     </main>
   );
 }
